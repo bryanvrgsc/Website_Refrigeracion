@@ -2,16 +2,20 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-gray-900 text-gray-300 py-16">
+<footer class="bg-slate-950 text-slate-400 py-24 relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-slate-800 to-transparent"></div>
+  
   <div class="container mx-auto px-4">
-    <div class="grid md:grid-cols-4 gap-12 mb-12">
-      <div class="col-span-2">
-        <a href="/" class="text-2xl font-bold text-white flex items-center gap-2 mb-6">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind"><path d="M17.7 7.7A2.5 2.5 0 1 1 15.8 12H3"/><path d="M9.9 21a2.5 2.5 0 1 1 1.9-4.3H3"/><path d="M20 17.5a2.5 2.5 0 1 1-1.5 4.3H7"/></svg>
-          <span>ClimaFresh</span>
+    <div class="grid lg:grid-cols-4 gap-16 mb-20">
+      <div class="lg:col-span-2">
+        <a href="/" class="text-2xl font-black text-white flex items-center gap-2 mb-8 tracking-tight">
+          <div class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-500/20">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind"><path d="M17.7 7.7A2.5 2.5 0 1 1 15.8 12H3"/><path d="M9.9 21a2.5 2.5 0 1 1 1.9-4.3H3"/><path d="M20 17.5a2.5 2.5 0 1 1-1.5 4.3H7"/></svg>
+          </div>
+          <span>Clima<span class="text-blue-500">Fresh</span></span>
         </a>
-        <p class="max-w-sm mb-6">
-          Brindamos soluciones integrales de climatización para hogares y empresas. Compromiso con la calidad, eficiencia energética y el medio ambiente.
+        <p class="max-w-md text-lg leading-relaxed mb-8">
+          Elevando el estándar en climatización. Soluciones inteligentes y eficientes para un mundo que nunca se detiene.
         </p>
         <div class="flex gap-4">
           <!-- Social Icons -->
