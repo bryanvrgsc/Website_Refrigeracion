@@ -151,12 +151,20 @@ const colorMap = {
         <!-- Left Column: Visuals (50%) -->
         <div class="w-full md:w-1/2 bg-slate-50 flex flex-col border-r border-slate-100">
           <!-- Main Image Viewport -->
-          <div class="flex-1 relative min-h-[300px] md:min-h-[450px] flex items-center justify-center p-8">
+          <div class="flex-1 relative min-h-[300px] md:min-h-[450px] flex items-center justify-center p-8 group/main">
             <div class="absolute inset-0 grid-pattern opacity-20 pointer-events-none"></div>
+            
+            <!-- Zoom Icon Trigger -->
+            <button id="zoom-trigger" class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover/main:opacity-100 transition-opacity bg-slate-900/10 cursor-zoom-in">
+              <div class="bg-white/90 p-4 rounded-2xl shadow-2xl scale-90 group-hover/main:scale-100 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+              </div>
+            </button>
+
             <img id="modal-main-image" src="" class="w-full h-full object-contain relative z-10 transition-all duration-500 rounded-2xl" alt="Trabajo realizado" />
             
             <!-- Navigation Arrows -->
-            <div class="absolute inset-0 flex items-center justify-between px-4 z-20 pointer-events-none">
+            <div class="absolute inset-0 flex items-center justify-between px-4 z-30 pointer-events-none">
               <button class="bg-white/90 hover:bg-blue-600 text-slate-900 hover:text-white p-3 rounded-xl backdrop-blur-sm transition-all border border-slate-200 pointer-events-auto shadow-md group/btn" onclick="prevImage()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:-translate-x-0.5 transition-transform"><path d="m15 18-6-6 6-6"/></svg>
               </button>
@@ -167,8 +175,8 @@ const colorMap = {
           </div>
 
           <!-- Integrated Thumbnails Grid -->
-          <div class="p-6 bg-white border-t border-slate-100">
-            <div class="grid grid-cols-3 gap-3" id="modal-gallery">
+          <div class="p-4 bg-white border-t border-slate-100">
+            <div class="grid grid-cols-5 gap-2" id="modal-gallery">
                <!-- Injected via JS -->
             </div>
           </div>
@@ -217,6 +225,13 @@ const colorMap = {
 
     </div>
   </div>
+  <!-- Zoom Overlay -->
+  <div id="zoom-overlay" class="fixed inset-0 z-[200] hidden opacity-0 transition-opacity duration-300 bg-slate-950/95 flex items-center justify-center p-4 cursor-zoom-out">
+    <button id="zoom-close" class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors bg-white/10 p-3 rounded-2xl backdrop-blur-md border border-white/10">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+    </button>
+    <img id="zoom-image" src="" class="max-w-full max-h-full object-contain rounded-xl shadow-2xl" alt="Vista ampliada" />
+  </div>
 </section>
 
 <script>
@@ -236,6 +251,11 @@ const colorMap = {
   const modalMainImage = document.getElementById('modal-main-image');
   const modalList = document.getElementById('modal-details-list');
   const modalGallery = document.getElementById('modal-gallery');
+  
+  const zoomOverlay = document.getElementById('zoom-overlay');
+  const zoomImage = document.getElementById('zoom-image');
+  const zoomTrigger = document.getElementById('zoom-trigger');
+  const zoomClose = document.getElementById('zoom-close');
 
   let currentImages = [];
   let currentImageIndex = 0;
@@ -259,7 +279,7 @@ const colorMap = {
 
       // Gallery Grid
       modalGallery.innerHTML = data.images.map((img, idx) => `
-        <button onclick="setImage(${idx})" class="aspect-square rounded-2xl overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-lg' : 'border-slate-100'} hover:border-blue-400 transition-all opacity-90 hover:opacity-100 focus:outline-none gallery-thumb group/thumb">
+        <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-md scale-105 z-10' : 'border-slate-100'} hover:border-blue-300 transition-all opacity-90 hover:opacity-100 focus:outline-none gallery-thumb group/thumb">
           <img src="${img}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
         </button>
       `).join('');
@@ -326,8 +346,31 @@ const colorMap = {
   closeBtn.addEventListener('click', closeModal);
   closeBtnDesktop?.addEventListener('click', closeModal);
   
+  // Zoom Handlers
+  function openZoom() {
+    zoomImage.src = currentImages[currentImageIndex];
+    zoomOverlay.classList.remove('hidden');
+    setTimeout(() => zoomOverlay.classList.remove('opacity-0'), 10);
+  }
+
+  function closeZoom() {
+    zoomOverlay.classList.add('opacity-0');
+    setTimeout(() => zoomOverlay.classList.add('hidden'), 300);
+  }
+
+  zoomTrigger?.addEventListener('click', openZoom);
+  zoomOverlay?.addEventListener('click', closeZoom);
+  zoomClose?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeZoom();
+  });
+  
   // Keyboard Navigation
   document.addEventListener('keydown', (e) => {
+    if (!zoomOverlay.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeZoom();
+      return;
+    }
     if (!modal.classList.contains('hidden')) {
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowLeft') window.prevImage();
