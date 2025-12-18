@@ -161,6 +161,11 @@ const colorMap = {
               </div>
             </button>
 
+            <!-- Image Counter Badge -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 bg-slate-900/80 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-widest border border-white/10 shadow-lg">
+              <span id="modal-counter-current">1</span> / <span id="modal-counter-total">1</span>
+            </div>
+
             <img id="modal-main-image" src="" class="w-full h-full object-contain relative z-10 transition-all duration-500 rounded-2xl" alt="Trabajo realizado" />
             
             <!-- Navigation Arrows -->
@@ -251,6 +256,8 @@ const colorMap = {
   const modalMainImage = document.getElementById('modal-main-image');
   const modalList = document.getElementById('modal-details-list');
   const modalGallery = document.getElementById('modal-gallery');
+  const modalCounterCurrent = document.getElementById('modal-counter-current');
+  const modalCounterTotal = document.getElementById('modal-counter-total');
   
   const zoomOverlay = document.getElementById('zoom-overlay');
   const zoomImage = document.getElementById('zoom-image');
@@ -273,16 +280,19 @@ const colorMap = {
       modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
       modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
       
+      // Content
       modalTitleMobile.innerText = data.title;
       modalDescMobile.innerText = data.description;
-      updateMainImage();
-
+      if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length;
+      
       // Gallery Grid
       modalGallery.innerHTML = data.images.map((img, idx) => `
-        <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-md scale-105 z-10' : 'border-slate-100'} hover:border-blue-300 transition-all opacity-90 hover:opacity-100 focus:outline-none gallery-thumb group/thumb">
+        <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 border-slate-100 opacity-50 hover:border-blue-300 transition-all focus:outline-none gallery-thumb group/thumb">
           <img src="${img}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
         </button>
       `).join('');
+
+      updateMainImage();
 
       // Details List
       modalList.innerHTML = data.details.map(item => `
@@ -332,6 +342,18 @@ const colorMap = {
 
   function updateMainImage() {
      modalMainImage.src = currentImages[currentImageIndex];
+     if (modalCounterCurrent) modalCounterCurrent.innerText = currentImageIndex + 1;
+     
+     // Update thumbnails state
+     document.querySelectorAll('.gallery-thumb').forEach((el, idx) => {
+        if(idx === currentImageIndex) {
+          el.classList.add('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
+          el.classList.remove('border-slate-100', 'opacity-50');
+        } else {
+          el.classList.remove('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
+          el.classList.add('border-slate-100', 'opacity-50');
+        }
+     });
   }
 
   // Close Logic
