@@ -36,24 +36,24 @@
 
   @keyframes wind-line {
     0% { transform: translateX(-100%) translateY(0); opacity: 0; }
-    10% { opacity: 0.5; }
-    90% { opacity: 0.5; }
-    100% { transform: translateX(200%) translateY(-20px); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { transform: translateX(200%) translateY(-40px); opacity: 0; }
   }
 
   @keyframes wind-particle {
     0% { transform: translateX(-10vw) translateY(0) rotate(0deg); opacity: 0; }
-    20% { opacity: 0.4; }
-    80% { opacity: 0.4; }
-    100% { transform: translateX(110vw) translateY(-50px) rotate(360deg); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateX(110vw) translateY(-100px) rotate(720deg); opacity: 0; }
   }
 
   .animate-wind-line {
-    animation: wind-line 8s linear infinite;
+    animation: wind-line 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
   .animate-wind-particle {
-    animation: wind-particle 12s linear infinite;
+    animation: wind-particle 6s linear infinite;
   }
 }
 
