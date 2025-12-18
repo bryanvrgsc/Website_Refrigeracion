@@ -1,0 +1,87 @@
+---
+const benefits = [
+  {
+    title: 'Respuesta Inmediata',
+    desc: 'Atendemos tus emergencias en menos de 24 horas.',
+    icon: 'clock',
+    delay: 'delay-100'
+  },
+  {
+    title: 'Garantía por Escrito',
+    desc: 'Todos nuestros trabajos cuentan con respaldo oficial.',
+    icon: 'check-circle',
+    delay: 'delay-200'
+  },
+  {
+    title: 'Precios Justos',
+    desc: 'Presupuestos transparentes sin cargos ocultos.',
+    icon: 'dollar-sign',
+    delay: 'delay-300'
+  },
+  {
+    title: 'Personal Certificado',
+    desc: 'Técnicos expertos con años de experiencia real.',
+    icon: 'award',
+    delay: 'delay-400'
+  }
+];
+---
+
+<section id="beneficios" class="py-24 bg-white overflow-hidden">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      <div class="lg:w-1/2 relative reveal">
+        <div class="absolute -top-10 -left-10 w-64 h-64 bg-blue-50 rounded-full -z-10 animate-pulse"></div>
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+          <img 
+            src="https://images.unsplash.com/photo-1563453392212-326f5e854473?q=80&w=2070&auto=format&fit=crop" 
+            alt="Mantenimiento de aire acondicionado" 
+            class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+        <div class="absolute -bottom-10 -right-10 bg-blue-600 p-8 rounded-3xl text-white shadow-xl hidden md:block hover:bg-blue-700 transition-colors cursor-default">
+          <p class="text-4xl font-bold mb-1">15+</p>
+          <p class="text-blue-100 uppercase tracking-widest text-xs font-bold">Años de experiencia</p>
+        </div>
+      </div>
+
+      <div class="lg:w-1/2">
+        <div class="reveal">
+          <h2 class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-3">¿Por qué elegirnos?</h2>
+          <h3 class="text-4xl font-bold text-gray-900 mb-8 leading-tight">Comprometidos con la excelencia en cada servicio</h3>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 gap-x-8 gap-y-10">
+          {benefits.map(benefit => (
+            <div class={`flex flex-col gap-4 reveal reveal-${benefit.delay} group`}>
+              <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                {benefit.icon === 'clock' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+                {benefit.icon === 'check-circle' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>}
+                {benefit.icon === 'dollar-sign' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+                {benefit.icon === 'award' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>}
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-2 text-lg">{benefit.title}</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">{benefit.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-14 p-8 bg-gray-50 rounded-3xl border border-gray-100 reveal reveal-delay-300 relative">
+           <svg class="absolute top-4 left-6 w-8 h-8 text-blue-200" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9C9.00001 15 9.00001 14 9.00001 13C9.00001 12 9.00001 11 9.00001 10C9.00001 9.44772 9.44772 9 10 9H13C13.5523 9 14 8.55228 14 8V5C14 4.44772 13.5523 4 13 4H10C7.23858 4 5 6.23858 5 9V17C5 19.2091 6.79086 21 9 21H14.017ZM21.017 21L21.017 18C21.017 16.8954 20.1216 16 19.017 16H16C15.9999 15 15.9999 14 15.9999 13C15.9999 12 15.9999 11 15.9999 10C15.9999 9.44772 16.4477 9 17 9H20C20.5523 9 21 8.55228 21 8V5C21 4.44772 20.5523 4 20 4H17C14.2386 4 12 6.23858 12 9V17C12 19.2091 13.7909 21 16 21H21.017Z"/></svg>
+           <p class="italic text-gray-700 relative z-10 pl-4">"El mejor servicio técnico que he contratado. Puntuales, profesionales y muy limpios al trabajar. Recomiendo ClimaFresh al 100%."</p>
+           <div class="mt-6 flex items-center gap-4 pl-4">
+              <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover" />
+              </div>
+              <div>
+                <p class="font-bold text-gray-900 text-sm">Juan Pérez</p>
+                <p class="text-xs text-gray-500">Cliente Residencial</p>
+              </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

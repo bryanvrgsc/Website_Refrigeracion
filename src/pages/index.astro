@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Brands from '../components/Brands.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="ClimaFresh | Expertos en Aire Acondicionado">
+	<Header />
+	<main>
+		<Hero />
+    
+    <!-- Brief Introduction / Teaser -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 text-center max-w-3xl">
+         <h2 class="text-3xl font-bold text-gray-900 mb-6 reveal">Expertos en Climatización para tu Hogar y Negocio</h2>
+         <p class="text-gray-600 text-lg mb-10 leading-relaxed reveal reveal-delay-100">
+           En ClimaFresh nos dedicamos a garantizar el máximo confort en tus espacios. 
+           Contamos con un equipo de profesionales certificados listos para atender cualquier necesidad, 
+           desde mantenimientos rutinarios hasta instalaciones complejas.
+         </p>
+         <div class="flex justify-center gap-6 reveal reveal-delay-200">
+            <a href="/beneficios" class="text-blue-600 font-bold hover:underline underline-offset-4 flex items-center gap-2">
+              Nuestra Garantía
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+         </div>
+      </div>
+    </section>
+
+    <Brands />
+
+    <!-- Final Call to Action -->
+    <section class="py-24 bg-blue-50">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-gray-900 mb-6 reveal">¿Tu aire acondicionado necesita atención?</h2>
+        <p class="text-xl text-gray-600 mb-10 reveal reveal-delay-100">No esperes a que falle. Agenda una revisión hoy mismo y ahorra dinero.</p>
+        <a href="/cotizar" class="inline-block bg-blue-600 text-white px-10 py-4 rounded-xl font-bold text-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 hover:-translate-y-1 reveal reveal-delay-200">
+          Solicitar Presupuesto Gratis
+        </a>
+      </div>
+    </section>
+	</main>
+	<Footer />
+</Layout>
