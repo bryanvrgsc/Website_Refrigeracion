@@ -1,64 +1,114 @@
 ---
 const navItems = [
-  { name: 'Inicio', href: '/' },
-  { name: 'Servicios', href: '/servicios' },
-  { name: 'Beneficios', href: '/beneficios' },
-  { name: 'Contacto', href: '/contacto' },
+  { name: "Inicio", href: "/" },
+  { name: "Servicios", href: "/servicios" },
+  { name: "Beneficios", href: "/beneficios" },
+  { name: "Contacto", href: "/contacto" },
 ];
 const currentPath = Astro.url.pathname;
 ---
 
-<header id="main-header" class="fixed w-full z-50 transition-all duration-500 bg-transparent py-6">
+<header
+  id="main-header"
+  class="fixed w-full z-50 transition-all duration-500 bg-transparent py-6"
+>
   <div class="container mx-auto px-4 flex justify-between items-center">
-    <a href="/" class="text-2xl font-black text-slate-900 flex items-center gap-2 group tracking-tight">
-      <div class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-500/20 group-hover:rotate-12 transition-all duration-500">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind"><path d="M17.7 7.7A2.5 2.5 0 1 1 15.8 12H3"/><path d="M9.9 21a2.5 2.5 0 1 1 1.9-4.3H3"/><path d="M20 17.5a2.5 2.5 0 1 1-1.5 4.3H7"/></svg>
-      </div>
-      <span>Clima<span class="text-blue-600">Fresh</span></span>
+    <a
+      href="/"
+      class="text-2xl font-black text-slate-900 flex items-center gap-2 group tracking-tight"
+    >
+      <img
+        src="/favicon.svg"
+        alt="Logo"
+        class="w-10 h-10 group-hover:scale-110 transition-transform duration-300"
+      />
+      <span class="flex flex-col leading-tight"
+        ><span class="text-sm">Aire Acondicionado y</span><span
+          class="text-blue-600 text-xs">Multiservicio Industrial</span
+        ></span
+      >
     </a>
-    
-    <nav class="hidden lg:flex gap-1 glass p-1.5 rounded-2xl border-white/40 shadow-xl shadow-slate-200/50">
-      {navItems.map(item => (
-        <a 
-          href={item.href} 
-          class:list={[
-            "px-6 py-2.5 rounded-xl font-bold transition-all text-sm tracking-wide",
-            currentPath === item.href ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" : "text-slate-600 hover:text-blue-600 hover:bg-blue-50/50"
-          ]}
-        >
-          {item.name}
-        </a>
-      ))}
+
+    <nav
+      class="hidden lg:flex gap-1 glass p-1.5 rounded-2xl border-white/40 shadow-xl shadow-slate-200/50"
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "px-6 py-2.5 rounded-xl font-bold transition-all text-sm tracking-wide",
+              currentPath === item.href
+                ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
+                : "text-slate-600 hover:text-blue-600 hover:bg-blue-50/50",
+            ]}
+          >
+            {item.name}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="flex items-center gap-4">
-      <a href="/cotizar" class="hidden lg:block bg-slate-900 text-white px-8 py-3 rounded-xl text-sm font-bold hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-500/20 transition-all transform hover:-translate-y-0.5 active:scale-95">
+      <a
+        href="/cotizar"
+        class="hidden lg:block bg-slate-900 text-white px-8 py-3 rounded-xl text-sm font-bold hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-500/20 transition-all transform hover:-translate-y-0.5 active:scale-95"
+      >
         Cotizar Proyecto
       </a>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="lg:hidden text-slate-900 p-3 glass rounded-xl border-white/50 shadow-sm active:scale-95 transition-transform">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden text-slate-900 p-3 glass rounded-xl border-white/50 shadow-sm active:scale-95 transition-transform"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-menu"
+          ><line x1="4" x2="20" y1="12" y2="12"></line><line
+            x1="4"
+            x2="20"
+            y1="6"
+            y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
+        >
       </button>
     </div>
   </div>
 
   <!-- Mobile Menu Dropdown -->
-  <div id="mobile-menu" class="lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-xl overflow-hidden transition-all duration-300 max-h-0 opacity-0">
+  <div
+    id="mobile-menu"
+    class="lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-xl overflow-hidden transition-all duration-300 max-h-0 opacity-0"
+  >
     <div class="flex flex-col p-4 gap-2">
-      {navItems.map(item => (
-        <a 
-          href={item.href} 
-          class:list={[
-            "px-4 py-3 rounded-xl font-medium transition-colors",
-            currentPath === item.href ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50"
-          ]}
-        >
-          {item.name}
-        </a>
-      ))}
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "px-4 py-3 rounded-xl font-medium transition-colors",
+              currentPath === item.href
+                ? "bg-blue-50 text-blue-600"
+                : "text-gray-600 hover:bg-gray-50",
+            ]}
+          >
+            {item.name}
+          </a>
+        ))
+      }
       <div class="h-px bg-gray-100 my-2"></div>
-      <a href="/cotizar" class="bg-blue-600 text-white px-4 py-3 rounded-xl font-bold text-center hover:bg-blue-700 transition-colors">
+      <a
+        href="/cotizar"
+        class="bg-blue-600 text-white px-4 py-3 rounded-xl font-bold text-center hover:bg-blue-700 transition-colors"
+      >
         Cotizar Ahora
       </a>
     </div>
@@ -66,29 +116,41 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
-  const header = document.getElementById('main-header');
-  const mobileBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const header = document.getElementById("main-header");
+  const mobileBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
   let isMenuOpen = false;
 
-  mobileBtn?.addEventListener('click', () => {
+  mobileBtn?.addEventListener("click", () => {
     isMenuOpen = !isMenuOpen;
     if (isMenuOpen) {
-      mobileMenu?.classList.remove('max-h-0', 'opacity-0');
-      mobileMenu?.classList.add('max-h-96', 'opacity-100');
+      mobileMenu?.classList.remove("max-h-0", "opacity-0");
+      mobileMenu?.classList.add("max-h-96", "opacity-100");
     } else {
-      mobileMenu?.classList.add('max-h-0', 'opacity-0');
-      mobileMenu?.classList.remove('max-h-96', 'opacity-100');
+      mobileMenu?.classList.add("max-h-0", "opacity-0");
+      mobileMenu?.classList.remove("max-h-96", "opacity-100");
     }
   });
-  
-  window.addEventListener('scroll', () => {
+
+  window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
-      header?.classList.add('glass', 'shadow-xl', 'py-3', 'border-b', 'border-slate-200/50');
-      header?.classList.remove('bg-transparent', 'py-6');
+      header?.classList.add(
+        "glass",
+        "shadow-xl",
+        "py-3",
+        "border-b",
+        "border-slate-200/50",
+      );
+      header?.classList.remove("bg-transparent", "py-6");
     } else {
-      header?.classList.remove('glass', 'shadow-xl', 'py-3', 'border-b', 'border-slate-200/50');
-      header?.classList.add('bg-transparent', 'py-6');
+      header?.classList.remove(
+        "glass",
+        "shadow-xl",
+        "py-3",
+        "border-b",
+        "border-slate-200/50",
+      );
+      header?.classList.add("bg-transparent", "py-6");
     }
   });
 </script>

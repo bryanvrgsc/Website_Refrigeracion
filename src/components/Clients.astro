@@ -1,0 +1,92 @@
+---
+const clients = [
+    { name: "Argo Artes Gráficas", logo: "/images/clients/ArgoArtesGraficas.png" },
+    { name: "Active Vision Center", logo: "/images/clients/ActiveVisionCenter.png" },
+    { name: "CCL", logo: "/images/clients/CCL.png" },
+    { name: "Colegio San Ildefonso", logo: "/images/clients/ColegioSanIldefonso.png" },
+    { name: "Filoyarn", logo: "/images/clients/Filoyarn.png" },
+    { name: "GP Impresores", logo: "/images/clients/GPImpresores.png" },
+    { name: "Grupo Zapata", logo: "/images/clients/GrupoZapata.png" },
+    { name: "Industrias Cazel", logo: "/images/clients/IndustriasCazel.webp" },
+    { name: "RR Donnelley", logo: "/images/clients/RRDonnelley.png" },
+    { name: "Tlapa", logo: "/images/clients/Tlapa.png" },
+    { name: "VetcoGray", logo: "/images/clients/VetcoGray.png" },
+    { name: "Vidimport", logo: "/images/clients/Vidimport.png" },
+];
+---
+
+<section class="py-24 bg-white overflow-hidden">
+    <div class="container mx-auto px-4 text-center">
+        <div class="max-w-3xl mx-auto mb-16 reveal">
+            <h2
+                class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-3"
+            >
+                CONFIANZA Y RESULTADOS
+            </h2>
+            <h3 class="text-4xl font-bold text-gray-900 mb-6 italic">
+                Empresas que confían en nosotros
+            </h3>
+            <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full mb-8"></div>
+            <p class="text-gray-600 text-lg">
+                Colaboramos con empresas líderes en diversos sectores,
+                garantizando sistemas de climatización y servicios industriales
+                de la más alta calidad.
+            </p>
+        </div>
+
+        <div
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center"
+        >
+            {
+                clients.map((client) => (
+                    <div class="group relative flex items-center justify-center p-6 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-500 bg-gray-50/50 rounded-2xl border border-transparent hover:border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-blue-500/5 reveal">
+                        <img
+                            src={client.logo}
+                            alt={client.name}
+                            class="max-h-16 w-auto object-contain transform group-hover:scale-110 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                        <span class="absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-semibold text-blue-600 whitespace-nowrap">
+                            {client.name}
+                        </span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    }, observerOptions);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document
+            .querySelectorAll(".reveal")
+            .forEach((el) => observer.observe(el));
+    });
+</script>

@@ -1,65 +1,121 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Términos de Servicio | ClimaFresh">
+<Layout title="Términos de Servicio | AC y Multiservicio Industrial">
   <Header />
   <main class="pt-32 pb-24 bg-white">
     <div class="container mx-auto px-4 max-w-4xl">
-      <h1 class="text-4xl font-bold text-gray-900 mb-8">Términos y Condiciones de Servicio</h1>
-      <p class="text-gray-500 mb-12">Última actualización: {new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-      
+      <h1 class="text-4xl font-bold text-gray-900 mb-8">
+        Términos y Condiciones de Servicio
+      </h1>
+      <p class="text-gray-500 mb-12">
+        Última actualización: {
+          new Date().toLocaleDateString("es-MX", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
+      </p>
+
       <div class="prose prose-blue max-w-none text-gray-700 space-y-8">
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Aceptación de los Términos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            1. Aceptación de los Términos
+          </h2>
           <p>
-            Al acceder a este sitio web y solicitar nuestros servicios de climatización, usted acepta estar sujeto a estos Términos y Condiciones, a todas las leyes y regulaciones aplicables, y acepta que es responsable del cumplimiento de las leyes locales aplicables.
+            Al acceder a este sitio web y solicitar nuestros servicios de
+            climatización, usted acepta estar sujeto a estos Términos y
+            Condiciones, a todas las leyes y regulaciones aplicables, y acepta
+            que es responsable del cumplimiento de las leyes locales aplicables.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Descripción del Servicio</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            2. Descripción del Servicio
+          </h2>
           <p>
-            <strong>ClimaFresh</strong> proporciona servicios de mantenimiento preventivo, correctivo e instalación de equipos de aire acondicionado. Nos reservamos el derecho de rechazar el servicio a cualquier persona por cualquier motivo y en cualquier momento, especialmente si las condiciones de seguridad no son adecuadas para nuestros técnicos.
+            <strong>Aire Acondicionado y Multiservicio Industrial</strong> proporciona
+            servicios de mantenimiento preventivo, correctivo e instalación de equipos
+            de aire acondicionado. Nos reservamos el derecho de rechazar el servicio
+            a cualquier persona por cualquier motivo y en cualquier momento, especialmente
+            si las condiciones de seguridad no son adecuadas para nuestros técnicos.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Cotizaciones y Pagos</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            3. Cotizaciones y Pagos
+          </h2>
           <ul class="list-disc pl-6 space-y-2 mt-2">
-            <li>Las cotizaciones proporcionadas son estimados basados en la información suministrada y pueden variar tras una inspección física.</li>
-            <li>El pago del servicio debe realizarse según lo acordado en la cotización final (efectivo, transferencia o tarjeta).</li>
-            <li>Para instalaciones o reparaciones mayores, se puede requerir un anticipo del 50%.</li>
+            <li>
+              Las cotizaciones proporcionadas son estimados basados en la
+              información suministrada y pueden variar tras una inspección
+              física.
+            </li>
+            <li>
+              El pago del servicio debe realizarse según lo acordado en la
+              cotización final (efectivo, transferencia o tarjeta).
+            </li>
+            <li>
+              Para instalaciones o reparaciones mayores, se puede requerir un
+              anticipo del 50%.
+            </li>
           </ul>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Garantía del Servicio</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            4. Garantía del Servicio
+          </h2>
           <p>
-            Ofrecemos garantía sobre nuestra mano de obra por un periodo de <strong>30 días</strong> a partir de la fecha del servicio. Esta garantía cubre defectos directamente relacionados con el trabajo realizado por nuestros técnicos. No cubre fallas preexistentes, mal uso del equipo por parte del cliente, o fallas en componentes electrónicos no reemplazados por nosotros.
+            Ofrecemos garantía sobre nuestra mano de obra por un periodo de <strong
+              >30 días</strong
+            > a partir de la fecha del servicio. Esta garantía cubre defectos directamente
+            relacionados con el trabajo realizado por nuestros técnicos. No cubre
+            fallas preexistentes, mal uso del equipo por parte del cliente, o fallas
+            en componentes electrónicos no reemplazados por nosotros.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Cancelaciones y Reprogramaciones</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            5. Cancelaciones y Reprogramaciones
+          </h2>
           <p>
-            Si necesita cancelar o reprogramar su cita, le solicitamos que nos notifique con al menos <strong>24 horas de antelación</strong>. Cancelaciones con menos tiempo pueden estar sujetas a un cargo por cancelación para cubrir los costos operativos y de desplazamiento.
+            Si necesita cancelar o reprogramar su cita, le solicitamos que nos
+            notifique con al menos <strong>24 horas de antelación</strong>.
+            Cancelaciones con menos tiempo pueden estar sujetas a un cargo por
+            cancelación para cubrir los costos operativos y de desplazamiento.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Limitación de Responsabilidad</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            6. Limitación de Responsabilidad
+          </h2>
           <p>
-            ClimaFresh no será responsable por daños indirectos, incidentales o consecuentes que resulten del uso o la imposibilidad de usar sus equipos de aire acondicionado, ni por daños causados por falta de mantenimiento previo por parte del cliente.
+            Aire Acondicionado y Multiservicio Industrial no será responsable
+            por daños indirectos, incidentales o consecuentes que resulten del
+            uso o la imposibilidad de usar sus equipos de aire acondicionado, ni
+            por daños causados por falta de mantenimiento previo por parte del
+            cliente.
           </p>
         </section>
 
         <section>
           <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Contacto</h2>
           <p>
-            Para cualquier duda sobre estos términos, por favor contáctenos a través de nuestro formulario en la página web o al correo <a href="mailto:legal@climafresh.com" class="text-blue-600 font-bold hover:underline">legal@climafresh.com</a>.
+            Para cualquier duda sobre estos términos, por favor contáctenos a
+            través de nuestro formulario en la página web o al correo <a
+              href="mailto:refrigeracioneh@gmail.com"
+              class="text-blue-600 font-bold hover:underline"
+              >refrigeracioneh@gmail.com</a
+            >.
           </p>
         </section>
       </div>
