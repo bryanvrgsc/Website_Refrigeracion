@@ -11,25 +11,27 @@ const currentPath = Astro.url.pathname;
 
 <header
   id="main-header"
-  class="fixed w-full z-50 transition-all duration-500 bg-transparent py-6"
+  class="fixed w-full z-50 transition-all duration-500 bg-transparent py-5"
 >
   <div class="container mx-auto px-4 flex justify-between items-center">
+    <!-- Logo: Solo ícono en móvil, con texto en desktop -->
     <a
       href="/"
-      class="text-2xl font-black text-slate-900 flex items-center gap-2 group tracking-tight"
+      class="font-black text-slate-900 flex items-center gap-2 group tracking-tight"
     >
       <img
         src="/favicon.svg"
-        alt="Logo"
+        alt="AC y Multiservicio Industrial"
         class="w-10 h-10 group-hover:scale-110 transition-transform duration-300"
       />
-      <span class="flex flex-col leading-tight"
-        ><span class="text-sm">Aire Acondicionado y</span><span
-          class="text-blue-600 text-xs">Multiservicio Industrial</span
-        ></span
-      >
+      <!-- Texto del logo oculto en móvil, visible desde md -->
+      <span class="hidden md:flex flex-col leading-tight">
+        <span class="text-sm">Aire Acondicionado y</span>
+        <span class="text-blue-600 text-xs">Multiservicio Industrial</span>
+      </span>
     </a>
 
+    <!-- Navegación Desktop -->
     <nav
       class="hidden lg:flex gap-1 glass p-1.5 rounded-2xl border-white/40 shadow-xl shadow-slate-200/50"
     >
@@ -38,7 +40,7 @@ const currentPath = Astro.url.pathname;
           <a
             href={item.href}
             class:list={[
-              "px-6 py-2.5 rounded-xl font-bold transition-all text-sm tracking-wide",
+              "px-5 py-2.5 rounded-xl font-bold transition-all text-sm tracking-wide whitespace-nowrap",
               currentPath === item.href
                 ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
                 : "text-slate-600 hover:text-blue-600 hover:bg-blue-50/50",
@@ -50,10 +52,11 @@ const currentPath = Astro.url.pathname;
       }
     </nav>
 
-    <div class="flex items-center gap-4">
+    <!-- Acciones -->
+    <div class="flex items-center gap-3">
       <a
         href="/cotizar"
-        class="hidden lg:block bg-slate-900 text-white px-8 py-3 rounded-xl text-sm font-bold hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-500/20 transition-all transform hover:-translate-y-0.5 active:scale-95"
+        class="hidden lg:flex bg-slate-900 text-white px-7 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-500/20 transition-all transform hover:-translate-y-0.5 active:scale-95 whitespace-nowrap items-center justify-center"
       >
         Cotizar Proyecto
       </a>
@@ -61,7 +64,8 @@ const currentPath = Astro.url.pathname;
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="lg:hidden text-slate-900 p-3 glass rounded-xl border-white/50 shadow-sm active:scale-95 transition-transform"
+        class="lg:hidden text-slate-900 p-2.5 glass rounded-xl border-white/50 shadow-sm active:scale-95 transition-transform"
+        aria-label="Menú de navegación"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +77,6 @@ const currentPath = Astro.url.pathname;
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-menu"
           ><line x1="4" x2="20" y1="12" y2="12"></line><line
             x1="4"
             x2="20"
@@ -138,20 +141,20 @@ const currentPath = Astro.url.pathname;
       header?.classList.add(
         "glass",
         "shadow-xl",
-        "py-3",
+        "!py-3",
         "border-b",
         "border-slate-200/50",
       );
-      header?.classList.remove("bg-transparent", "py-6");
+      header?.classList.remove("bg-transparent");
     } else {
       header?.classList.remove(
         "glass",
         "shadow-xl",
-        "py-3",
+        "!py-3",
         "border-b",
         "border-slate-200/50",
       );
-      header?.classList.add("bg-transparent", "py-6");
+      header?.classList.add("bg-transparent");
     }
   });
 </script>
