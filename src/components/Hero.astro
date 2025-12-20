@@ -1,134 +1,256 @@
 ---
+
 ---
 
 <section class="relative min-h-screen flex items-center pt-24 overflow-hidden">
   <!-- Background Decor -->
   <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
     <div class="absolute inset-0 grid-pattern opacity-40"></div>
-    
-    <!-- Wind Effect Elements -->
-    <div class="absolute inset-0 z-0">
-      <!-- Stronger Wind Lines -->
-      <div class="absolute left-0 w-96 h-[3px] bg-linear-to-r from-transparent via-blue-500/60 to-transparent animate-wind-line" style="animation-delay: 0s; top: 10%;"></div>
-      <div class="absolute left-0 w-[600px] h-[4px] bg-linear-to-r from-transparent via-cyan-500/60 to-transparent animate-wind-line" style="animation-delay: 1.5s; top: 25%;"></div>
-      <div class="absolute left-0 w-96 h-[2px] bg-linear-to-r from-transparent via-blue-400/60 to-transparent animate-wind-line" style="animation-delay: 3s; top: 40%;"></div>
-      <div class="absolute left-0 w-[800px] h-[3px] bg-linear-to-r from-transparent via-blue-300/50 to-transparent animate-wind-line" style="animation-delay: 0.8s; top: 55%;"></div>
-      <div class="absolute left-0 w-80 h-[2px] bg-linear-to-r from-transparent via-blue-500/50 to-transparent animate-wind-line" style="animation-delay: 1s; top: 70%;"></div>
-      <div class="absolute left-0 w-[550px] h-[3px] bg-linear-to-r from-transparent via-cyan-400/60 to-transparent animate-wind-line" style="animation-delay: 2.5s; top: 85%;"></div>
-      <div class="absolute left-0 w-[450px] h-[2px] bg-linear-to-r from-transparent via-blue-400/50 to-transparent animate-wind-line" style="animation-delay: 4s; top: 92%;"></div>
-      <div class="absolute left-0 w-[700px] h-[2px] bg-linear-to-r from-transparent via-cyan-300/50 to-transparent animate-wind-line" style="animation-delay: 0.5s; top: 18%;"></div>
-      <div class="absolute left-0 w-72 h-[3px] bg-linear-to-r from-transparent via-blue-600/40 to-transparent animate-wind-line" style="animation-delay: 3.5s; top: 48%;"></div>
-      <div class="absolute left-0 w-[500px] h-[2px] bg-linear-to-r from-transparent via-blue-500/50 to-transparent animate-wind-line" style="animation-delay: 2s; top: 78%;"></div>
-      <div class="absolute left-0 w-[300px] h-[2px] bg-linear-to-r from-transparent via-cyan-500/60 to-transparent animate-wind-line" style="animation-delay: 1.2s; top: 32%;"></div>
-      <div class="absolute left-0 w-[400px] h-[3px] bg-linear-to-r from-transparent via-blue-400/60 to-transparent animate-wind-line" style="animation-delay: 2.8s; top: 62%;"></div>
+
+    <!-- Wind Effect Elements (GPU Optimized & Visible) -->
+    <div class="wind-container absolute inset-0 z-0">
+      <!-- Visible wind lines with smooth gradients -->
+      <div
+        class="wind-line absolute left-0 h-[3px]"
+        style="--delay: 0s; --width: 500px; --color: rgba(59, 130, 246, 0.7); top: 15%;"
+      >
+      </div>
+      <div
+        class="wind-line absolute left-0 h-[3px]"
+        style="--delay: 1.2s; --width: 650px; --color: rgba(34, 211, 238, 0.65); top: 35%;"
+      >
+      </div>
+      <div
+        class="wind-line absolute left-0 h-[3px]"
+        style="--delay: 0.5s; --width: 580px; --color: rgba(96, 165, 250, 0.7); top: 55%;"
+      >
+      </div>
+      <div
+        class="wind-line absolute left-0 h-[3px]"
+        style="--delay: 1.8s; --width: 480px; --color: rgba(6, 182, 212, 0.65); top: 75%;"
+      >
+      </div>
+      <div
+        class="wind-line absolute left-0 h-[3px]"
+        style="--delay: 2.5s; --width: 420px; --color: rgba(59, 130, 246, 0.6); top: 92%;"
+      >
+      </div>
     </div>
 
-    <div class="absolute top-0 -left-20 w-[500px] h-[500px] bg-blue-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-    <div class="absolute bottom-0 -right-20 w-[500px] h-[500px] bg-cyan-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/40 rounded-full filter blur-[100px] opacity-30 pointer-events-none"></div>
+    <!-- Static Blobs (Removing animation and mix-blend to save GPU) -->
+    <div
+      class="absolute top-0 -left-20 w-[500px] h-[500px] bg-blue-100/40 rounded-full filter blur-3xl opacity-60"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 -right-20 w-[500px] h-[500px] bg-cyan-100/40 rounded-full filter blur-3xl opacity-60"
+    >
+    </div>
   </div>
 
-  <div class="container mx-auto px-4 z-10 grid lg:grid-cols-2 gap-16 items-center">
+  <div
+    class="container mx-auto px-4 z-10 grid lg:grid-cols-2 gap-16 items-center"
+  >
     <div class="space-y-10 py-10 text-center lg:text-left">
       <div class="reveal">
-        <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-blue-50/80 backdrop-blur-sm text-blue-700 text-xs font-bold tracking-wider uppercase mb-6 border border-blue-100 shadow-sm hover:shadow-md transition-shadow cursor-default">
+        <div
+          class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-blue-50/80 backdrop-blur-sm text-blue-700 text-xs font-bold tracking-wider uppercase mb-6 border border-blue-100 shadow-sm cursor-default"
+        >
           <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"
+            ></span>
           </span>
           Servicio #1 en la región
         </div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.15] tracking-tight">
-          Soluciones Integrales en <span class="text-gradient">Refrigeración, Aire Acondicionado</span> y <span class="text-silver-gradient drop-shadow-sm">Mantenimiento Industrial.</span>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.15] tracking-tight"
+        >
+          Soluciones Integrales en <span class="text-gradient"
+            >Refrigeración, Aire Acondicionado</span
+          > y <span class="text-silver-gradient drop-shadow-sm"
+            >Mantenimiento Industrial.</span
+          >
         </h1>
       </div>
-      
-      <p class="text-xl md:text-2xl text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed reveal reveal-delay-100">
+
+      <p
+        class="text-xl md:text-2xl text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed reveal reveal-delay-100"
+      >
         Atención directa y personalizada.
       </p>
-      
-      <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start reveal reveal-delay-200">
-        <a href="/cotizar" class="group relative bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-1 active:scale-95">
+
+      <div
+        class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start reveal reveal-delay-200"
+      >
+        <a
+          href="/cotizar"
+          class="group relative bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-1 active:scale-95"
+        >
           <span class="relative z-10">Programar Ahora</span>
-          <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-blue-700/50"></div>
+          <div
+            class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-blue-700/50"
+          >
+          </div>
         </a>
-        <a href="/servicios" class="glass text-slate-700 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white transition-all text-center border-white/40 shadow-sm hover:shadow-md transform hover:-translate-y-1 active:scale-95">
+        <a
+          href="/servicios"
+          class="glass text-slate-700 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white transition-all text-center border-white/40 shadow-sm hover:shadow-md transform hover:-translate-y-1 active:scale-95"
+        >
           Ver Servicios
         </a>
       </div>
     </div>
 
-    <div class="relative hidden md:block reveal reveal-delay-200 lg:h-[600px] flex items-center justify-center">
-      <!-- Main Image Container with Float -->
+    <div
+      class="relative hidden md:block reveal reveal-delay-200 lg:h-[600px] flex items-center justify-center"
+    >
       <div class="relative w-full max-w-[500px] animate-float-slow">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50 transform rotate-2 hover:rotate-0 transition-all duration-700 group">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=2069&auto=format&fit=crop" 
-            alt="Técnico trabajando en aire acondicionado" 
+        <div
+          class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50 transform rotate-2 hover:rotate-0 transition-all duration-700 group"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"
+          >
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=2069&auto=format&fit=crop"
+            alt="Técnico trabajando en aire acondicionado"
             class="w-full h-[500px] object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
           />
         </div>
-        
-        <!-- Floating Badge 1 -->
-        <div class="absolute -bottom-6 -left-6 glass p-5 rounded-2xl flex items-center gap-4 z-20 animate-float border-white/60 shadow-xl shadow-blue-500/10 backdrop-blur-md">
-          <div class="bg-blue-600 p-3 rounded-xl text-white shadow-lg shadow-blue-500/30">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+
+        <div
+          class="absolute -bottom-6 -left-6 glass p-5 rounded-2xl flex items-center gap-4 z-20 animate-float border-white/60 shadow-xl shadow-blue-500/10 backdrop-blur-md"
+        >
+          <div
+            class="bg-blue-600 p-3 rounded-xl text-white shadow-lg shadow-blue-500/30"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shield-check"
+              ><path
+                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+              ></path><path d="m9 12 2 2 4-4"></path></svg
+            >
           </div>
           <div>
-            <p class="text-[10px] text-blue-600 uppercase tracking-[0.2em] font-black mb-0.5">Garantizado</p>
-            <p class="font-bold text-slate-900 text-lg leading-tight">Técnicos <br/>Certificados</p>
+            <p
+              class="text-[10px] text-blue-600 uppercase tracking-[0.2em] font-black mb-0.5"
+            >
+              Garantizado
+            </p>
+            <p class="font-bold text-slate-900 text-lg leading-tight">
+              Técnicos <br />Certificados
+            </p>
           </div>
         </div>
-        
-        <!-- Floating Badge 2 -->
-        <div class="absolute top-8 -right-6 glass p-4 rounded-2xl shadow-xl border-white/60 z-20 animate-float animation-delay-2000 backdrop-blur-md">
-           <div class="flex items-center gap-3">
-              <div class="relative flex h-3 w-3">
-                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                 <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </div>
-              <span class="font-bold text-sm text-slate-800">Disponible Hoy</span>
-           </div>
-        </div>
 
-        <!-- Decorative Elements behind image -->
-        <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div
+          class="absolute top-8 -right-6 glass p-4 rounded-2xl shadow-xl border-white/60 z-20 animate-float animation-delay-2000 backdrop-blur-md"
+        >
+          <div class="flex items-center gap-3">
+            <div class="relative flex h-3 w-3">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-3 w-3 bg-green-500"
+              ></span>
+            </div>
+            <span class="font-bold text-sm text-slate-800">Disponible Hoy</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
+  /* GPU-optimized wind animation */
+  .wind-container {
+    contain: content;
+    pointer-events: none;
   }
+
+  @keyframes wind-optimized {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateX(calc(100vw + 100%));
+      opacity: 0;
+    }
+  }
+
+  .wind-line {
+    width: var(--width, 400px);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color, rgba(59, 130, 246, 0.5)) 30%,
+      var(--color, rgba(59, 130, 246, 0.5)) 70%,
+      transparent 100%
+    );
+    animation: wind-optimized 5s linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* Reduce motion for accessibility and GPU savings */
+  @media (prefers-reduced-motion: reduce) {
+    .wind-line,
+    .animate-float,
+    .animate-float-slow {
+      animation: none !important;
+    }
+  }
+
   @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
+
   @keyframes float-slow {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
   }
-  .animate-blob {
-    animation: blob 7s infinite;
-  }
+
   .animate-float {
     animation: float 4s ease-in-out infinite;
   }
+
   .animate-float-slow {
     animation: float-slow 7s ease-in-out infinite;
   }
+
   .animation-delay-2000 {
     animation-delay: 2s;
-  }
-  .bg-300\% {
-    background-size: 300% auto;
   }
 </style>
