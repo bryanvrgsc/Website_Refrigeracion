@@ -42,17 +42,19 @@
 
         <div class="group">
           <label class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">¿Qué necesitas?</label>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { id: 'install', label: 'Instalación', icon: '<path d="M8 12h8"/><path d="M12 8v8"/><rect width="18" height="18" x="3" y="3" rx="2"/>' },
-              { id: 'maint', label: 'Mantenimiento', icon: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>' },
-              { id: 'repair', label: 'Reparación', icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
-              { id: 'advice', label: 'Asesoría', icon: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1Z"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>' }
+              { id: 'maint', label: 'Mantenimiento Preventivo', icon: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>' },
+              { id: 'repair', label: 'Reparación de Averías', icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
+              { id: 'sales', label: 'Venta de Equipos', icon: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>' },
+              { id: 'install', label: 'Instalación Profesional', icon: '<path d="M8 12h8"/><path d="M12 8v8"/><rect width="18" height="18" x="3" y="3" rx="2"/>' },
+              { id: 'ref', label: 'Carga de Refrigerante', icon: '<path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/>' },
+              { id: 'multi', label: 'Multiservicios', icon: '<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>' }
             ].map(item => (
               <label class="relative flex flex-col items-center justify-center p-6 rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-blue-300 hover:bg-blue-50/50 transition-all has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:border-blue-600 has-[:checked]:shadow-lg group/card">
                 <input type="checkbox" class="sr-only" />
                 <div class="mb-3 text-blue-500 group-has-[:checked]/card:text-white transition-colors" set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg>`} />
-                <span class="font-bold text-sm">{item.label}</span>
+                <span class="font-bold text-xs text-center">{item.label}</span>
               </label>
             ))}
           </div>

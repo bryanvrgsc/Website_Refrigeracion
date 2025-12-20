@@ -14,6 +14,12 @@ const services = [
       'Limpieza de filtros de aire y turbina.',
       'Aplicación de tratamiento antibacterial.'
     ],
+    extra: [
+      { label: 'Mantenimiento por Contrato', value: 'Planes anuales o semestrales para asegurar la continuidad operativa.' },
+      { label: 'Equipos Industriales', value: 'Limpieza y ajuste a Compresores de Tornillo, Scroll y Reciprocantes (Atlas Copco, Kaeser, Gardner Denver, etc.).' },
+      { label: 'Climatización', value: 'Revisión general de Chillers, Unidades Paquete, Aire Lavado y Mini Splits.' },
+      { label: 'Lubricación', value: 'Cambio de aceites y filtros para equipos lubricados.' }
+    ],
     images: [
       'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?q=80&w=2070&auto=format&fit=crop',
@@ -34,12 +40,43 @@ const services = [
       'Reparación de fugas mediante soldadura.',
       'Corrección de problemas de vibración.'
     ],
+    extra: [
+      { label: 'Diagnóstico Especializado', value: 'Reparación de compresores que no arrancan, ruidos extraños o baja presión.' },
+      { label: 'Marcas que atendemos', value: 'Sullair, Ingersoll-Rand, Chicago Pneumatic, Quincy y más.' },
+      { label: 'Reemplazo de partes críticas', value: 'Cambio de contactores, tarjetas electrónicas, sellos y baleros.' },
+      { label: 'Atención a Fugas', value: 'Detección y sellado en sistemas de refrigeración y aire comprimido.' }
+    ],
     images: [
       'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop'
     ],
     delay: '100'
+  },
+  {
+    id: 'venta',
+    title: 'Suministro y Venta de Equipos',
+    description: 'Venta de equipos de aire acondicionado y refrigeración de las mejores marcas.',
+    icon: 'shopping-cart',
+    color: 'indigo',
+    details: [
+      'Equipos Mini Split e Inverter.',
+      'Unidades de Paquete y Divididos.',
+      'Sistemas de Ventilación Industrial.',
+      'Refacciones Originales.',
+      'Asesoría técnica en selección de equipo.'
+    ],
+    extra: [
+      { label: 'Venta de Equipos Nuevos', value: 'Compresores Industriales, Secadoras de Aire y Equipos de Aire Acondicionado.' },
+      { label: 'Refacciones Originales', value: 'Filtros, bandas, termostatos y aceites especializados.' },
+      { label: 'Asesoría Técnica', value: 'Le ayudamos a elegir el caballaje y capacidad correcta para su instalación.' }
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1585338107529-13afc5f0171f?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1527669232947-1629a493b2d0?q=80&w=2070&auto=format&fit=crop'
+    ],
+    delay: '150'
   },
   {
     id: 'instalacion',
@@ -53,6 +90,11 @@ const services = [
       'Vacío del sistema con bomba (500 micrones).',
       'Conexión eléctrica normativa.',
       'Pruebas de arranque y capacitación.'
+    ],
+    extra: [
+      { label: 'Sistemas HVAC', value: 'Instalación certificada de Mini Splits, Chillers y Cámaras de Refrigeración/Congelación.' },
+      { label: 'Obra Civil Ligera', value: 'Instalación de Plafones (Falsos techos), muros de Tablaroca y adecuación de espacios para los equipos.' },
+      { label: 'Ductería y Tubería', value: 'Instalación de líneas de cobre y aislamientos térmicos.' }
     ],
     images: [
       'https://images.unsplash.com/photo-1505775561242-727b7fba20f0?q=80&w=2070&auto=format&fit=crop',
@@ -74,12 +116,43 @@ const services = [
       'Verificación de temperaturas.',
       'Sellado de válvulas de servicio.'
     ],
+    extra: [
+      { label: 'Variedad de Gases', value: 'Manejo de R22, R404A, R407C, R410A y refrigerantes especiales.' },
+      { label: 'Recuperación Ecológica', value: 'Procesos responsables para evitar daño al medio ambiente.' },
+      { label: 'Optimización', value: 'Carga exacta para garantizar la eficiencia energética del equipo (que enfríe bien sin gastar luz de más).' }
+    ],
     images: [
       'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=2070&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=2070&auto=format&fit=crop'
     ],
     delay: '300'
+  },
+  {
+    id: 'multiservicios',
+    title: 'Multiservicios',
+    description: 'Soluciones integrales de mantenimiento para la infraestructura de su empresa.',
+    icon: 'layers',
+    color: 'slate',
+    details: [
+      'Mantenimiento a subestaciones eléctricas.',
+      'Pintura y acabados industriales.',
+      'Impermeabilización de naves.',
+      'Herrería y estructuras metálicas.',
+      'Plomería industrial y comercial.'
+    ],
+    extra: [
+      { label: 'Electricidad Industrial', value: 'Media y baja tensión.' },
+      { label: 'Plomería y Fontanería', value: 'Reparación de fugas, bombas y sistemas hidráulicos.' },
+      { label: 'Acabados', value: 'Pintura en general, trabajos de Herrería, Aluminio y Carpintería.' },
+      { label: 'Solución "Llave en Mano"', value: 'Un solo proveedor para mantener su planta u oficina en perfecto estado.' }
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop'
+    ],
+    delay: '350'
   }
 ];
 
@@ -87,7 +160,9 @@ const colorMap = {
   blue: 'text-blue-600 bg-blue-50 border-blue-600 hover:shadow-blue-500/10',
   orange: 'text-orange-600 bg-orange-50 border-orange-600 hover:shadow-orange-500/10',
   green: 'text-green-600 bg-green-50 border-green-600 hover:shadow-green-500/10',
-  cyan: 'text-cyan-600 bg-cyan-50 border-cyan-600 hover:shadow-cyan-500/10'
+  cyan: 'text-cyan-600 bg-cyan-50 border-cyan-600 hover:shadow-cyan-500/10',
+  indigo: 'text-indigo-600 bg-indigo-50 border-indigo-600 hover:shadow-indigo-500/10',
+  slate: 'text-slate-600 bg-slate-50 border-slate-600 hover:shadow-slate-500/10'
 };
 ---
 
@@ -103,21 +178,23 @@ const colorMap = {
       <p class="text-lg md:text-xl text-slate-600 leading-relaxed">Ofrecemos servicios especializados con los más altos estándares de calidad para garantizar el rendimiento óptimo de tus equipos.</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
       {services.map((service, index) => (
         <article 
           class={`relative bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-t border-r border-l border-slate-100 border-b-[12px] ${colorMap[service.color].split(' ').slice(-1)} group reveal reveal-delay-${index * 100} cursor-pointer service-card flex flex-col items-start min-h-[450px] overflow-hidden`}
           data-service={JSON.stringify(service)}
         >
           <!-- Accent Glow -->
-          <div class={`absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500 ${service.color === 'blue' ? 'bg-blue-400' : service.color === 'orange' ? 'bg-orange-400' : service.color === 'green' ? 'bg-green-400' : 'bg-cyan-400'}`}></div>
+          <div class={`absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500 ${service.color === 'blue' ? 'bg-blue-400' : service.color === 'orange' ? 'bg-orange-400' : service.color === 'green' ? 'bg-green-400' : service.color === 'indigo' ? 'bg-indigo-400' : service.color === 'slate' ? 'bg-slate-400' : 'bg-cyan-400'}`}></div>
           
           <!-- Icon -->
           <div class={`w-20 h-20 rounded-2xl flex items-center justify-center mb-10 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-lg shadow-slate-200 ${colorMap[service.color].split(' ').slice(0, 2).join(' ')}`}>
             {service.icon === 'shield-check' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>}
             {service.icon === 'wrench' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>}
+            {service.icon === 'shopping-cart' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>}
             {service.icon === 'plus-square' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>}
             {service.icon === 'droplets' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/></svg>}
+            {service.icon === 'layers' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>}
           </div>
           
           <h3 class="text-3xl font-black text-slate-900 mb-6 group-hover:text-blue-600 transition-colors tracking-tight">{service.title}</h3>
@@ -198,14 +275,19 @@ const colorMap = {
                  <!-- Icon Injected via JS -->
               </div>
 
-              <h3 id="modal-title-mobile" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6"></h3>
+              <h3 id="modal-title-mobile" class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6"></h3>
               
-              <p id="modal-description-mobile" class="text-slate-500 text-lg leading-relaxed mb-10"></p>
+              <p id="modal-description-mobile" class="text-slate-700 text-xl leading-relaxed mb-10"></p>
+
+              <!-- Extra Info Section (only for some services) -->
+              <div id="modal-extra-info" class="mb-10 space-y-6 hidden">
+                 <!-- Injected via JS -->
+              </div>
 
               <!-- Technical Specs List -->
               <div class="space-y-6">
-                <h4 class="text-blue-600 text-[10px] font-black uppercase tracking-[0.2em]">Especificaciones Técnicas</h4>
-                <ul id="modal-details-list" class="grid gap-3 text-sm text-slate-600">
+                <h4 class="text-blue-600 text-xs font-black uppercase tracking-[0.2em]">Especificaciones Técnicas</h4>
+                <ul id="modal-details-list" class="grid gap-4 text-base text-slate-800">
                    <!-- Injected via JS -->
                 </ul>
               </div>
@@ -224,12 +306,6 @@ const colorMap = {
     </div>
   </div>
 
-      </div>
-    </div>
-  </div>
-
-    </div>
-  </div>
   <!-- Zoom Overlay -->
   <div id="zoom-overlay" class="fixed inset-0 z-[200] hidden opacity-0 transition-opacity duration-300 bg-slate-950/95 flex items-center justify-center p-4 cursor-zoom-out">
     <button id="zoom-close" class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors bg-white/10 p-3 rounded-2xl backdrop-blur-md border border-white/10">
@@ -243,15 +319,13 @@ const colorMap = {
   // Elements
   const cards = document.querySelectorAll('.service-card');
   const modal = document.getElementById('service-modal');
-  const closeBtn = document.getElementById('modal-close'); // Mobile close
-  const closeBtnDesktop = document.getElementById('modal-close-desktop'); // Desktop close
+  const closeBtn = document.getElementById('modal-close'); 
   
-  const modalTitleDesktop = document.getElementById('modal-title-desktop');
-  const modalDescDesktop = document.getElementById('modal-description-desktop');
   const modalTitleMobile = document.getElementById('modal-title-mobile');
   const modalDescMobile = document.getElementById('modal-description-mobile');
   const modalPanel = document.getElementById('modal-panel');
   const modalAccentGlow = document.getElementById('modal-accent-glow');
+  const modalIconContainer = document.getElementById('modal-icon-container');
   
   const modalMainImage = document.getElementById('modal-main-image');
   const modalList = document.getElementById('modal-details-list');
@@ -267,25 +341,57 @@ const colorMap = {
   let currentImages = [];
   let currentImageIndex = 0;
 
+  const colorClasses = {
+    blue: 'text-blue-600 bg-blue-50',
+    orange: 'text-orange-600 bg-orange-50',
+    green: 'text-green-600 bg-green-50',
+    cyan: 'text-cyan-600 bg-cyan-50',
+    indigo: 'text-indigo-600 bg-indigo-50',
+    slate: 'text-slate-600 bg-slate-50'
+  };
+
+  // Icons mapping
+  const icons = {
+    'shield-check': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>',
+    'wrench': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    'shopping-cart': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>',
+    'plus-square': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>',
+    'droplets': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/></svg>',
+    'layers': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>'
+  };
+
   // Open Modal
   cards.forEach(card => {
     card.addEventListener('click', () => {
       const data = JSON.parse(card.getAttribute('data-service'));
       
-      // Store state
       currentImages = data.images;
       currentImageIndex = 0;
 
       // Populate Data
       modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
       modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
-      
-      // Content
+      modalIconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-slate-100 ${colorClasses[data.color]}`;
+      modalIconContainer.innerHTML = icons[data.icon];
+
       modalTitleMobile.innerText = data.title;
       modalDescMobile.innerText = data.description;
       if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length;
       
-      // Gallery Grid
+      // Extra Info
+      const extraContainer = document.getElementById('modal-extra-info');
+      if (data.extra) {
+        extraContainer.innerHTML = data.extra.map(item => `
+          <div>
+            <h5 class="text-blue-600 font-bold text-sm mb-1">${item.label}</h5>
+            <p class="text-slate-600 text-sm leading-relaxed">${item.value}</p>
+          </div>
+        `).join('');
+        extraContainer.classList.remove('hidden');
+      } else {
+        extraContainer.classList.add('hidden');
+      }
+
       modalGallery.innerHTML = data.images.map((img, idx) => `
         <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 border-slate-100 opacity-50 hover:border-blue-300 transition-all focus:outline-none gallery-thumb group/thumb">
           <img src="${img}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
@@ -296,38 +402,21 @@ const colorMap = {
 
       // Details List
       modalList.innerHTML = data.details.map(item => `
-        <li class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 group/item hover:bg-white hover:shadow-md transition-all">
-          <div class="w-6 h-6 rounded-lg bg-blue-100 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-blue-600 transition-colors">
-            <svg class="w-4 h-4 text-blue-600 group-hover/item:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          </div>
-          <span class="leading-relaxed font-medium">${item}</span>
+        <li class="flex items-center gap-3 text-slate-600">
+          <svg class="w-4 h-4 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          <span class="font-medium">${item}</span>
         </li>
       `).join('');
 
-      // Show Modal
       modal.classList.remove('hidden');
-      setTimeout(() => {
-        modal.classList.remove('opacity-0');
-      }, 10);
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
       document.body.style.overflow = 'hidden';
     });
   });
 
-  // Image Navigation Functions
   window.setImage = (index) => {
      currentImageIndex = index;
      updateMainImage();
-     
-     // Update active border on thumbnails
-     document.querySelectorAll('.gallery-thumb').forEach((el, idx) => {
-        if(idx === index) {
-          el.classList.add('border-blue-500', 'shadow-lg', 'shadow-blue-500/20', 'opacity-100');
-          el.classList.remove('border-white/10', 'opacity-80');
-        } else {
-          el.classList.remove('border-blue-500', 'shadow-lg', 'shadow-blue-500/20', 'opacity-100');
-          el.classList.add('border-white/10', 'opacity-80');
-        }
-     });
   };
 
   window.prevImage = () => {
@@ -344,7 +433,6 @@ const colorMap = {
      modalMainImage.src = currentImages[currentImageIndex];
      if (modalCounterCurrent) modalCounterCurrent.innerText = currentImageIndex + 1;
      
-     // Update thumbnails state
      document.querySelectorAll('.gallery-thumb').forEach((el, idx) => {
         if(idx === currentImageIndex) {
           el.classList.add('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
@@ -356,7 +444,6 @@ const colorMap = {
      });
   }
 
-  // Close Logic
   function closeModal() {
     modal.classList.add('opacity-0');
     setTimeout(() => {
@@ -366,9 +453,7 @@ const colorMap = {
   }
 
   closeBtn.addEventListener('click', closeModal);
-  closeBtnDesktop?.addEventListener('click', closeModal);
   
-  // Zoom Handlers
   function openZoom() {
     zoomImage.src = currentImages[currentImageIndex];
     zoomOverlay.classList.remove('hidden');
@@ -387,7 +472,6 @@ const colorMap = {
     closeZoom();
   });
   
-  // Keyboard Navigation
   document.addEventListener('keydown', (e) => {
     if (!zoomOverlay.classList.contains('hidden')) {
       if (e.key === 'Escape') closeZoom();
