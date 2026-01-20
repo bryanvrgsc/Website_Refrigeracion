@@ -21,9 +21,9 @@ const services = [
       { label: 'Lubricación', value: 'Cambio de aceites y filtros para equipos lubricados.' }
     ],
     images: [
-      'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1558403194-611308249627?q=80&w=2070&auto=format&fit=crop'
+      "/images/site/Servicios/service-ac-main.jpg",
+      "/images/site/Servicios/service-maintenance.jpg",
+      "/images/site/Servicios/service-industrial.jpg"
     ],
     delay: '0'
   },
@@ -47,9 +47,9 @@ const services = [
       { label: 'Atención a Fugas', value: 'Detección y sellado en sistemas de refrigeración y aire comprimido.' }
     ],
     images: [
-      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop'
+      "/images/site/Servicios/service-installation.jpg",
+      "/images/site/Servicios/service-tech-1.jpg",
+      "/images/site/Servicios/service-repair.jpg"
     ],
     delay: '100'
   },
@@ -72,9 +72,9 @@ const services = [
       { label: 'Asesoría Técnica', value: 'Le ayudamos a elegir el caballaje y capacidad correcta para su instalación.' }
     ],
     images: [
-      'https://images.unsplash.com/photo-1585338107529-13afc5f0171f?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1527669232947-1629a493b2d0?q=80&w=2070&auto=format&fit=crop'
+      "/images/site/Servicios/service-tools.jpg",
+      "/images/site/Servicios/service-pizza.jpg",
+      "/images/site/Servicios/service-commercial.jpg"
     ],
     delay: '150'
   },
@@ -97,9 +97,9 @@ const services = [
       { label: 'Ductería y Tubería', value: 'Instalación de líneas de cobre y aislamientos térmicos.' }
     ],
     images: [
-      'https://images.unsplash.com/photo-1505775561242-727b7fba20f0?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1595814433015-e6f5ce69614e?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1521207418485-99c705420785?q=80&w=2070&auto=format&fit=crop'
+      "/images/site/Servicios/service-ventilation.jpg",
+      "/images/site/Servicios/service-worker.jpg",
+      "/images/site/Servicios/service-hvac.jpg"
     ],
     delay: '200'
   },
@@ -122,9 +122,9 @@ const services = [
       { label: 'Optimización', value: 'Carga exacta para garantizar la eficiencia energética del equipo (que enfríe bien sin gastar luz de más).' }
     ],
     images: [
-      'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=2070&auto=format&fit=crop'
+      "/images/site/Servicios/service-tech-2.jpg",
+      "/images/site/Servicios/service-ac-main.jpg",
+      "/images/site/Servicios/service-cooling.jpg"
     ],
     delay: '300'
   },
@@ -148,9 +148,9 @@ const services = [
       { label: 'Solución "Llave en Mano"', value: 'Un solo proveedor para mantener su planta u oficina en perfecto estado.' }
     ],
     images: [
-      'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=2070&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop'
+      "/images/site/Servicios/service-electrical.jpg",
+      "/images/site/Servicios/service-compressor.jpg",
+      "/images/site/Servicios/service-repair.jpg"
     ],
     delay: '350'
   }
@@ -163,7 +163,9 @@ const colorMap = {
   cyan: 'text-cyan-600 bg-cyan-50 border-cyan-600 hover:shadow-cyan-500/10',
   indigo: 'text-indigo-600 bg-indigo-50 border-indigo-600 hover:shadow-indigo-500/10',
   slate: 'text-slate-600 bg-slate-50 border-slate-600 hover:shadow-slate-500/10'
-};
+} as const;
+
+type ColorKey = keyof typeof colorMap;
 ---
 
 <section id="servicios" class="py-32 relative overflow-hidden bg-white">
@@ -181,14 +183,14 @@ const colorMap = {
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
       {services.map((service, index) => (
         <article 
-          class={`relative bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-t border-r border-l border-slate-100 border-b-[12px] ${colorMap[service.color].split(' ').slice(-1)} group reveal reveal-delay-${index * 100} cursor-pointer service-card flex flex-col items-start min-h-[450px] overflow-hidden`}
+          class={`relative bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-t border-r border-l border-slate-100 border-b-[12px] ${colorMap[service.color as ColorKey].split(' ').slice(-1)} group reveal reveal-delay-${index * 100} cursor-pointer service-card flex flex-col items-start min-h-[450px] overflow-hidden`}
           data-service={JSON.stringify(service)}
         >
           <!-- Accent Glow -->
           <div class={`absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500 ${service.color === 'blue' ? 'bg-blue-400' : service.color === 'orange' ? 'bg-orange-400' : service.color === 'green' ? 'bg-green-400' : service.color === 'indigo' ? 'bg-indigo-400' : service.color === 'slate' ? 'bg-slate-400' : 'bg-cyan-400'}`}></div>
           
           <!-- Icon -->
-          <div class={`w-20 h-20 rounded-2xl flex items-center justify-center mb-10 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-lg shadow-slate-200 ${colorMap[service.color].split(' ').slice(0, 2).join(' ')}`}>
+          <div class={`w-20 h-20 rounded-2xl flex items-center justify-center mb-10 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-lg shadow-slate-200 ${colorMap[service.color as ColorKey].split(' ').slice(0, 2).join(' ')}`}>
             {service.icon === 'shield-check' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>}
             {service.icon === 'wrench' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>}
             {service.icon === 'shopping-cart' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>}
@@ -318,30 +320,30 @@ const colorMap = {
 <script>
   // Elements
   const cards = document.querySelectorAll('.service-card');
-  const modal = document.getElementById('service-modal');
-  const closeBtn = document.getElementById('modal-close'); 
+  const modal = document.getElementById('service-modal') as HTMLElement;
+  const closeBtn = document.getElementById('modal-close') as HTMLElement; 
   
-  const modalTitleMobile = document.getElementById('modal-title-mobile');
-  const modalDescMobile = document.getElementById('modal-description-mobile');
-  const modalPanel = document.getElementById('modal-panel');
-  const modalAccentGlow = document.getElementById('modal-accent-glow');
-  const modalIconContainer = document.getElementById('modal-icon-container');
+  const modalTitleMobile = document.getElementById('modal-title-mobile') as HTMLElement;
+  const modalDescMobile = document.getElementById('modal-description-mobile') as HTMLElement;
+  const modalPanel = document.getElementById('modal-panel') as HTMLElement;
+  const modalAccentGlow = document.getElementById('modal-accent-glow') as HTMLElement;
+  const modalIconContainer = document.getElementById('modal-icon-container') as HTMLElement;
   
-  const modalMainImage = document.getElementById('modal-main-image');
-  const modalList = document.getElementById('modal-details-list');
-  const modalGallery = document.getElementById('modal-gallery');
-  const modalCounterCurrent = document.getElementById('modal-counter-current');
-  const modalCounterTotal = document.getElementById('modal-counter-total');
+  const modalMainImage = document.getElementById('modal-main-image') as HTMLImageElement;
+  const modalList = document.getElementById('modal-details-list') as HTMLElement;
+  const modalGallery = document.getElementById('modal-gallery') as HTMLElement;
+  const modalCounterCurrent = document.getElementById('modal-counter-current') as HTMLElement;
+  const modalCounterTotal = document.getElementById('modal-counter-total') as HTMLElement;
   
-  const zoomOverlay = document.getElementById('zoom-overlay');
-  const zoomImage = document.getElementById('zoom-image');
-  const zoomTrigger = document.getElementById('zoom-trigger');
-  const zoomClose = document.getElementById('zoom-close');
+  const zoomOverlay = document.getElementById('zoom-overlay') as HTMLElement;
+  const zoomImage = document.getElementById('zoom-image') as HTMLImageElement;
+  const zoomTrigger = document.getElementById('zoom-trigger') as HTMLElement;
+  const zoomClose = document.getElementById('zoom-close') as HTMLElement;
 
-  let currentImages = [];
+  let currentImages: string[] = [];
   let currentImageIndex = 0;
 
-  const colorClasses = {
+  const colorClasses: Record<string, string> = {
     blue: 'text-blue-600 bg-blue-50',
     orange: 'text-orange-600 bg-orange-50',
     green: 'text-green-600 bg-green-50',
@@ -351,7 +353,7 @@ const colorMap = {
   };
 
   // Icons mapping
-  const icons = {
+  const icons: Record<string, string> = {
     'shield-check': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>',
     'wrench': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
     'shopping-cart': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>',
@@ -363,7 +365,10 @@ const colorMap = {
   // Open Modal
   cards.forEach(card => {
     card.addEventListener('click', () => {
-      const data = JSON.parse(card.getAttribute('data-service'));
+      const dataAttr = card.getAttribute('data-service');
+      if (!dataAttr) return;
+      
+      const data = JSON.parse(dataAttr);
       
       currentImages = data.images;
       currentImageIndex = 0;

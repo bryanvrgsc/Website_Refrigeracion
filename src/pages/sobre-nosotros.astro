@@ -12,20 +12,35 @@ import Footer from "../components/Footer.astro";
     <section class="relative pt-32 pb-20 overflow-hidden bg-slate-50">
       <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div class="absolute inset-0 grid-pattern opacity-40"></div>
-        <div class="absolute top-0 -left-20 w-[500px] h-[500px] bg-blue-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-        <div class="absolute bottom-0 -right-20 w-[500px] h-[500px] bg-cyan-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div
+          class="absolute top-0 -left-20 w-[500px] h-[500px] bg-blue-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 -right-20 w-[500px] h-[500px] bg-cyan-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"
+        >
+        </div>
       </div>
 
       <div class="container mx-auto px-4 relative z-10 text-center max-w-4xl">
         <div class="reveal">
-          <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-blue-50 text-blue-700 text-xs font-bold tracking-wider uppercase mb-6 border border-blue-100 shadow-sm">
+          <div
+            class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-blue-50 text-blue-700 text-xs font-bold tracking-wider uppercase mb-6 border border-blue-100 shadow-sm"
+          >
             Nuestra Historia
           </div>
-          <h1 class="text-5xl md:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight mb-8">
-            Comprometidos con la <span class="text-gradient">Excelencia Industrial.</span>
+          <h1
+            class="text-5xl md:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight mb-8"
+          >
+            Comprometidos con la <span class="text-gradient"
+              >Excelencia Industrial.</span
+            >
           </h1>
-          <p class="text-xl md:text-2xl text-slate-600 leading-relaxed reveal reveal-delay-100">
-            Conoce más sobre nuestra filosofía, nuestros valores y el compromiso que tenemos con cada uno de nuestros clientes.
+          <p
+            class="text-xl md:text-2xl text-slate-600 leading-relaxed reveal reveal-delay-100"
+          >
+            Conoce más sobre nuestra filosofía, nuestros valores y el compromiso
+            que tenemos con cada uno de nuestros clientes.
           </p>
         </div>
       </div>
@@ -33,64 +48,117 @@ import Footer from "../components/Footer.astro";
 
     <!-- Mission & Vision Section -->
     <section class="py-24 bg-slate-50 relative overflow-hidden">
-        <div class="absolute inset-0 dot-pattern opacity-30"></div>
-        <div class="container mx-auto px-4 relative z-10">
-          <div class="grid md:grid-cols-2 gap-12">
-            <!-- Mission -->
-            <div class="bg-white p-12 rounded-3xl shadow-xl shadow-slate-200/50 border border-white reveal">
-              <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-              </div>
-              <h3 class="text-3xl font-bold text-slate-900 mb-6">Misión</h3>
-              <p class="text-slate-600 leading-relaxed text-lg">
-                Proporcionar las mejores soluciones a nuestros Clientes, ofreciéndoles la mejor Asistencia Profesional y Técnica, buscando el compromiso de una relación duradera y no sólo el beneficio de una venta.
-              </p>
+      <div class="absolute inset-0 dot-pattern opacity-30"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Mission -->
+          <div
+            class="bg-white p-12 rounded-3xl shadow-xl shadow-slate-200/50 border border-white reveal"
+          >
+            <div
+              class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-500/30"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-target"
+                ><circle cx="12" cy="12" r="10"></circle><circle
+                  cx="12"
+                  cy="12"
+                  r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg
+              >
             </div>
-  
-            <!-- Vision -->
-            <div class="bg-white p-12 rounded-3xl shadow-xl shadow-slate-200/50 border border-white reveal reveal-delay-100">
-              <div class="w-16 h-16 bg-cyan-500 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-cyan-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-              </div>
-              <h3 class="text-3xl font-bold text-slate-900 mb-6">Visión</h3>
-              <p class="text-slate-600 leading-relaxed text-lg">
-                Siempre estamos buscando la mejor Capacitación, los mejores Equipos, Refacciones y Herramientas, para estar a la altura de sus necesidades, dando la mejor respuesta en el servicio.
-              </p>
+            <h3 class="text-3xl font-bold text-slate-900 mb-6">Misión</h3>
+            <p class="text-slate-600 leading-relaxed text-lg">
+              Proporcionar las mejores soluciones a nuestros Clientes,
+              ofreciéndoles la mejor Asistencia Profesional y Técnica, buscando
+              el compromiso de una relación duradera y no sólo el beneficio de
+              una venta.
+            </p>
+          </div>
+
+          <!-- Vision -->
+          <div
+            class="bg-white p-12 rounded-3xl shadow-xl shadow-slate-200/50 border border-white reveal reveal-delay-100"
+          >
+            <div
+              class="w-16 h-16 bg-cyan-500 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-cyan-500/30"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-trending-up"
+                ><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"
+                ></polyline><polyline points="17 6 23 6 23 12"></polyline></svg
+              >
             </div>
+            <h3 class="text-3xl font-bold text-slate-900 mb-6">Visión</h3>
+            <p class="text-slate-600 leading-relaxed text-lg">
+              Siempre estamos buscando la mejor Capacitación, los mejores
+              Equipos, Refacciones y Herramientas, para estar a la altura de sus
+              necesidades, dando la mejor respuesta en el servicio.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
     <Suppliers />
 
     <!-- Final Call to Action -->
     <section class="py-24 bg-blue-600 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-        <div class="container mx-auto px-4 text-center relative z-10">
-          <h2 class="text-4xl font-bold text-white mb-6 reveal">
-            ¿Listo para optimizar su infraestructura?
-          </h2>
-          <p class="text-xl text-blue-100 mb-10 reveal reveal-delay-100">
-            Únase a las empresas que ya confían en nuestro servicio profesional.
-          </p>
-          <a
-            href="/cotizar"
-            class="inline-block bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-xl hover:bg-blue-50 transition-all shadow-xl reveal reveal-delay-200"
-          >
-            Contactar Ahora
-          </a>
-        </div>
-      </section>
+      <div
+        class="absolute inset-0 opacity-10"
+        style="background-image: url(/images/site/Sobre_Nosotros/carbon-pattern.png); background-repeat: repeat;"
+      >
+      </div>
+      <div class="container mx-auto px-4 text-center relative z-10">
+        <h2 class="text-4xl font-bold text-white mb-6 reveal">
+          ¿Listo para optimizar su infraestructura?
+        </h2>
+        <p class="text-xl text-blue-100 mb-10 reveal reveal-delay-100">
+          Únase a las empresas que ya confían en nuestro servicio profesional.
+        </p>
+        <a
+          href="/cotizar"
+          class="inline-block bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-xl hover:bg-blue-50 transition-all shadow-xl reveal reveal-delay-200"
+        >
+          Contactar Ahora
+        </a>
+      </div>
+    </section>
   </main>
   <Footer />
 </Layout>
 
 <style>
   @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
   }
   .animate-blob {
     animation: blob 7s infinite;
