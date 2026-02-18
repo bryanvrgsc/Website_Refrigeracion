@@ -173,125 +173,6 @@ type ColorKey = keyof typeof colorMap;
 <script type="application/json" id="services-data" set:html={JSON.stringify(services)}></script>
 
 <script>
-  // Elements
-  const servicesDataElement = document.getElementById('services-data');
-  const servicesData = servicesDataElement ? JSON.parse(servicesDataElement.textContent || '[]') : [];
-  const cards = document.querySelectorAll('.service-card');
-  const modal = document.getElementById('service-modal') as HTMLElement;
-  const closeBtn = document.getElementById('modal-close') as HTMLElement; 
-  
-  const modalTitleMobile = document.getElementById('modal-title-mobile') as HTMLElement;
-  const modalDescMobile = document.getElementById('modal-description-mobile') as HTMLElement;
-  const modalPanel = document.getElementById('modal-panel') as HTMLElement;
-  const modalAccentGlow = document.getElementById('modal-accent-glow') as HTMLElement;
-  const modalIconContainer = document.getElementById('modal-icon-container') as HTMLElement;
-  
-  const modalMainImage = document.getElementById('modal-main-image') as HTMLImageElement;
-  const modalList = document.getElementById('modal-details-list') as HTMLElement;
-  const modalGallery = document.getElementById('modal-gallery') as HTMLElement;
-  const modalCounterCurrent = document.getElementById('modal-counter-current') as HTMLElement;
-  const modalCounterTotal = document.getElementById('modal-counter-total') as HTMLElement;
-  
-  const zoomOverlay = document.getElementById('zoom-overlay') as HTMLElement;
-  const zoomImage = document.getElementById('zoom-image') as HTMLImageElement;
-  const zoomTrigger = document.getElementById('zoom-trigger') as HTMLElement;
-  const zoomClose = document.getElementById('zoom-close') as HTMLElement;
-
-  let currentImages: string[] = [];
-  let currentImageIndex = 0;
-
-  const colorClasses: Record<string, string> = {
-    blue: 'text-blue-600 bg-blue-50',
-    orange: 'text-orange-600 bg-orange-50',
-    green: 'text-green-600 bg-green-50',
-    cyan: 'text-cyan-600 bg-cyan-50',
-    indigo: 'text-indigo-600 bg-indigo-50',
-    slate: 'text-slate-600 bg-slate-50'
-  };
-
-  // Icons mapping
-  const icons: Record<string, string> = {
-    'shield-check': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>',
-    'wrench': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
-    'shopping-cart': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>',
-    'plus-square': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>',
-    'droplets': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/></svg>',
-    'layers': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>'
-  };
-
-  // Open Modal (Event Delegation)
-  const servicesGrid = document.getElementById('services-grid');
-  
-  servicesGrid?.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-    const card = target.closest('.service-card');
-    
-    if (!card) return;
-
-    const indexAttr = card.getAttribute('data-index');
-    if (indexAttr === null) return;
-    
-    const index = parseInt(indexAttr, 10);
-    const data = servicesData[index];
-    
-    if (!data) return;
-    
-    currentImages = data.images;
-    currentImageIndex = 0;
-
-    // Populate Data
-    if (modalPanel) modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
-    if (modalAccentGlow) modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
-    if (modalIconContainer) {
-        modalIconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-slate-100 ${colorClasses[data.color]}`;
-        modalIconContainer.innerHTML = icons[data.icon];
-    }
-
-    if (modalTitleMobile) modalTitleMobile.innerText = data.title;
-    if (modalDescMobile) modalDescMobile.innerText = data.description;
-    if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length.toString();
-    
-    // Extra Info
-    const extraContainer = document.getElementById('modal-extra-info');
-    if (extraContainer) {
-      if (data.extra) {
-        extraContainer.innerHTML = data.extra.map((item: { label: string; value: string }) => `
-          <div>
-            <h5 class="text-blue-600 font-bold text-sm mb-1">${item.label}</h5>
-            <p class="text-slate-600 text-sm leading-relaxed">${item.value}</p>
-          </div>
-        `).join('');
-        extraContainer.classList.remove('hidden');
-      } else {
-        extraContainer.classList.add('hidden');
-      }
-    }
-
-    if (modalGallery) {
-      modalGallery.innerHTML = data.images.map((img: string, idx: number) => `
-        <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 border-slate-100 opacity-50 hover:border-blue-300 transition-all focus:outline-none gallery-thumb group/thumb">
-          <img src="${img}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
-        </button>
-      `).join('');
-    }
-
-    updateMainImage();
-
-    // Details List
-    if (modalList) {
-      modalList.innerHTML = data.details.map((item: string) => `
-        <li class="flex items-center gap-3 text-slate-600">
-          <svg class="w-4 h-4 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          <span class="font-medium">${item}</span>
-        </li>
-      `).join('');
-    }
-
-    modal.classList.remove('hidden');
-    setTimeout(() => modal.classList.remove('opacity-0'), 10);
-    document.body.style.overflow = 'hidden';
-  });
-
   declare global {
     interface Window {
       setImage: (index: number) => void;
@@ -300,75 +181,203 @@ type ColorKey = keyof typeof colorMap;
     }
   }
 
-  window.setImage = (index: number) => {
-     currentImageIndex = index;
-     updateMainImage();
-  };
-
-  window.prevImage = () => {
-     currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : currentImages.length - 1;
-     updateMainImage();
-  };
-
-  window.nextImage = () => {
-     currentImageIndex = (currentImageIndex < currentImages.length - 1) ? currentImageIndex + 1 : 0;
-     updateMainImage();
-  };
-
-  function updateMainImage() {
-     modalMainImage.src = currentImages[currentImageIndex];
-     if (modalCounterCurrent) modalCounterCurrent.innerText = (currentImageIndex + 1).toString();
-     
-     document.querySelectorAll('.gallery-thumb').forEach((el, idx) => {
-        if(idx === currentImageIndex) {
-          el.classList.add('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
-          el.classList.remove('border-slate-100', 'opacity-50');
-        } else {
-          el.classList.remove('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
-          el.classList.add('border-slate-100', 'opacity-50');
-        }
-     });
-  }
-
-  function closeModal() {
-    modal.classList.add('opacity-0');
+  // Defer execution to avoid blocking LCP
+  requestAnimationFrame(() => {
     setTimeout(() => {
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }, 300);
-  }
-
-  closeBtn.addEventListener('click', closeModal);
-  
-  function openZoom() {
-    zoomImage.src = currentImages[currentImageIndex];
-    zoomOverlay.classList.remove('hidden');
-    setTimeout(() => zoomOverlay.classList.remove('opacity-0'), 10);
-  }
-
-  function closeZoom() {
-    zoomOverlay.classList.add('opacity-0');
-    setTimeout(() => zoomOverlay.classList.add('hidden'), 300);
-  }
-
-  zoomTrigger?.addEventListener('click', openZoom);
-  zoomOverlay?.addEventListener('click', closeZoom);
-  zoomClose?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    closeZoom();
+      initServices();
+    }, 0);
   });
+
+  function initServices() {
+    // Elements
+    const servicesDataElement = document.getElementById('services-data');
+    const servicesData = servicesDataElement ? JSON.parse(servicesDataElement.textContent || '[]') : [];
+    const cards = document.querySelectorAll('.service-card');
+    const modal = document.getElementById('service-modal') as HTMLElement;
+    const closeBtn = document.getElementById('modal-close') as HTMLElement; 
+    
+    const modalTitleMobile = document.getElementById('modal-title-mobile') as HTMLElement;
+    const modalDescMobile = document.getElementById('modal-description-mobile') as HTMLElement;
+    const modalPanel = document.getElementById('modal-panel') as HTMLElement;
+    const modalAccentGlow = document.getElementById('modal-accent-glow') as HTMLElement;
+    const modalIconContainer = document.getElementById('modal-icon-container') as HTMLElement;
+    
+    const modalMainImage = document.getElementById('modal-main-image') as HTMLImageElement;
+    const modalList = document.getElementById('modal-details-list') as HTMLElement;
+    const modalGallery = document.getElementById('modal-gallery') as HTMLElement;
+    const modalCounterCurrent = document.getElementById('modal-counter-current') as HTMLElement;
+    const modalCounterTotal = document.getElementById('modal-counter-total') as HTMLElement;
+    
+    const zoomOverlay = document.getElementById('zoom-overlay') as HTMLElement;
+    const zoomImage = document.getElementById('zoom-image') as HTMLImageElement;
+    const zoomTrigger = document.getElementById('zoom-trigger') as HTMLElement;
+    const zoomClose = document.getElementById('zoom-close') as HTMLElement;
   
-  document.addEventListener('keydown', (e) => {
-    if (!zoomOverlay.classList.contains('hidden')) {
-      if (e.key === 'Escape') closeZoom();
-      return;
+    let currentImages: string[] = [];
+    let currentImageIndex = 0;
+  
+    const colorClasses: Record<string, string> = {
+      blue: 'text-blue-600 bg-blue-50',
+      orange: 'text-orange-600 bg-orange-50',
+      green: 'text-green-600 bg-green-50',
+      cyan: 'text-cyan-600 bg-cyan-50',
+      indigo: 'text-indigo-600 bg-indigo-50',
+      slate: 'text-slate-600 bg-slate-50'
+    };
+  
+    // Icons mapping
+    const icons: Record<string, string> = {
+      'shield-check': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>',
+      'wrench': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+      'shopping-cart': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>',
+      'plus-square': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>',
+      'droplets': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/></svg>',
+      'layers': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>'
+    };
+  
+    // Open Modal (Event Delegation)
+    const servicesGrid = document.getElementById('services-grid');
+    
+    servicesGrid?.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const card = target.closest('.service-card');
+      
+      if (!card) return;
+  
+      const indexAttr = card.getAttribute('data-index');
+      if (indexAttr === null) return;
+      
+      const index = parseInt(indexAttr, 10);
+      const data = servicesData[index];
+      
+      if (!data) return;
+      
+      currentImages = data.images;
+      currentImageIndex = 0;
+  
+      // Populate Data
+      if (modalPanel) modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
+      if (modalAccentGlow) modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
+      if (modalIconContainer) {
+          modalIconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-slate-100 ${colorClasses[data.color]}`;
+          modalIconContainer.innerHTML = icons[data.icon];
+      }
+  
+      if (modalTitleMobile) modalTitleMobile.innerText = data.title;
+      if (modalDescMobile) modalDescMobile.innerText = data.description;
+      if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length.toString();
+      
+      // Extra Info
+      const extraContainer = document.getElementById('modal-extra-info');
+      if (extraContainer) {
+        if (data.extra) {
+          extraContainer.innerHTML = data.extra.map((item: { label: string; value: string }) => `
+            <div>
+              <h5 class="text-blue-600 font-bold text-sm mb-1">${item.label}</h5>
+              <p class="text-slate-600 text-sm leading-relaxed">${item.value}</p>
+            </div>
+          `).join('');
+          extraContainer.classList.remove('hidden');
+        } else {
+          extraContainer.classList.add('hidden');
+        }
+      }
+  
+      if (modalGallery) {
+        modalGallery.innerHTML = data.images.map((img: string, idx: number) => `
+          <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 border-slate-100 opacity-50 hover:border-blue-300 transition-all focus:outline-none gallery-thumb group/thumb">
+            <img src="${img}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
+          </button>
+        `).join('');
+      }
+  
+      updateMainImage();
+  
+      // Details List
+      if (modalList) {
+        modalList.innerHTML = data.details.map((item: string) => `
+          <li class="flex items-center gap-3 text-slate-600">
+            <svg class="w-4 h-4 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <span class="font-medium">${item}</span>
+          </li>
+        `).join('');
+      }
+  
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    });
+  
+    window.setImage = (index: number) => {
+       currentImageIndex = index;
+       updateMainImage();
+    };
+  
+    window.prevImage = () => {
+       currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : currentImages.length - 1;
+       updateMainImage();
+    };
+  
+    window.nextImage = () => {
+       currentImageIndex = (currentImageIndex < currentImages.length - 1) ? currentImageIndex + 1 : 0;
+       updateMainImage();
+    };
+  
+    function updateMainImage() {
+       modalMainImage.src = currentImages[currentImageIndex];
+       if (modalCounterCurrent) modalCounterCurrent.innerText = (currentImageIndex + 1).toString();
+       
+       document.querySelectorAll('.gallery-thumb').forEach((el, idx) => {
+          if(idx === currentImageIndex) {
+            el.classList.add('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
+            el.classList.remove('border-slate-100', 'opacity-50');
+          } else {
+            el.classList.remove('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
+            el.classList.add('border-slate-100', 'opacity-50');
+          }
+       });
     }
-    if (!modal.classList.contains('hidden')) {
-      if (e.key === 'Escape') closeModal();
-      if (e.key === 'ArrowLeft') window.prevImage();
-      if (e.key === 'ArrowRight') window.nextImage();
+  
+    function closeModal() {
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
     }
-  });
+  
+    closeBtn.addEventListener('click', closeModal);
+    
+    function openZoom() {
+      zoomImage.src = currentImages[currentImageIndex];
+      zoomOverlay.classList.remove('hidden');
+      setTimeout(() => zoomOverlay.classList.remove('opacity-0'), 10);
+    }
+  
+    function closeZoom() {
+      zoomOverlay.classList.add('opacity-0');
+      setTimeout(() => zoomOverlay.classList.add('hidden'), 300);
+    }
+  
+    zoomTrigger?.addEventListener('click', openZoom);
+    zoomOverlay?.addEventListener('click', closeZoom);
+    zoomClose?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeZoom();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (!zoomOverlay.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeZoom();
+        return;
+      }
+      if (!modal.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') window.prevImage();
+        if (e.key === 'ArrowRight') window.nextImage();
+      }
+    });
+  }
 </script>
 
 
