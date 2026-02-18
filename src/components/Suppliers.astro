@@ -42,10 +42,12 @@ const allSuppliers = [...suppliers, ...suppliers];
 
 <section class="py-16 bg-white overflow-hidden">
   <div class="container mx-auto px-4 mb-10 text-center">
-    <h2 class="text-3xl font-bold text-slate-900 mb-4 reveal">
+    <h2 class="text-3xl font-bold text-slate-900 mb-4 animate-fade-in-up">
       Nuestros Proveedores Estratégicos
     </h2>
-    <p class="text-slate-600 max-w-2xl mx-auto reveal reveal-delay-100">
+    <p
+      class="text-slate-600 max-w-2xl mx-auto animate-fade-in-up animate-delay-200"
+    >
       Trabajamos de la mano con los mejores proveedores para garantizar
       refacciones originales y equipos de la más alta calidad en cada proyecto.
     </p>
@@ -55,7 +57,7 @@ const allSuppliers = [...suppliers, ...suppliers];
     <div class="flex w-max animate-marquee">
       {
         allSuppliers.map((supplier) => (
-          <div class="supplier-item flex items-center justify-center mx-4 sm:mx-6 md:mx-8 w-48 sm:w-64 md:w-80 h-24 md:h-32">
+          <div class="supplier-item flex items-center justify-center mx-4 sm:mx-6 md:mx-8 w-48 sm:w-64 md:w-80 h-24 md:h-32 hover:animate-pulse">
             <img
               src={supplier.logo}
               alt={supplier.name}

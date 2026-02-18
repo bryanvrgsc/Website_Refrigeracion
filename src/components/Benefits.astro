@@ -35,7 +35,9 @@ const benefits = [
           class="absolute -top-10 -left-10 w-64 h-64 bg-blue-50 rounded-full -z-10 animate-pulse"
         >
         </div>
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+        <div
+          class="relative rounded-3xl overflow-hidden shadow-2xl animate-fade-in-right"
+        >
           <img
             src="/images/site/Beneficios/benefits-clean.avif"
             alt="Mantenimiento de aire acondicionado"
@@ -43,7 +45,7 @@ const benefits = [
           />
         </div>
         <div
-          class="absolute -bottom-10 -right-10 bg-blue-600 p-8 rounded-3xl text-white shadow-xl hidden md:block hover:bg-blue-700 transition-colors cursor-default"
+          class="absolute -bottom-10 -right-10 bg-blue-600 p-8 rounded-3xl text-white shadow-xl hidden md:block hover:bg-blue-700 transition-colors cursor-default animate-bounce-in animate-delay-500"
         >
           <p class="text-4xl font-bold mb-1">20+</p>
           <p class="text-blue-100 uppercase tracking-widest text-xs font-bold">
@@ -53,7 +55,7 @@ const benefits = [
       </div>
 
       <div class="lg:w-1/2">
-        <div class="reveal">
+        <div class="animate-fade-in-left">
           <h2
             class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-3"
           >
@@ -68,7 +70,7 @@ const benefits = [
           {
             benefits.map((benefit) => (
               <div
-                class={`flex flex-col gap-4 reveal reveal-${benefit.delay} group`}
+                class={`flex flex-col gap-4 animate-fade-in-up transition-all hover:-translate-y-1 ${benefit.delay.replace("delay-", "animate-delay-")} group`}
               >
                 <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
                   {benefit.icon === "clock" && (
