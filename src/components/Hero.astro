@@ -39,12 +39,13 @@ import heroTech from "../assets/images/site/Inicio/hero-tech.avif";
     </div>
 
     <!-- Static Blobs (Removing animation and mix-blend to save GPU) -->
+    <!-- Static Blobs (Removing animation and mix-blend to save GPU) -->
     <div
-      class="absolute top-0 -left-20 w-[500px] h-[500px] bg-blue-100/40 rounded-full filter blur-3xl opacity-60"
+      class="absolute top-0 -left-20 w-[500px] h-[500px] bg-blue-100/40 rounded-full filter blur-3xl opacity-60 hidden md:block"
     >
     </div>
     <div
-      class="absolute bottom-0 -right-20 w-[500px] h-[500px] bg-cyan-100/40 rounded-full filter blur-3xl opacity-60"
+      class="absolute bottom-0 -right-20 w-[500px] h-[500px] bg-cyan-100/40 rounded-full filter blur-3xl opacity-60 hidden md:block"
     >
     </div>
   </div>
@@ -124,6 +125,8 @@ import heroTech from "../assets/images/site/Inicio/hero-tech.avif";
             class="w-full h-auto object-contain scale-100 group-hover:scale-105 transition-transform duration-1000"
             loading="eager"
             fetchpriority="high"
+            widths={[340, 450, 500, heroTech.width]}
+            sizes={`(max-width: 380px) 340px, (max-width: 640px) 450px, (max-width: 1024px) 500px, ${heroTech.width}px`}
           />
         </div>
 
@@ -225,7 +228,8 @@ import heroTech from "../assets/images/site/Inicio/hero-tech.avif";
   }
 
   /* Reduce motion for accessibility and GPU savings */
-  @media (prefers-reduced-motion: reduce) {
+  /* Reduce motion for accessibility and GPU savings */
+  @media (prefers-reduced-motion: reduce), (max-width: 768px) {
     .wind-line,
     .animate-float,
     .animate-float-slow {
