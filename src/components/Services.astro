@@ -21,9 +21,9 @@ const services = [
       { label: 'Lubricación', value: 'Cambio de aceites y filtros para equipos lubricados.' }
     ],
     images: [
-      "/images/site/Servicios/service-ac-main.jpg",
-      "/images/site/Servicios/service-maintenance.jpg",
-      "/images/site/Servicios/service-industrial.jpg"
+      "/images/site/Servicios/service-ac-main.avif",
+      "/images/site/Servicios/service-maintenance.avif",
+      "/images/site/Servicios/service-industrial.avif"
     ],
     delay: '0'
   },
@@ -47,9 +47,9 @@ const services = [
       { label: 'Atención a Fugas', value: 'Detección y sellado en sistemas de refrigeración y aire comprimido.' }
     ],
     images: [
-      "/images/site/Servicios/service-installation.jpg",
-      "/images/site/Servicios/service-tech-1.jpg",
-      "/images/site/Servicios/service-repair.jpg"
+      "/images/site/Servicios/service-installation.avif",
+      "/images/site/Servicios/service-tech-1.avif",
+      "/images/site/Servicios/service-repair.avif"
     ],
     delay: '100'
   },
@@ -72,9 +72,9 @@ const services = [
       { label: 'Asesoría Técnica', value: 'Le ayudamos a elegir el caballaje y capacidad correcta para su instalación.' }
     ],
     images: [
-      "/images/site/Servicios/service-tools.jpg",
-      "/images/site/Servicios/service-pizza.jpg",
-      "/images/site/Servicios/service-commercial.jpg"
+      "/images/site/Servicios/service-tools.avif",
+      "/images/site/Servicios/service-pizza.avif",
+      "/images/site/Servicios/service-commercial.avif"
     ],
     delay: '150'
   },
@@ -97,9 +97,9 @@ const services = [
       { label: 'Ductería y Tubería', value: 'Instalación de líneas de cobre y aislamientos térmicos.' }
     ],
     images: [
-      "/images/site/Servicios/service-ventilation.jpg",
-      "/images/site/Servicios/service-worker.jpg",
-      "/images/site/Servicios/service-hvac.jpg"
+      "/images/site/Servicios/service-ventilation.avif",
+      "/images/site/Servicios/service-worker.avif",
+      "/images/site/Servicios/service-hvac.avif"
     ],
     delay: '200'
   },
@@ -122,9 +122,9 @@ const services = [
       { label: 'Optimización', value: 'Carga exacta para garantizar la eficiencia energética del equipo (que enfríe bien sin gastar luz de más).' }
     ],
     images: [
-      "/images/site/Servicios/service-tech-2.jpg",
-      "/images/site/Servicios/service-ac-main.jpg",
-      "/images/site/Servicios/service-cooling.jpg"
+      "/images/site/Servicios/service-tech-2.avif",
+      "/images/site/Servicios/service-ac-main.avif",
+      "/images/site/Servicios/service-cooling.avif"
     ],
     delay: '300'
   },
@@ -148,9 +148,9 @@ const services = [
       { label: 'Solución "Llave en Mano"', value: 'Un solo proveedor para mantener su planta u oficina en perfecto estado.' }
     ],
     images: [
-      "/images/site/Servicios/service-electrical.jpg",
-      "/images/site/Servicios/service-compressor.jpg",
-      "/images/site/Servicios/service-repair.jpg"
+      "/images/site/Servicios/service-electrical.avif",
+      "/images/site/Servicios/service-compressor.avif",
+      "/images/site/Servicios/service-repair.avif"
     ],
     delay: '350'
   }
@@ -381,7 +381,7 @@ type ColorKey = keyof typeof colorMap;
 
       modalTitleMobile.innerText = data.title;
       modalDescMobile.innerText = data.description;
-      if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length;
+      if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length.toString();
       
       // Extra Info
       const extraContainer = document.getElementById('modal-extra-info');
@@ -419,7 +419,15 @@ type ColorKey = keyof typeof colorMap;
     });
   });
 
-  window.setImage = (index) => {
+  declare global {
+    interface Window {
+      setImage: (index: number) => void;
+      prevImage: () => void;
+      nextImage: () => void;
+    }
+  }
+
+  window.setImage = (index: number) => {
      currentImageIndex = index;
      updateMainImage();
   };
@@ -436,7 +444,7 @@ type ColorKey = keyof typeof colorMap;
 
   function updateMainImage() {
      modalMainImage.src = currentImages[currentImageIndex];
-     if (modalCounterCurrent) modalCounterCurrent.innerText = currentImageIndex + 1;
+     if (modalCounterCurrent) modalCounterCurrent.innerText = (currentImageIndex + 1).toString();
      
      document.querySelectorAll('.gallery-thumb').forEach((el, idx) => {
         if(idx === currentImageIndex) {
