@@ -187,7 +187,7 @@ type ColorKey = keyof typeof colorMap;
       {services.map((service, index) => (
         <article 
           class={`relative bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-t border-r border-l border-slate-100 border-b-[12px] ${colorMap[service.color as ColorKey].split(' ').slice(-1)} group animate-fade-in-up animate-delay-${index * 100} cursor-pointer service-card flex flex-col items-start min-h-[450px] overflow-hidden`}
-          data-service={JSON.stringify(service)}
+          data-index={index}
         >
           <!-- Accent Glow -->
           <div class={`absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500 ${service.color === 'blue' ? 'bg-blue-400' : service.color === 'orange' ? 'bg-orange-400' : service.color === 'green' ? 'bg-green-400' : service.color === 'indigo' ? 'bg-indigo-400' : service.color === 'slate' ? 'bg-slate-400' : 'bg-cyan-400'}`}></div>
@@ -320,8 +320,12 @@ type ColorKey = keyof typeof colorMap;
   </div>
 </section>
 
+<script type="application/json" id="services-data" set:html={JSON.stringify(services)}></script>
+
 <script>
   // Elements
+  const servicesDataElement = document.getElementById('services-data');
+  const servicesData = servicesDataElement ? JSON.parse(servicesDataElement.textContent || '[]') : [];
   const cards = document.querySelectorAll('.service-card');
   const modal = document.getElementById('service-modal') as HTMLElement;
   const closeBtn = document.getElementById('modal-close') as HTMLElement; 
@@ -374,19 +378,24 @@ type ColorKey = keyof typeof colorMap;
     
     if (!card) return;
 
-    const dataAttr = card.getAttribute('data-service');
-    if (!dataAttr) return;
+    const indexAttr = card.getAttribute('data-index');
+    if (indexAttr === null) return;
     
-    const data = JSON.parse(dataAttr);
+    const index = parseInt(indexAttr, 10);
+    const data = servicesData[index];
+    
+    if (!data) return;
     
     currentImages = data.images;
     currentImageIndex = 0;
 
     // Populate Data
-    modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
-    modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
-    modalIconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-slate-100 ${colorClasses[data.color]}`;
-    modalIconContainer.innerHTML = icons[data.icon];
+    if (modalPanel) modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
+    if (modalAccentGlow) modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
+    if (modalIconContainer) {
+        modalIconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-slate-100 ${colorClasses[data.color]}`;
+        modalIconContainer.innerHTML = icons[data.icon];
+    }
 
     if (modalTitleMobile) modalTitleMobile.innerText = data.title;
     if (modalDescMobile) modalDescMobile.innerText = data.description;
@@ -396,7 +405,7 @@ type ColorKey = keyof typeof colorMap;
     const extraContainer = document.getElementById('modal-extra-info');
     if (extraContainer) {
       if (data.extra) {
-        extraContainer.innerHTML = data.extra.map((item: any) => `
+        extraContainer.innerHTML = data.extra.map((item: { label: string; value: string }) => `
           <div>
             <h5 class="text-blue-600 font-bold text-sm mb-1">${item.label}</h5>
             <p class="text-slate-600 text-sm leading-relaxed">${item.value}</p>
