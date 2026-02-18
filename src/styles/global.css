@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tailwind-animations";
 
 @theme {
   --color-primary: var(--color-blue-600);
@@ -9,7 +10,7 @@
   * {
     @apply border-slate-200;
   }
-  
+
   body {
     @apply bg-slate-50/30 text-slate-900;
   }
@@ -19,7 +20,7 @@
   .glass {
     @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm;
   }
-  
+
   .text-gradient {
     @apply bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-cyan-500;
   }
@@ -36,7 +37,7 @@
     background-image: radial-gradient(circle at 1px 1px, var(--color-slate-200) 1px, transparent 0);
     background-size: 40px 40px;
   }
-  
+
   .dot-pattern {
     background-image: radial-gradient(var(--color-slate-300) 0.5px, transparent 0.5px);
     background-size: 20px 20px;
@@ -45,9 +46,17 @@
   /* Wind animations moved to Hero.astro for better scoping and GPU optimization */
 
   @keyframes gradient-x {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .animate-gradient-x {

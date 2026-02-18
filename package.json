@@ -13,6 +13,7 @@
     "@vercel/analytics": "^1.6.1",
     "astro": "^5.17.2",
     "sharp": "^0.34.5",
+    "tailwind-animations": "^1.0.1",
     "tailwindcss": "^4.1.18"
   }
 }
