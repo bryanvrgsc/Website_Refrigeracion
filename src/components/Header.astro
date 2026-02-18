@@ -7,6 +7,7 @@ const navItems = [
   { name: "Contacto", href: "/contacto" },
 ];
 const currentPath = Astro.url.pathname;
+const normalize = (path: string) => path.replace(/\/$/, "") || "/";
 ---
 
 <header
@@ -41,7 +42,7 @@ const currentPath = Astro.url.pathname;
             href={item.href}
             class:list={[
               "px-5 py-2.5 rounded-xl font-bold transition-all text-sm tracking-wide whitespace-nowrap",
-              currentPath === item.href
+              normalize(currentPath) === normalize(item.href)
                 ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
                 : "text-slate-600 hover:text-blue-600 hover:bg-blue-50/50",
             ]}
@@ -99,7 +100,7 @@ const currentPath = Astro.url.pathname;
             href={item.href}
             class:list={[
               "px-4 py-3 rounded-xl font-medium transition-colors",
-              currentPath === item.href
+              normalize(currentPath) === normalize(item.href)
                 ? "bg-blue-50 text-blue-600"
                 : "text-gray-600 hover:bg-gray-50",
             ]}
