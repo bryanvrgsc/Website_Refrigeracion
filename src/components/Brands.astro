@@ -1,18 +1,26 @@
 ---
+import { Image } from "astro:assets";
+const brandLogos = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/brands/*.svg",
+  { eager: true },
+);
+const getBrandLogo = (name: string) =>
+  brandLogos[`/src/assets/images/brands/${name}`].default;
+
 const brands = [
-  { name: "Atlas Copco", logo: "/images/brands/AtlasCopco.svg" },
-  { name: "Carrier", logo: "/images/brands/Carrier.svg" },
-  { name: "Chicago Pneumatic", logo: "/images/brands/ChicagoPneumatic.svg" },
-  { name: "Gardner Denver", logo: "/images/brands/GardnerDenver.svg" },
-  { name: "Ingersoll Rand", logo: "/images/brands/IngersollRand.svg" },
-  { name: "Kaeser Kompressoren", logo: "/images/brands/KaeserKompressoren.svg" },
-  { name: "LG", logo: "/images/brands/LG.svg" },
-  { name: "McQuay", logo: "/images/brands/McQuay.svg" },
-  { name: "Panasonic", logo: "/images/brands/Panasonic.svg" },
-  { name: "Quincy Compressor", logo: "/images/brands/QuincyCompressor.svg" },
-  { name: "Samsung", logo: "/images/brands/Samsung.svg" },
-  { name: "Sullair", logo: "/images/brands/Sullair.svg" },
-  { name: "York", logo: "/images/brands/York.svg" },
+  { name: "Atlas Copco", logo: getBrandLogo("AtlasCopco.svg") },
+  { name: "Carrier", logo: getBrandLogo("Carrier.svg") },
+  { name: "Chicago Pneumatic", logo: getBrandLogo("ChicagoPneumatic.svg") },
+  { name: "Gardner Denver", logo: getBrandLogo("GardnerDenver.svg") },
+  { name: "Ingersoll Rand", logo: getBrandLogo("IngersollRand.svg") },
+  { name: "Kaeser Kompressoren", logo: getBrandLogo("KaeserKompressoren.svg") },
+  { name: "LG", logo: getBrandLogo("LG.svg") },
+  { name: "McQuay", logo: getBrandLogo("McQuay.svg") },
+  { name: "Panasonic", logo: getBrandLogo("Panasonic.svg") },
+  { name: "Quincy Compressor", logo: getBrandLogo("QuincyCompressor.svg") },
+  { name: "Samsung", logo: getBrandLogo("Samsung.svg") },
+  { name: "Sullair", logo: getBrandLogo("Sullair.svg") },
+  { name: "York", logo: getBrandLogo("York.svg") },
 ];
 
 // Duplicate brands for seamless loop
@@ -31,12 +39,11 @@ const allBrands = [...brands, ...brands];
       {
         allBrands.map((brand) => (
           <div class="brand-item flex items-center justify-center mx-8 sm:mx-12 w-40 sm:w-56 md:w-64 h-20 md:h-24">
-            <img
+            <Image
               src={brand.logo}
               alt={brand.name}
               title={brand.name}
               class="max-w-full max-h-full object-contain"
-              loading="lazy"
             />
           </div>
         ))

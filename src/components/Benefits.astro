@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import benefitsClean from "../assets/images/site/Beneficios/benefits-clean.avif";
+
 const benefits = [
   {
     title: "Respuesta Oportuna",
@@ -38,8 +41,8 @@ const benefits = [
         <div
           class="relative rounded-3xl overflow-hidden shadow-2xl animate-fade-in-right"
         >
-          <img
-            src="/images/site/Beneficios/benefits-clean.avif"
+          <Image
+            src={benefitsClean}
             alt="Mantenimiento de aire acondicionado"
             class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
           />

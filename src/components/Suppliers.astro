@@ -1,39 +1,48 @@
 ---
+import { Image } from "astro:assets";
+
+const supplierLogos = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/suppliers/*.{avif,webp,png,jpg,jpeg}",
+  { eager: true },
+);
+const getLogo = (name: string) =>
+  supplierLogos[`/src/assets/images/suppliers/${name}`].default;
+
 const suppliers = [
   {
     name: "Comercial de Aire Acondicionado",
-    logo: "/images/suppliers/Comercial de Aire Acondicionado.avif",
+    logo: getLogo("Comercial de Aire Acondicionado.avif"),
   },
   {
     name: "Confort Excellence",
-    logo: "/images/suppliers/ConfortExcellence.avif",
+    logo: getLogo("ConfortExcellence.avif"),
   },
-  { name: "Dimaco Equipos", logo: "/images/suppliers/Dimaco Equipos.avif" },
+  { name: "Dimaco Equipos", logo: getLogo("Dimaco Equipos.avif") },
   {
     name: "Empaques Industriales",
-    logo: "/images/suppliers/Empaques Industriales.avif",
+    logo: getLogo("Empaques Industriales.avif"),
   },
-  { name: "ER Comsa", logo: "/images/suppliers/ER Comsa.avif" },
+  { name: "ER Comsa", logo: getLogo("ER Comsa.avif") },
   {
     name: "Especialistas en Sistemas de Sellado",
-    logo: "/images/suppliers/Especialistas en Sistemas de Sellado.avif",
+    logo: getLogo("Especialistas en Sistemas de Sellado.avif"),
   },
-  { name: "Geoclub", logo: "/images/suppliers/Geoclub.avif" },
+  { name: "Geoclub", logo: getLogo("Geoclub.avif") },
   {
     name: "International Clean",
-    logo: "/images/suppliers/International Clean.avif",
+    logo: getLogo("International Clean.avif"),
   },
-  { name: "IR Diensa", logo: "/images/suppliers/IR Diensa.avif" },
+  { name: "IR Diensa", logo: getLogo("IR Diensa.avif") },
   {
     name: "Refrigerantes Tlanepantla",
-    logo: "/images/suppliers/RefrigerantesTlanepantla.avif",
+    logo: getLogo("RefrigerantesTlanepantla.avif"),
   },
   {
     name: "Regiretantes Cuautitlan",
-    logo: "/images/suppliers/RegiretantesCuautitlan.avif",
+    logo: getLogo("RegiretantesCuautitlan.avif"),
   },
-  { name: "Ricsa", logo: "/images/suppliers/Ricsa.avif" },
-  { name: "Sygma", logo: "/images/suppliers/Sygma.avif" },
+  { name: "Ricsa", logo: getLogo("Ricsa.avif") },
+  { name: "Sygma", logo: getLogo("Sygma.avif") },
 ];
 
 // Duplicate suppliers for seamless loop
@@ -58,12 +67,11 @@ const allSuppliers = [...suppliers, ...suppliers];
       {
         allSuppliers.map((supplier) => (
           <div class="supplier-item flex items-center justify-center mx-4 sm:mx-6 md:mx-8 w-48 sm:w-64 md:w-80 h-24 md:h-32 hover:animate-pulse">
-            <img
+            <Image
               src={supplier.logo}
               alt={supplier.name}
               title={supplier.name}
               class="max-w-full max-h-full object-contain"
-              loading="lazy"
             />
           </div>
         ))

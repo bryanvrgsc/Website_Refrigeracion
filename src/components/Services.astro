@@ -1,4 +1,7 @@
 ---
+const serviceImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/site/Servicios/*.avif', { eager: true });
+const img = (name: string) => serviceImages[`/src/assets/images/site/Servicios/${name}`].default.src;
+
 const services = [
   {
     id: 'preventivo',
@@ -21,9 +24,9 @@ const services = [
       { label: 'Lubricación', value: 'Cambio de aceites y filtros para equipos lubricados.' }
     ],
     images: [
-      "/images/site/Servicios/service-ac-main.avif",
-      "/images/site/Servicios/service-maintenance.avif",
-      "/images/site/Servicios/service-industrial.avif"
+      img("service-ac-main.avif"),
+      img("service-maintenance.avif"),
+      img("service-industrial.avif")
     ],
     delay: '0'
   },
@@ -47,9 +50,9 @@ const services = [
       { label: 'Atención a Fugas', value: 'Detección y sellado en sistemas de refrigeración y aire comprimido.' }
     ],
     images: [
-      "/images/site/Servicios/service-installation.avif",
-      "/images/site/Servicios/service-tech-1.avif",
-      "/images/site/Servicios/service-repair.avif"
+      img("service-installation.avif"),
+      img("service-tech-1.avif"),
+      img("service-repair.avif")
     ],
     delay: '100'
   },
@@ -72,9 +75,9 @@ const services = [
       { label: 'Asesoría Técnica', value: 'Le ayudamos a elegir el caballaje y capacidad correcta para su instalación.' }
     ],
     images: [
-      "/images/site/Servicios/service-tools.avif",
-      "/images/site/Servicios/service-pizza.avif",
-      "/images/site/Servicios/service-commercial.avif"
+      img("service-repair.avif"),
+      img("service-pizza.avif"),
+      img("service-industrial.avif")
     ],
     delay: '150'
   },
@@ -97,9 +100,9 @@ const services = [
       { label: 'Ductería y Tubería', value: 'Instalación de líneas de cobre y aislamientos térmicos.' }
     ],
     images: [
-      "/images/site/Servicios/service-ventilation.avif",
-      "/images/site/Servicios/service-worker.avif",
-      "/images/site/Servicios/service-hvac.avif"
+      img("service-ventilation.avif"),
+      img("service-worker.avif"),
+      img("service-hvac.avif")
     ],
     delay: '200'
   },
@@ -122,9 +125,9 @@ const services = [
       { label: 'Optimización', value: 'Carga exacta para garantizar la eficiencia energética del equipo (que enfríe bien sin gastar luz de más).' }
     ],
     images: [
-      "/images/site/Servicios/service-tech-2.avif",
-      "/images/site/Servicios/service-ac-main.avif",
-      "/images/site/Servicios/service-cooling.avif"
+      img("service-tech-2.avif"),
+      img("service-ac-main.avif"),
+      img("service-cooling.avif")
     ],
     delay: '300'
   },
@@ -148,9 +151,9 @@ const services = [
       { label: 'Solución "Llave en Mano"', value: 'Un solo proveedor para mantener su planta u oficina en perfecto estado.' }
     ],
     images: [
-      "/images/site/Servicios/service-electrical.avif",
-      "/images/site/Servicios/service-compressor.avif",
-      "/images/site/Servicios/service-repair.avif"
+      img("service-electrical.avif"),
+      img("service-compressor.avif"),
+      img("service-repair.avif")
     ],
     delay: '350'
   }
@@ -180,7 +183,7 @@ type ColorKey = keyof typeof colorMap;
       <p class="text-lg md:text-xl text-slate-600 leading-relaxed animate-fade-in-up animate-delay-400">Ofrecemos servicios especializados con los más altos estándares de calidad para garantizar el rendimiento óptimo de tus equipos.</p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+    <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
       {services.map((service, index) => (
         <article 
           class={`relative bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-t border-r border-l border-slate-100 border-b-[12px] ${colorMap[service.color as ColorKey].split(' ').slice(-1)} group animate-fade-in-up animate-delay-${index * 100} cursor-pointer service-card flex flex-col items-start min-h-[450px] overflow-hidden`}
@@ -362,31 +365,38 @@ type ColorKey = keyof typeof colorMap;
     'layers': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>'
   };
 
-  // Open Modal
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      const dataAttr = card.getAttribute('data-service');
-      if (!dataAttr) return;
-      
-      const data = JSON.parse(dataAttr);
-      
-      currentImages = data.images;
-      currentImageIndex = 0;
+  // Open Modal (Event Delegation)
+  const servicesGrid = document.getElementById('services-grid');
+  
+  servicesGrid?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const card = target.closest('.service-card');
+    
+    if (!card) return;
 
-      // Populate Data
-      modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
-      modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
-      modalIconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-slate-100 ${colorClasses[data.color]}`;
-      modalIconContainer.innerHTML = icons[data.icon];
+    const dataAttr = card.getAttribute('data-service');
+    if (!dataAttr) return;
+    
+    const data = JSON.parse(dataAttr);
+    
+    currentImages = data.images;
+    currentImageIndex = 0;
 
-      modalTitleMobile.innerText = data.title;
-      modalDescMobile.innerText = data.description;
-      if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length.toString();
-      
-      // Extra Info
-      const extraContainer = document.getElementById('modal-extra-info');
+    // Populate Data
+    modalPanel.style.borderBottomColor = `var(--color-${data.color}-600)`;
+    modalAccentGlow.className = `absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none bg-${data.color}-400`;
+    modalIconContainer.className = `w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-slate-100 ${colorClasses[data.color]}`;
+    modalIconContainer.innerHTML = icons[data.icon];
+
+    if (modalTitleMobile) modalTitleMobile.innerText = data.title;
+    if (modalDescMobile) modalDescMobile.innerText = data.description;
+    if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length.toString();
+    
+    // Extra Info
+    const extraContainer = document.getElementById('modal-extra-info');
+    if (extraContainer) {
       if (data.extra) {
-        extraContainer.innerHTML = data.extra.map(item => `
+        extraContainer.innerHTML = data.extra.map((item: any) => `
           <div>
             <h5 class="text-blue-600 font-bold text-sm mb-1">${item.label}</h5>
             <p class="text-slate-600 text-sm leading-relaxed">${item.value}</p>
@@ -396,27 +406,31 @@ type ColorKey = keyof typeof colorMap;
       } else {
         extraContainer.classList.add('hidden');
       }
+    }
 
-      modalGallery.innerHTML = data.images.map((img, idx) => `
+    if (modalGallery) {
+      modalGallery.innerHTML = data.images.map((img: string, idx: number) => `
         <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 border-slate-100 opacity-50 hover:border-blue-300 transition-all focus:outline-none gallery-thumb group/thumb">
           <img src="${img}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
         </button>
       `).join('');
+    }
 
-      updateMainImage();
+    updateMainImage();
 
-      // Details List
-      modalList.innerHTML = data.details.map(item => `
+    // Details List
+    if (modalList) {
+      modalList.innerHTML = data.details.map((item: string) => `
         <li class="flex items-center gap-3 text-slate-600">
           <svg class="w-4 h-4 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           <span class="font-medium">${item}</span>
         </li>
       `).join('');
+    }
 
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
-      document.body.style.overflow = 'hidden';
-    });
+    modal.classList.remove('hidden');
+    setTimeout(() => modal.classList.remove('opacity-0'), 10);
+    document.body.style.overflow = 'hidden';
   });
 
   declare global {

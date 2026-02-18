@@ -1,26 +1,35 @@
 ---
+import { Image } from "astro:assets";
+
+const clientLogos = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/images/clients/*.{avif,webp,png,jpg,jpeg}",
+    { eager: true },
+);
+const getLogo = (name: string) =>
+    clientLogos[`/src/assets/images/clients/${name}`].default;
+
 const clients = [
     {
         name: "Argo Artes Gráficas",
-        logo: "/images/clients/ArgoArtesGraficas.avif",
+        logo: getLogo("ArgoArtesGraficas.avif"),
     },
     {
         name: "Active Vision Center",
-        logo: "/images/clients/ActiveVisionCenter.avif",
+        logo: getLogo("ActiveVisionCenter.avif"),
     },
-    { name: "CCL", logo: "/images/clients/CCL.avif" },
+    { name: "CCL", logo: getLogo("CCL.avif") },
     {
         name: "Colegio San Ildefonso",
-        logo: "/images/clients/ColegioSanIldefonso.avif",
+        logo: getLogo("ColegioSanIldefonso.avif"),
     },
-    { name: "Filoyarn", logo: "/images/clients/Filoyarn.avif" },
-    { name: "GP Impresores", logo: "/images/clients/GPImpresores.avif" },
-    { name: "Grupo Zapata", logo: "/images/clients/GrupoZapata.avif" },
-    { name: "Industrias Cazel", logo: "/images/clients/IndustriasCazel.webp" },
-    { name: "RR Donnelley", logo: "/images/clients/RRDonnelley.avif" },
-    { name: "Tlapa", logo: "/images/clients/Tlapa.avif" },
-    { name: "VetcoGray", logo: "/images/clients/VetcoGray.avif" },
-    { name: "Vidimport", logo: "/images/clients/Vidimport.avif" },
+    { name: "Filoyarn", logo: getLogo("Filoyarn.avif") },
+    { name: "GP Impresores", logo: getLogo("GPImpresores.avif") },
+    { name: "Grupo Zapata", logo: getLogo("GrupoZapata.avif") },
+    { name: "Industrias Cazel", logo: getLogo("IndustriasCazel.webp") },
+    { name: "RR Donnelley", logo: getLogo("RRDonnelley.avif") },
+    { name: "Tlapa", logo: getLogo("Tlapa.avif") },
+    { name: "VetcoGray", logo: getLogo("VetcoGray.avif") },
+    { name: "Vidimport", logo: getLogo("Vidimport.avif") },
 ];
 ---
 
@@ -58,11 +67,10 @@ const clients = [
                     <div
                         class={`group relative flex items-center justify-center p-6 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-500 bg-gray-50/50 rounded-2xl border border-transparent hover:border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-blue-500/5 animate-fade-in-up animate-delay-${index * 100}`}
                     >
-                        <img
+                        <Image
                             src={client.logo}
                             alt={client.name}
                             class="max-h-16 w-auto object-contain transform group-hover:scale-110 transition-transform duration-500"
-                            loading="lazy"
                         />
                         <span class="absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-semibold text-blue-600 whitespace-nowrap">
                             {client.name}
