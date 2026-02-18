@@ -8,20 +8,20 @@ Sitio web moderno y profesional diseñado para una empresa de servicios de clima
 
 ## ✨ Características Principales
 
-*   **⚡ Rendimiento Extremo:** Página estática generada con Astro para tiempos de carga casi instantáneos.
-*   **📱 Diseño Responsivo:** Adaptado perfectamente a móviles, tablets y escritorio.
+*   **⚡ Rendimiento Extremo:** 
+    *   Arquitectura "Astro Island" para hidratación selectiva.
+    *   **Imágenes Optimizadas:** Assets comprimidos (AVIF) y redimensionados para carga instantánea.
+    *   **Fuentes Locales:** Uso de Inter Variable (subseteada) con precarga (`preload`) para eliminar el retraso de renderizado.
+    *   **Zero CSS Blocking:** Estilos inyectados directamente en el HTML (inlining) para un FCP ultra-rápido.
+*   **📱 Diseño Responsivo:** Adaptado perfectamente a móviles con animaciones optimizadas para GPU (desactivadas en dispositivos de baja potencia).
+*   **🔍 Optimizado para SEO:**
+    *   Metodescripciones únicas por cada página.
+    *   Etiquetas jerárquicas semánticamente correctas.
+    *   Configuración automática de etiquetas meta y favicons.
 *   **🎨 UI/UX Premium:**
-    *   Animaciones de entrada ("Scroll Reveal").
-    *   Menú de navegación transparente con efecto "glassmorphism".
-    *   Carrusel infinito de marcas colaboradoras.
-    *   Modales interactivos inmersivos para mostrar detalles de servicios y galerías de trabajos.
+    *   Transiciones suaves y animaciones de entrada.
 *   **📄 Estructura Multi-Página:**
-    *   **Inicio:** Hero impactante, introducción y marcas.
-    *   **Servicios:** Catálogo detallado con fichas técnicas y fotos.
-    *   **Beneficios:** Ventajas competitivas y testimonios.
-    *   **Contacto:** Centro de soporte con mapa, redes sociales y chat de WhatsApp directo.
-    *   **Cotizar:** Formulario específico para solicitar presupuestos.
-    *   **Legales:** Páginas de Política de Privacidad y Términos de Servicio configuradas.
+    *   Inicio, Servicios, Beneficios, Contacto, Cotizar y Páginas Legales.
 
 ## 🛠️ Tecnologías
 
@@ -29,6 +29,7 @@ Sitio web moderno y profesional diseñado para una empresa de servicios de clima
 *   **[Tailwind CSS](https://tailwindcss.com/):** Framework de utilidades para el diseño.
 *   **[pnpm](https://pnpm.io/):** Gestor de paquetes rápido y eficiente.
 *   **TypeScript:** Para un código más robusto y mantenible.
+*   **[Sharp](https://sharp.pixelplumbing.com/):** Procesamiento de imágenes de alto rendimiento.
 
 ## 🚀 Cómo empezar
 
