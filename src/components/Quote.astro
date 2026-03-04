@@ -210,13 +210,57 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
     async function handleSubmit(event: SubmitEvent) {
       event.preventDefault();
 
+      const nameInput = form!.elements.namedItem("name") as HTMLInputElement;
+      const emailInput = form!.elements.namedItem("email") as HTMLInputElement;
+      const phoneInput = form!.elements.namedItem("phone") as HTMLInputElement;
+
+      status!.classList.remove("hidden", "text-red-600", "text-green-600");
+      status!.textContent = "";
+
+      // Validación clara
+      if (nameInput.value.trim().length < 3) {
+        status!.classList.add("text-red-600");
+        status!.textContent = "Por favor, ingresa tu nombre completo.";
+        nameInput.focus();
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value.trim())) {
+        status!.classList.add("text-red-600");
+        status!.textContent =
+          "Por favor, ingresa un correo electrónico válido.";
+        emailInput.focus();
+        return;
+      }
+
+      if (phoneInput.value.trim() !== "") {
+        const phoneDigits = phoneInput.value.replace(/\D/g, "");
+        if (phoneDigits.length < 10) {
+          status!.classList.add("text-red-600");
+          status!.textContent =
+            "Por favor, ingresa un número de teléfono/WhatsApp válido a 10 dígitos.";
+          phoneInput.focus();
+          return;
+        }
+      }
+
+      // Validar al menos un servicio seleccionado si es posible, aunque message no es requerido, comprobaremos servicios
+      const formData = new FormData(form as HTMLFormElement);
+      const services = formData.getAll("services[]");
+      const message = formData.get("message") as string;
+
+      if (services.length === 0 && message.trim().length === 0) {
+        status!.classList.add("text-red-600");
+        status!.textContent =
+          "Por favor, selecciona qué servicio necesitas o déjanos un detalle en el mensaje.";
+        return;
+      }
+
       const originalButtonText = submitButton!.innerHTML;
       submitButton!.innerHTML = "Enviando Solicitud...";
       submitButton!.disabled = true;
       submitButton!.classList.add("opacity-70", "cursor-not-allowed");
-
-      status!.classList.remove("hidden", "text-red-600", "text-green-600");
-      status!.textContent = "";
 
       const data = new FormData(event.target as HTMLFormElement);
 

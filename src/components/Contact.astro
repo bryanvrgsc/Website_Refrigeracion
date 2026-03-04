@@ -291,13 +291,36 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
     async function handleSubmit(event: SubmitEvent) {
       event.preventDefault();
 
+      const emailInput = form!.elements.namedItem("email") as HTMLInputElement;
+      const messageInput = form!.elements.namedItem(
+        "message",
+      ) as HTMLTextAreaElement;
+
+      status!.classList.remove("hidden", "text-red-600", "text-green-600");
+      status!.textContent = "";
+
+      // Validación clara
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value.trim())) {
+        status!.classList.add("text-red-600");
+        status!.textContent =
+          "Por favor, ingresa un correo electrónico válido.";
+        emailInput.focus();
+        return;
+      }
+
+      if (messageInput.value.trim().length < 10) {
+        status!.classList.add("text-red-600");
+        status!.textContent =
+          "El mensaje es muy corto. Por favor, detalla un poco más tu consulta (mín. 10 caracteres).";
+        messageInput.focus();
+        return;
+      }
+
       const originalButtonText = submitButton!.innerHTML;
       submitButton!.innerHTML = "Enviando...";
       submitButton!.disabled = true;
       submitButton!.classList.add("opacity-70", "cursor-not-allowed");
-
-      status!.classList.remove("hidden", "text-red-600", "text-green-600");
-      status!.textContent = "";
 
       const data = new FormData(event.target as HTMLFormElement);
 
