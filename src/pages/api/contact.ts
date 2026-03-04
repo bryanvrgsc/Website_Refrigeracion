@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request }) => {
     const formspreeId = import.meta.env.PUBLIC_FORMSPREE_CONTACT ||
         import.meta.env.FORMSPREE_CONTACT_ID ||
@@ -14,18 +16,25 @@ export const POST: APIRoute = async ({ request }) => {
 
     try {
         const data = await request.formData();
+        const jsonBody: Record<string, any> = {};
+        for (const [key, value] of data.entries()) {
+            if (typeof value === 'string') {
+                jsonBody[key] = value;
+            }
+        }
 
-        if (!data.get('email') || !data.get('message')) {
+        if (!jsonBody.email || !jsonBody.message) {
             return new Response(JSON.stringify({
-                error: "Missing required fields (email or message)."
+                error: "Faltan campos requeridos (email o mensaje)."
             }), { status: 400, headers: { 'Content-Type': 'application/json' } });
         }
 
         const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
             method: 'POST',
-            body: data,
+            body: JSON.stringify(jsonBody),
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
         });
 
@@ -45,7 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
     } catch (error) {
         console.error("Error submitting contact form:", error);
         return new Response(JSON.stringify({
-            error: "Failed to connect to the form service. Server backend error.",
+            error: "Error interno del servidor al enviar el formulario.",
             details: error instanceof Error ? error.message : String(error)
         }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
