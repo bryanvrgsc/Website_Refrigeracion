@@ -14,20 +14,18 @@ export const POST: APIRoute = async ({ request }) => {
 
     try {
         const data = await request.formData();
-        const jsonBody: Record<string, any> = Object.fromEntries(data.entries());
 
-        // Add multiple checkbox support if needed here (for Quote but safe for all)
-        const services = data.getAll('services[]');
-        if (services.length > 0) {
-            jsonBody.services = services;
+        if (!data.get('email') || !data.get('message')) {
+            return new Response(JSON.stringify({
+                error: "Missing required fields (email or message)."
+            }), { status: 400, headers: { 'Content-Type': 'application/json' } });
         }
 
         const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
             method: 'POST',
-            body: JSON.stringify(jsonBody),
+            body: data,
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Accept': 'application/json'
             }
         });
 

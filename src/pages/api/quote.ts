@@ -14,29 +14,18 @@ export const POST: APIRoute = async ({ request }) => {
 
     try {
         const data = await request.formData();
-        // Convert FormData to a plain object, ensuring all values are strings for JSON serialization
-        const jsonBody: Record<string, string | string[]> = {};
-        for (const [key, value] of data.entries()) {
-            if (typeof value === 'string') {
-                jsonBody[key] = value;
-            }
-            // If there are multiple values for the same key (e.g., checkboxes with the same name),
-            // FormData.getAll() is better, but Object.fromEntries only takes the last one.
-            // The 'services[]' handling below addresses this for specific cases.
-        }
 
-        const services = data.getAll('services[]');
-        if (services.length > 0) {
-            // Ensure services are treated as strings if they are FormDataEntryValue
-            jsonBody.services = services.map(s => String(s));
+        if (!data.get('email') || !data.get('message')) {
+            return new Response(JSON.stringify({
+                error: "Missing required fields (email or message)."
+            }), { status: 400, headers: { 'Content-Type': 'application/json' } });
         }
 
         const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
             method: 'POST',
-            body: JSON.stringify(jsonBody),
+            body: data,
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Accept': 'application/json'
             }
         });
 
