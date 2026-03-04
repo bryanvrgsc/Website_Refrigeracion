@@ -1,5 +1,5 @@
 ---
-
+const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_CONTACT}`;
 ---
 
 <section id="contacto" class="py-24 bg-gray-50 relative overflow-hidden">
@@ -227,7 +227,7 @@
           </h4>
           <form
             id="contact-form"
-            action="/api/contact"
+            action={formspreeUrl}
             method="POST"
             class="space-y-4"
           >

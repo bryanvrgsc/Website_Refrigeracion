@@ -1,5 +1,5 @@
 ---
-
+const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_QUOTE}`;
 ---
 
 <section id="cotizar" class="py-24 bg-white relative overflow-hidden">
@@ -21,7 +21,12 @@
     <div
       class="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-xl reveal reveal-delay-200"
     >
-      <form id="quote-form" action="/api/quote" method="POST" class="space-y-8">
+      <form
+        id="quote-form"
+        action={formspreeUrl}
+        method="POST"
+        class="space-y-8"
+      >
         <div class="grid md:grid-cols-2 gap-8">
           <div class="group">
             <label
