@@ -279,29 +279,31 @@
 </section>
 
 <script>
-  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const form = document.getElementById(
+    "contact-form",
+  ) as HTMLFormElement | null;
   const status = document.getElementById("form-status");
   const submitButton = document.getElementById(
     "submit-button",
-  ) as HTMLButtonElement;
+  ) as HTMLButtonElement | null;
 
   if (form && status && submitButton) {
     async function handleSubmit(event: SubmitEvent) {
       event.preventDefault();
 
-      const originalButtonText = submitButton.innerHTML;
-      submitButton.innerHTML = "Enviando...";
-      submitButton.disabled = true;
-      submitButton.classList.add("opacity-70", "cursor-not-allowed");
+      const originalButtonText = submitButton!.innerHTML;
+      submitButton!.innerHTML = "Enviando...";
+      submitButton!.disabled = true;
+      submitButton!.classList.add("opacity-70", "cursor-not-allowed");
 
-      status.classList.remove("hidden", "text-red-600", "text-green-600");
-      status.textContent = "";
+      status!.classList.remove("hidden", "text-red-600", "text-green-600");
+      status!.textContent = "";
 
       const data = new FormData(event.target as HTMLFormElement);
 
       try {
-        const response = await fetch(form.action, {
-          method: form.method,
+        const response = await fetch(form!.action, {
+          method: form!.method,
           body: data,
           headers: {
             Accept: "application/json",
@@ -309,30 +311,30 @@
         });
 
         if (response.ok) {
-          status.textContent =
+          status!.textContent =
             "¡Gracias por tu mensaje! Te contactaremos pronto.";
-          status.classList.add("text-green-600");
-          form.reset();
+          status!.classList.add("text-green-600");
+          form!.reset();
         } else {
           const resultData = await response.json();
-          status.classList.add("text-red-600");
+          status!.classList.add("text-red-600");
           if (Object.hasOwn(resultData, "errors")) {
-            status.textContent = resultData.errors
+            status!.textContent = resultData.errors
               .map((error: any) => error.message)
               .join(", ");
           } else {
-            status.textContent =
+            status!.textContent =
               "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo.";
           }
         }
       } catch (error) {
-        status.classList.add("text-red-600");
-        status.textContent =
+        status!.classList.add("text-red-600");
+        status!.textContent =
           "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.";
       } finally {
-        submitButton.innerHTML = originalButtonText;
-        submitButton.disabled = false;
-        submitButton.classList.remove("opacity-70", "cursor-not-allowed");
+        submitButton!.innerHTML = originalButtonText;
+        submitButton!.disabled = false;
+        submitButton!.classList.remove("opacity-70", "cursor-not-allowed");
       }
     }
 

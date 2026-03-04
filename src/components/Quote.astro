@@ -1,74 +1,262 @@
 ---
+
 ---
 
 <section id="cotizar" class="py-24 bg-white relative overflow-hidden">
   <div class="container mx-auto px-4 relative z-10">
     <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-      <h2 class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-3">Presupuesto sin compromiso</h2>
-      <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Solicita tu cotización personalizada</h3>
+      <h2 class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-3">
+        Presupuesto sin compromiso
+      </h2>
+      <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        Solicita tu cotización personalizada
+      </h3>
       <p class="text-gray-600 text-lg">
-        Completa el siguiente formulario con los detalles de tu requerimiento y uno de nuestros expertos se pondrá en contacto contigo para brindarte la mejor solución al mejor precio.
+        Completa el siguiente formulario con los detalles de tu requerimiento y
+        uno de nuestros expertos se pondrá en contacto contigo para brindarte la
+        mejor solución al mejor precio.
       </p>
     </div>
 
-    <div class="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-xl reveal reveal-delay-200">
-      <form class="space-y-8">
+    <div
+      class="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-xl reveal reveal-delay-200"
+    >
+      <form
+        id="quote-form"
+        action="https://formspree.io/f/mqedrqkr"
+        method="POST"
+        class="space-y-8"
+      >
         <div class="grid md:grid-cols-2 gap-8">
           <div class="group">
-            <label class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">Nombre Completo</label>
-            <input type="text" placeholder="Ej. Juan Pérez" class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white" />
+            <label
+              for="name"
+              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              >Nombre Completo</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Ej. Juan Pérez"
+              required
+              class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+            />
           </div>
           <div class="group">
-            <label class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">Correo Electrónico</label>
-            <input type="email" placeholder="tu@email.com" class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white" />
+            <label
+              for="email"
+              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              >Correo Electrónico</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="tu@email.com"
+              required
+              class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+            />
           </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8">
           <div class="group">
-            <label class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">Teléfono / WhatsApp</label>
-            <input type="tel" placeholder="+1 (555) 000-0000" class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white" />
+            <label
+              for="phone"
+              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              >Teléfono / WhatsApp</label
+            >
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+1 (555) 000-0000"
+              class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+            />
           </div>
           <div class="group">
-            <label class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">Tipo de Inmueble</label>
-            <select class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all appearance-none bg-white">
-              <option>Residencial (Casa/Apto)</option>
-              <option>Oficina / Local Comercial</option>
-              <option>Industrial / Bodega</option>
-              <option>Otro</option>
+            <label
+              for="property-type"
+              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              >Tipo de Inmueble</label
+            >
+            <select
+              id="property-type"
+              name="property_type"
+              class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all appearance-none bg-white"
+            >
+              <option value="Residencial (Casa/Apto)"
+                >Residencial (Casa/Apto)</option
+              >
+              <option value="Oficina / Local Comercial"
+                >Oficina / Local Comercial</option
+              >
+              <option value="Industrial / Bodega">Industrial / Bodega</option>
+              <option value="Otro">Otro</option>
             </select>
           </div>
         </div>
 
         <div class="group">
-          <label class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">¿Qué necesitas?</label>
+          <label
+            class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+            >¿Qué necesitas?</label
+          >
           <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              { id: 'maint', label: 'Mantenimiento Preventivo', icon: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>' },
-              { id: 'repair', label: 'Reparación de Averías', icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
-              { id: 'sales', label: 'Venta de Equipos', icon: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>' },
-              { id: 'install', label: 'Instalación Profesional', icon: '<path d="M8 12h8"/><path d="M12 8v8"/><rect width="18" height="18" x="3" y="3" rx="2"/>' },
-              { id: 'ref', label: 'Carga de Refrigerante', icon: '<path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/>' },
-              { id: 'multi', label: 'Multiservicios', icon: '<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>' }
-            ].map(item => (
-              <label class="relative flex flex-col items-center justify-center p-6 rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-blue-300 hover:bg-blue-50/50 transition-all has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:border-blue-600 has-[:checked]:shadow-lg group/card">
-                <input type="checkbox" class="sr-only" />
-                <div class="mb-3 text-blue-500 group-has-[:checked]/card:text-white transition-colors" set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg>`} />
-                <span class="font-bold text-xs text-center">{item.label}</span>
-              </label>
-            ))}
+            {
+              [
+                {
+                  id: "maint",
+                  value: "Mantenimiento Preventivo",
+                  label: "Mantenimiento Preventivo",
+                  icon: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+                },
+                {
+                  id: "repair",
+                  value: "Reparación de Averías",
+                  label: "Reparación de Averías",
+                  icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+                },
+                {
+                  id: "sales",
+                  value: "Venta de Equipos",
+                  label: "Venta de Equipos",
+                  icon: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
+                },
+                {
+                  id: "install",
+                  value: "Instalación Profesional",
+                  label: "Instalación Profesional",
+                  icon: '<path d="M8 12h8"/><path d="M12 8v8"/><rect width="18" height="18" x="3" y="3" rx="2"/>',
+                },
+                {
+                  id: "ref",
+                  value: "Carga de Refrigerante",
+                  label: "Carga de Refrigerante",
+                  icon: '<path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/>',
+                },
+                {
+                  id: "multi",
+                  value: "Multiservicios",
+                  label: "Multiservicios",
+                  icon: '<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>',
+                },
+              ].map((item) => (
+                <label
+                  for={item.id}
+                  class="relative flex flex-col items-center justify-center p-6 rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-blue-300 hover:bg-blue-50/50 transition-all has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:border-blue-600 has-[:checked]:shadow-lg group/card"
+                >
+                  <input
+                    type="checkbox"
+                    id={item.id}
+                    name="services[]"
+                    value={item.value}
+                    class="sr-only"
+                  />
+                  <div
+                    class="mb-3 text-blue-500 group-has-[:checked]/card:text-white transition-colors"
+                    set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg>`}
+                  />
+                  <span class="font-bold text-xs text-center">
+                    {item.label}
+                  </span>
+                </label>
+              ))
+            }
           </div>
         </div>
 
         <div class="group">
-          <label class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">Detalles adicionales</label>
-          <textarea rows="4" placeholder="Marca del equipo, síntomas de la falla, número de unidades..." class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"></textarea>
+          <label
+            for="message"
+            class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+            >Detalles adicionales</label
+          >
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Marca del equipo, síntomas de la falla, número de unidades..."
+            class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+          ></textarea>
         </div>
 
-        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-200 transform active:scale-[0.98] transition-all text-lg">
+        <button
+          id="quote-submit-button"
+          type="submit"
+          class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-200 transform active:scale-[0.98] transition-all text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
           Enviar Solicitud de Cotización
         </button>
+        <p
+          id="quote-form-status"
+          class="text-sm font-medium text-center mt-4 hidden"
+        >
+        </p>
       </form>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById("quote-form") as HTMLFormElement | null;
+  const status = document.getElementById("quote-form-status");
+  const submitButton = document.getElementById(
+    "quote-submit-button",
+  ) as HTMLButtonElement | null;
+
+  if (form && status && submitButton) {
+    async function handleSubmit(event: SubmitEvent) {
+      event.preventDefault();
+
+      const originalButtonText = submitButton!.innerHTML;
+      submitButton!.innerHTML = "Enviando Solicitud...";
+      submitButton!.disabled = true;
+      submitButton!.classList.add("opacity-70", "cursor-not-allowed");
+
+      status!.classList.remove("hidden", "text-red-600", "text-green-600");
+      status!.textContent = "";
+
+      const data = new FormData(event.target as HTMLFormElement);
+
+      try {
+        const response = await fetch(form!.action, {
+          method: form!.method,
+          body: data,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          status!.textContent =
+            "¡Solicitud enviada con éxito! Nos comunicaremos contigo a la brevedad.";
+          status!.classList.add("text-green-600");
+          form!.reset();
+        } else {
+          const resultData = await response.json();
+          status!.classList.add("text-red-600");
+          if (Object.hasOwn(resultData, "errors")) {
+            status!.textContent = resultData.errors
+              .map((error: any) => error.message)
+              .join(", ");
+          } else {
+            status!.textContent =
+              "Hubo un problema al enviar tu solicitud. Inténtalo de nuevo.";
+          }
+        }
+      } catch (error) {
+        status!.classList.add("text-red-600");
+        status!.textContent =
+          "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.";
+      } finally {
+        submitButton!.innerHTML = originalButtonText;
+        submitButton!.disabled = false;
+        submitButton!.classList.remove("opacity-70", "cursor-not-allowed");
+      }
+    }
+
+    form.addEventListener("submit", handleSubmit);
+  }
+</script>
