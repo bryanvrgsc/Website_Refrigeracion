@@ -319,9 +319,9 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
           const resultData = await response.json();
           status!.classList.add("text-red-600");
           if (Object.hasOwn(resultData, "errors")) {
-            status!.textContent = resultData.errors
-              .map((error: any) => error.message)
-              .join(", ");
+            status!.textContent =
+              "Error en el formulario: " +
+              resultData.errors.map((error: any) => error.message).join(", ");
           } else {
             status!.textContent =
               "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo.";
