@@ -266,101 +266,103 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
             >
               Enviar Mensaje
             </button>
-            <p
-              id="form-status"
-              class="text-sm font-medium text-center mt-2 hidden"
-            >
-            </p>
           </form>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<script>
-  const form = document.getElementById(
-    "contact-form",
-  ) as HTMLFormElement | null;
-  const status = document.getElementById("form-status");
-  const submitButton = document.getElementById(
-    "submit-button",
-  ) as HTMLButtonElement | null;
+  <script>
+    import { sileo } from "sileo";
 
-  if (form && status && submitButton) {
-    async function handleSubmit(event: SubmitEvent) {
-      event.preventDefault();
+    const form = document.getElementById(
+      "contact-form",
+    ) as HTMLFormElement | null;
+    const submitButton = document.getElementById(
+      "submit-button",
+    ) as HTMLButtonElement | null;
 
-      const emailInput = form!.elements.namedItem("email") as HTMLInputElement;
-      const messageInput = form!.elements.namedItem(
-        "message",
-      ) as HTMLTextAreaElement;
+    if (form && submitButton) {
+      async function handleSubmit(event: SubmitEvent) {
+        event.preventDefault();
 
-      status!.classList.remove("hidden", "text-red-600", "text-green-600");
-      status!.textContent = "";
+        const emailInput = form!.elements.namedItem(
+          "email",
+        ) as HTMLInputElement;
+        const messageInput = form!.elements.namedItem(
+          "message",
+        ) as HTMLTextAreaElement;
 
-      // Validación clara
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailInput.value.trim())) {
-        status!.classList.add("text-red-600");
-        status!.textContent =
-          "Por favor, ingresa un correo electrónico válido.";
-        emailInput.focus();
-        return;
-      }
-
-      if (messageInput.value.trim().length < 10) {
-        status!.classList.add("text-red-600");
-        status!.textContent =
-          "El mensaje es muy corto. Por favor, detalla un poco más tu consulta (mín. 10 caracteres).";
-        messageInput.focus();
-        return;
-      }
-
-      const originalButtonText = submitButton!.innerHTML;
-      submitButton!.innerHTML = "Enviando...";
-      submitButton!.disabled = true;
-      submitButton!.classList.add("opacity-70", "cursor-not-allowed");
-
-      const data = new FormData(event.target as HTMLFormElement);
-
-      try {
-        const response = await fetch(form!.action, {
-          method: form!.method,
-          body: data,
-          headers: {
-            Accept: "application/json",
-          },
-        });
-
-        if (response.ok) {
-          status!.textContent =
-            "¡Gracias por tu mensaje! Te contactaremos pronto.";
-          status!.classList.add("text-green-600");
-          form!.reset();
-        } else {
-          const resultData = await response.json();
-          status!.classList.add("text-red-600");
-          if (Object.hasOwn(resultData, "errors")) {
-            status!.textContent =
-              "Error en el formulario: " +
-              resultData.errors.map((error: any) => error.message).join(", ");
-          } else {
-            status!.textContent =
-              "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo.";
-          }
+        // Validación clara
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value.trim())) {
+          sileo.error({
+            title: "Por favor, ingresa un correo electrónico válido.",
+          });
+          emailInput.focus();
+          return;
         }
-      } catch (error) {
-        status!.classList.add("text-red-600");
-        status!.textContent =
-          "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.";
-      } finally {
-        submitButton!.innerHTML = originalButtonText;
-        submitButton!.disabled = false;
-        submitButton!.classList.remove("opacity-70", "cursor-not-allowed");
-      }
-    }
 
-    form.addEventListener("submit", handleSubmit);
-  }
-</script>
+        if (messageInput.value.trim().length < 10) {
+          sileo.error({
+            title:
+              "El mensaje es muy corto. Por favor, detalla un poco más tu consulta (mín. 10 caracteres).",
+          });
+          messageInput.focus();
+          return;
+        }
+
+        const originalButtonText = submitButton!.innerHTML;
+        submitButton!.innerHTML = "Enviando...";
+        submitButton!.disabled = true;
+        submitButton!.classList.add("opacity-70", "cursor-not-allowed");
+
+        const data = new FormData(event.target as HTMLFormElement);
+
+        try {
+          const response = await fetch(form!.action, {
+            method: form!.method,
+            body: data,
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          if (response.ok) {
+            sileo.success({
+              title: "¡Gracias por tu mensaje!",
+              description: "Te contactaremos pronto.",
+            });
+            form!.reset();
+          } else {
+            const resultData = await response.json();
+            if (Object.hasOwn(resultData, "errors")) {
+              sileo.error({
+                title: "Error en el formulario",
+                description: resultData.errors
+                  .map((error: any) => error.message)
+                  .join(", "),
+              });
+            } else {
+              sileo.error({
+                title:
+                  "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo.",
+              });
+            }
+          }
+        } catch (error) {
+          sileo.error({
+            title:
+              "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.",
+          });
+        } finally {
+          submitButton!.innerHTML = originalButtonText;
+          submitButton!.disabled = false;
+          submitButton!.classList.remove("opacity-70", "cursor-not-allowed");
+        }
+      }
+
+      form.addEventListener("submit", handleSubmit);
+    }
+  </script>
+</section>

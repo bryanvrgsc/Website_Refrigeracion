@@ -189,24 +189,20 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
         >
           Enviar Solicitud de Cotización
         </button>
-        <p
-          id="quote-form-status"
-          class="text-sm font-medium text-center mt-4 hidden"
-        >
-        </p>
       </form>
     </div>
   </div>
 </section>
 
 <script>
+  import { sileo } from "sileo";
+
   const form = document.getElementById("quote-form") as HTMLFormElement | null;
-  const status = document.getElementById("quote-form-status");
   const submitButton = document.getElementById(
     "quote-submit-button",
   ) as HTMLButtonElement | null;
 
-  if (form && status && submitButton) {
+  if (form && submitButton) {
     async function handleSubmit(event: SubmitEvent) {
       event.preventDefault();
 
@@ -214,22 +210,18 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
       const emailInput = form!.elements.namedItem("email") as HTMLInputElement;
       const phoneInput = form!.elements.namedItem("phone") as HTMLInputElement;
 
-      status!.classList.remove("hidden", "text-red-600", "text-green-600");
-      status!.textContent = "";
-
       // Validación clara
       if (nameInput.value.trim().length < 3) {
-        status!.classList.add("text-red-600");
-        status!.textContent = "Por favor, ingresa tu nombre completo.";
+        sileo.error({ title: "Por favor, ingresa tu nombre completo." });
         nameInput.focus();
         return;
       }
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(emailInput.value.trim())) {
-        status!.classList.add("text-red-600");
-        status!.textContent =
-          "Por favor, ingresa un correo electrónico válido.";
+        sileo.error({
+          title: "Por favor, ingresa un correo electrónico válido.",
+        });
         emailInput.focus();
         return;
       }
@@ -237,9 +229,10 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
       if (phoneInput.value.trim() !== "") {
         const phoneDigits = phoneInput.value.replace(/\D/g, "");
         if (phoneDigits.length < 10) {
-          status!.classList.add("text-red-600");
-          status!.textContent =
-            "Por favor, ingresa un número de teléfono/WhatsApp válido a 10 dígitos.";
+          sileo.error({
+            title:
+              "Por favor, ingresa un número de teléfono/WhatsApp válido a 10 dígitos.",
+          });
           phoneInput.focus();
           return;
         }
@@ -251,9 +244,10 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
       const message = formData.get("message") as string;
 
       if (services.length === 0 && message.trim().length === 0) {
-        status!.classList.add("text-red-600");
-        status!.textContent =
-          "Por favor, selecciona qué servicio necesitas o déjanos un detalle en el mensaje.";
+        sileo.error({
+          title:
+            "Por favor, selecciona qué servicio necesitas o déjanos un detalle en el mensaje.",
+        });
         return;
       }
 
@@ -274,26 +268,32 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
         });
 
         if (response.ok) {
-          status!.textContent =
-            "¡Solicitud enviada con éxito! Nos comunicaremos contigo a la brevedad.";
-          status!.classList.add("text-green-600");
+          sileo.success({
+            title: "¡Solicitud enviada con éxito!",
+            description: "Nos comunicaremos contigo a la brevedad.",
+          });
           form!.reset();
         } else {
           const resultData = await response.json();
-          status!.classList.add("text-red-600");
           if (Object.hasOwn(resultData, "errors")) {
-            status!.textContent =
-              "Error en el formulario: " +
-              resultData.errors.map((error: any) => error.message).join(", ");
+            sileo.error({
+              title: "Error en el formulario",
+              description: resultData.errors
+                .map((error: any) => error.message)
+                .join(", "),
+            });
           } else {
-            status!.textContent =
-              "Hubo un problema al enviar tu solicitud. Inténtalo de nuevo.";
+            sileo.error({
+              title:
+                "Hubo un problema al enviar tu solicitud. Inténtalo de nuevo.",
+            });
           }
         }
       } catch (error) {
-        status!.classList.add("text-red-600");
-        status!.textContent =
-          "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.";
+        sileo.error({
+          title:
+            "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.",
+        });
       } finally {
         submitButton!.innerHTML = originalButtonText;
         submitButton!.disabled = false;
