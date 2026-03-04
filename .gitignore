@@ -29,3 +29,4 @@ GEMINI.md
 .github/workflows/gemini-*
 .github/commands/gemini-*
 
+.vercel/
