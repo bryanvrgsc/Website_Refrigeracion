@@ -1,0 +1,70 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+    title="Página no encontrada | Aire Acondicionado y Multiservicio Industrial"
+    description="Lo sentimos, la página que buscas no existe o ha sido movida."
+>
+    <Header />
+
+    <main
+        class="min-h-[80vh] flex items-center justify-center bg-gray-50 pt-20"
+    >
+        <div class="container mx-auto px-4 text-center max-w-2xl reveal">
+            <div
+                class="inline-flex items-center justify-center w-24 h-24 bg-blue-100 text-blue-600 rounded-full mb-8"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"
+                    ></path><path d="m9 9 6 6"></path></svg
+                >
+            </div>
+
+            <h1
+                class="text-6xl md:text-8xl font-black text-gray-900 tracking-tight mb-4"
+            >
+                404
+            </h1>
+
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                ¡Vaya! Página no encontrada
+            </h2>
+
+            <p class="text-gray-600 text-lg mb-10 leading-relaxed">
+                Parece que la página que intentas visitar no existe, ha cambiado
+                de nombre o está temporalmente inaccesible.
+            </p>
+
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+                <a
+                    href="/"
+                    class="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 hover:-translate-y-1"
+                >
+                    Volver al Inicio
+                </a>
+                <a
+                    href="/contacto"
+                    class="w-full sm:w-auto bg-white text-gray-700 px-8 py-4 rounded-xl font-bold text-lg border border-gray-200 hover:bg-gray-50 hover:text-blue-600 transition-all shadow-sm hover:-translate-y-1"
+                >
+                    Contactar Soporte
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
