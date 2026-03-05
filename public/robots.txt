@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://multiservicios.vercel.app/sitemap-index.xml
+Sitemap: https://aireacondicionadoyrefrigeracionmexico.com/sitemap-index.xml

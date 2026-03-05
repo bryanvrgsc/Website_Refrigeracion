@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://tudominio.com',
+  site: 'https://aireacondicionadoyrefrigeracionmexico.com',
   compressHTML: true,
 
   build: {
