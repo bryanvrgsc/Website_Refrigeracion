@@ -46,6 +46,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
           <a
             href="https://wa.me/525514084145?text=Hola,%20me%20gustaría%20cotizar"
             target="_blank"
+            rel="noopener noreferrer"
             class="text-blue-600 font-bold hover:underline"
             >55 1408 4145 (WhatsApp)</a
           >
@@ -259,6 +260,19 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
                 class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-50 outline-none bg-gray-50 transition-all"
               ></textarea>
             </div>
+            <div
+              aria-hidden="true"
+              class="absolute opacity-0 h-0 w-0 overflow-hidden"
+            >
+              <label for="contact-website">No llenar este campo</label>
+              <input
+                type="text"
+                id="contact-website"
+                name="_gotcha"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
             <button
               id="submit-button"
               type="submit"
@@ -312,8 +326,8 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
           return;
         }
 
-        const originalButtonText = submitButton!.innerHTML;
-        submitButton!.innerHTML = "Enviando...";
+        const originalButtonText = submitButton!.textContent;
+        submitButton!.textContent = "Enviando...";
         submitButton!.disabled = true;
         submitButton!.classList.add("opacity-70", "cursor-not-allowed");
 
@@ -356,7 +370,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
               "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.",
           });
         } finally {
-          submitButton!.innerHTML = originalButtonText;
+          submitButton!.textContent = originalButtonText;
           submitButton!.disabled = false;
           submitButton!.classList.remove("opacity-70", "cursor-not-allowed");
         }

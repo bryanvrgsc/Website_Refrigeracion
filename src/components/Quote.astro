@@ -182,6 +182,20 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
           ></textarea>
         </div>
 
+        <div
+          aria-hidden="true"
+          class="absolute opacity-0 h-0 w-0 overflow-hidden"
+        >
+          <label for="quote-website">No llenar este campo</label>
+          <input
+            type="text"
+            id="quote-website"
+            name="_gotcha"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
         <button
           id="quote-submit-button"
           type="submit"
@@ -251,8 +265,8 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
         return;
       }
 
-      const originalButtonText = submitButton!.innerHTML;
-      submitButton!.innerHTML = "Enviando Solicitud...";
+      const originalButtonText = submitButton!.textContent;
+      submitButton!.textContent = "Enviando Solicitud...";
       submitButton!.disabled = true;
       submitButton!.classList.add("opacity-70", "cursor-not-allowed");
 
@@ -295,7 +309,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
             "Hubo un error de conexión. Por favor, revisa tu internet y vuelve a intentarlo.",
         });
       } finally {
-        submitButton!.innerHTML = originalButtonText;
+        submitButton!.textContent = originalButtonText;
         submitButton!.disabled = false;
         submitButton!.classList.remove("opacity-70", "cursor-not-allowed");
       }
