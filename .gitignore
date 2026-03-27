@@ -30,3 +30,4 @@ GEMINI.md
 .github/commands/gemini-*
 
 .vercel/
+.grepai/
