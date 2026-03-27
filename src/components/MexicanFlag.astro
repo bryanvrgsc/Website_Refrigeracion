@@ -11,7 +11,7 @@
   <!-- Bandera -->
   <img
     src="/images/mexico-flag.png"
-    alt="Bandera de México"
+    alt=""
     width="90"
     height="60"
     class="flag-wave"
@@ -34,12 +34,12 @@
     width: 90px;
     height: auto;
     transform-origin: left center;
-    animation: waveFlag 2.5s ease-in-out infinite;
+    animation: mexicanFlagWave 2.5s ease-in-out infinite;
     will-change: transform;
     display: block;
   }
 
-  @keyframes waveFlag {
+  @keyframes mexicanFlagWave {
     0%   { transform: perspective(300px) rotateY(0deg)  skewY(-1deg); }
     25%  { transform: perspective(300px) rotateY(6deg)  skewY(1deg);  }
     50%  { transform: perspective(300px) rotateY(0deg)  skewY(-1deg); }
