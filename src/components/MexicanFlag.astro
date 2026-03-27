@@ -1,0 +1,49 @@
+---
+---
+
+<div
+  class="absolute top-0 -right-4 lg:-right-20 z-20 hidden lg:flex items-start gap-1"
+  aria-hidden="true"
+>
+  <!-- Mástil -->
+  <div class="pole"></div>
+
+  <!-- Bandera -->
+  <img
+    src="/images/mexico-flag.png"
+    alt="Bandera de México"
+    width="90"
+    height="60"
+    class="flag-wave"
+    loading="lazy"
+    decoding="async"
+  />
+</div>
+
+<style>
+  .pole {
+    width: 3px;
+    min-height: 80px;
+    background: linear-gradient(to bottom, #c8a84b, #8b7355);
+    border-radius: 2px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .flag-wave {
+    width: 90px;
+    height: auto;
+    transform-origin: left center;
+    animation: waveFlag 2.5s ease-in-out infinite;
+    will-change: transform;
+    display: block;
+  }
+
+  @keyframes waveFlag {
+    0%   { transform: perspective(300px) rotateY(0deg)  skewY(-1deg); }
+    25%  { transform: perspective(300px) rotateY(6deg)  skewY(1deg);  }
+    50%  { transform: perspective(300px) rotateY(0deg)  skewY(-1deg); }
+    75%  { transform: perspective(300px) rotateY(-4deg) skewY(0.5deg); }
+    100% { transform: perspective(300px) rotateY(0deg)  skewY(-1deg); }
+  }
+</style>
