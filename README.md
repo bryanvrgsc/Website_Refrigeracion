@@ -3,7 +3,7 @@
 Sitio web moderno y profesional diseñado para una empresa de servicios de climatización (HVAC). Construido con **Astro** y **Tailwind CSS** para garantizar el máximo rendimiento, velocidad y una experiencia de usuario fluida.
 
 ![Estado del Proyecto](https://img.shields.io/badge/Estado-Terminado-success)
-![Astro](https://img.shields.io/badge/Astro-5.0-orange)
+![Astro](https://img.shields.io/badge/Astro-6.0-orange)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4.0-blue)
 
 ## ✨ Características Principales
