@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
 import SileoToaster from "../components/SileoToaster.tsx";
 
@@ -18,10 +19,11 @@ const {
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <ClientRouter />
 
     <!-- Open Graph / Meta -->
     <meta property="og:type" content="website" />
@@ -110,6 +112,13 @@ const {
   :root {
     --font-inter: "Inter Variable", system-ui, -apple-system, sans-serif;
   }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 220ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   html,
   body {
     margin: 0;
@@ -145,6 +154,12 @@ const {
 </style>
 
 <script>
+  function observeRevealElements() {
+    document.querySelectorAll(".reveal").forEach((element) => {
+      observer.observe(element);
+    });
+  }
+
   const observerOptions = {
     root: null,
     rootMargin: "0px",
@@ -160,14 +175,7 @@ const {
     });
   }, observerOptions);
 
-  document.addEventListener("astro:page-load", () => {
-    // Re-run on page navigation if using ViewTransitions,
-    // but for now just run on load.
-    const hiddenElements = document.querySelectorAll(".reveal");
-    hiddenElements.forEach((el) => observer.observe(el));
-  });
+  document.addEventListener("astro:page-load", observeRevealElements);
 
-  // Run immediately for initial load
-  const hiddenElements = document.querySelectorAll(".reveal");
-  hiddenElements.forEach((el) => observer.observe(el));
+  observeRevealElements();
 </script>

@@ -124,23 +124,17 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
 </header>
 
 <script>
-  const header = document.getElementById("main-header");
-  const mobileBtn = document.getElementById("mobile-menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  let isMenuOpen = false;
-
-  mobileBtn?.addEventListener("click", () => {
-    isMenuOpen = !isMenuOpen;
-    if (isMenuOpen) {
-      mobileMenu?.classList.remove("max-h-0", "opacity-0");
-      mobileMenu?.classList.add("max-h-96", "opacity-100");
-    } else {
-      mobileMenu?.classList.add("max-h-0", "opacity-0");
-      mobileMenu?.classList.remove("max-h-96", "opacity-100");
+  declare global {
+    interface Window {
+      __syncHeaderState?: () => void;
+      __headerScrollBound?: boolean;
     }
-  });
+  }
 
-  window.addEventListener("scroll", () => {
+  function syncHeaderState() {
+    const header = document.getElementById("main-header");
+    if (!header) return;
+
     if (window.scrollY > 20) {
       header?.classList.add(
         "glass",
@@ -160,5 +154,49 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
       );
       header?.classList.add("bg-transparent");
     }
-  });
+  }
+
+  function initHeader() {
+    const mobileBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileBtn && mobileMenu && mobileBtn.dataset.bound !== "true") {
+      mobileBtn.dataset.bound = "true";
+
+      const closeMenu = () => {
+        mobileMenu.classList.add("max-h-0", "opacity-0");
+        mobileMenu.classList.remove("max-h-96", "opacity-100");
+      };
+
+      mobileBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.contains("max-h-96");
+
+        if (isOpen) {
+          closeMenu();
+        } else {
+          mobileMenu.classList.remove("max-h-0", "opacity-0");
+          mobileMenu.classList.add("max-h-96", "opacity-100");
+        }
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+    }
+
+    syncHeaderState();
+  }
+
+  if (!window.__headerScrollBound) {
+    window.__headerScrollBound = true;
+    window.__syncHeaderState = syncHeaderState;
+    window.addEventListener("scroll", () => {
+      window.__syncHeaderState?.();
+    });
+  } else {
+    window.__syncHeaderState = syncHeaderState;
+  }
+
+  document.addEventListener("astro:page-load", initHeader);
+  initHeader();
 </script>

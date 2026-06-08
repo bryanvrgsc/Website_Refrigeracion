@@ -19,10 +19,12 @@ export const services = [
             { label: 'Climatización', value: 'Revisión general de Chillers, Unidades Paquete, Aire Lavado y Mini Splits.' },
             { label: 'Lubricación', value: 'Cambio de aceites y filtros para equipos lubricados.' }
         ],
-        images: [
-            "service-ac-main.avif",
-            "service-maintenance.avif",
-            "service-industrial.avif"
+        media: [
+            { type: 'video', src: 'preventivo-serpentin.mp4', poster: 'preventivo-serpentin-poster.avif' },
+            { type: 'image', src: 'preventivo-01-contexto.avif' },
+            { type: 'video', src: 'preventivo-limpieza.mp4', poster: 'preventivo-limpieza-poster.avif' },
+            { type: 'image', src: 'preventivo-04-detalle.avif' },
+            { type: 'image', src: 'preventivo-05-resultado.avif' }
         ],
         delay: '0'
     },
@@ -45,10 +47,12 @@ export const services = [
             { label: 'Reemplazo de partes críticas', value: 'Cambio de contactores, tarjetas electrónicas, sellos y baleros.' },
             { label: 'Atención a Fugas', value: 'Detección y sellado en sistemas de refrigeración y aire comprimido.' }
         ],
-        images: [
-            "service-installation.avif",
-            "service-tech-1.avif",
-            "service-repair.avif"
+        media: [
+            { type: 'video', src: 'reparacion-soldadura.mp4', poster: 'reparacion-soldadura-poster.avif' },
+            { type: 'image', src: 'reparacion-01-contexto.avif' },
+            { type: 'image', src: 'reparacion-03-intervencion.avif' },
+            { type: 'image', src: 'reparacion-04-detalle.avif' },
+            { type: 'image', src: 'reparacion-05-resultado.avif' }
         ],
         delay: '100'
     },
@@ -70,10 +74,11 @@ export const services = [
             { label: 'Refacciones Originales', value: 'Filtros, bandas, termostatos y aceites especializados.' },
             { label: 'Asesoría Técnica', value: 'Le ayudamos a elegir el caballaje y capacidad correcta para su instalación.' }
         ],
-        images: [
-            "service-repair.avif",
-            "service-pizza.avif",
-            "service-industrial.avif"
+        media: [
+            { type: 'image', src: 'venta-azotea.avif' },
+            { type: 'image', src: 'venta-02-diagnostico.avif' },
+            { type: 'image', src: 'venta-04-detalle.avif' },
+            { type: 'image', src: 'venta-05-resultado.avif' }
         ],
         delay: '150'
     },
@@ -95,10 +100,12 @@ export const services = [
             { label: 'Obra Civil Ligera', value: 'Instalación de Plafones (Falsos techos), muros de Tablaroca y adecuación de espacios para los equipos.' },
             { label: 'Ductería y Tubería', value: 'Instalación de líneas de cobre y aislamientos térmicos.' }
         ],
-        images: [
-            "service-ventilation.avif",
-            "service-worker.avif",
-            "service-hvac.avif"
+        media: [
+            { type: 'video', src: 'instalacion-montaje.mp4', poster: 'instalacion-montaje-poster.avif' },
+            { type: 'image', src: 'instalacion-01-contexto.avif' },
+            { type: 'video', src: 'instalacion-tuberia.mp4', poster: 'instalacion-tuberia-poster.avif' },
+            { type: 'image', src: 'instalacion-vacio.avif' },
+            { type: 'image', src: 'instalacion-05-resultado.avif' }
         ],
         delay: '200'
     },
@@ -120,10 +127,12 @@ export const services = [
             { label: 'Recuperación Ecológica', value: 'Procesos responsables para evitar daño al medio ambiente.' },
             { label: 'Optimización', value: 'Carga exacta para garantizar la eficiencia energética del equipo (que enfríe bien sin gastar luz de más).' }
         ],
-        images: [
-            "service-tech-2.avif",
-            "service-ac-main.avif",
-            "service-cooling.avif"
+        media: [
+            { type: 'video', src: 'carga-manometros.mp4', poster: 'carga-manometros-poster.avif' },
+            { type: 'image', src: 'carga-02-diagnostico.avif' },
+            { type: 'video', src: 'carga-recarga.mp4', poster: 'carga-recarga-poster.avif' },
+            { type: 'image', src: 'carga-04-detalle.avif' },
+            { type: 'image', src: 'carga-05-resultado.avif' }
         ],
         delay: '300'
     },
@@ -146,10 +155,12 @@ export const services = [
             { label: 'Acabados', value: 'Pintura en general, trabajos de Herrería, Aluminio y Carpintería.' },
             { label: 'Solución "Llave en Mano"', value: 'Un solo proveedor para mantener su planta u oficina en perfecto estado.' }
         ],
-        images: [
-            "service-electrical.avif",
-            "service-compressor.avif",
-            "service-repair.avif"
+        media: [
+            { type: 'video', src: 'multiservicios-electrico.mp4', poster: 'multiservicios-electrico-poster.avif' },
+            { type: 'image', src: 'multiservicios-01-contexto.avif' },
+            { type: 'image', src: 'multiservicios-03-intervencion.avif' },
+            { type: 'image', src: 'multiservicios-04-detalle.avif' },
+            { type: 'image', src: 'multiservicios-05-resultado.avif' }
         ],
         delay: '350'
     }

@@ -289,14 +289,17 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
   <script>
     import { sileo } from "sileo";
 
-    const form = document.getElementById(
-      "contact-form",
-    ) as HTMLFormElement | null;
-    const submitButton = document.getElementById(
-      "submit-button",
-    ) as HTMLButtonElement | null;
+    function initContactForm() {
+      const form = document.getElementById(
+        "contact-form",
+      ) as HTMLFormElement | null;
+      const submitButton = document.getElementById(
+        "submit-button",
+      ) as HTMLButtonElement | null;
 
-    if (form && submitButton) {
+      if (!form || !submitButton || form.dataset.bound === "true") return;
+      form.dataset.bound = "true";
+
       async function handleSubmit(event: SubmitEvent) {
         event.preventDefault();
 
@@ -378,5 +381,8 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
 
       form.addEventListener("submit", handleSubmit);
     }
+
+    document.addEventListener("astro:page-load", initContactForm);
+    initContactForm();
   </script>
 </section>
