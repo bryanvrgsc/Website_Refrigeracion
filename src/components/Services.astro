@@ -2,12 +2,28 @@
 import { services as rawServices } from '../data/services';
 
 const serviceImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/site/Servicios/*.avif', { eager: true });
-const img = (name: string) => serviceImages[`/src/assets/images/site/Servicios/${name}`].default.src;
+const serviceVideos = import.meta.glob<string>('/src/assets/images/site/Servicios/*.mp4', { eager: true, query: '?url', import: 'default' });
 
-const services = rawServices.map(service => ({
-  ...service,
-  images: service.images.map(imageName => img(imageName))
-}));
+const img = (name: string) => serviceImages[`/src/assets/images/site/Servicios/${name}`].default.src;
+const vid = (name: string) => serviceVideos[`/src/assets/images/site/Servicios/${name}`];
+
+type RawMedia = { type: 'image' | 'video'; src: string; poster?: string };
+type Media = { type: 'image' | 'video'; src: string; poster: string };
+
+const services = rawServices.map(service => {
+  const media: Media[] = (service.media as RawMedia[]).map(item =>
+    item.type === 'video'
+      ? { type: 'video', src: vid(item.src), poster: item.poster ? img(item.poster) : '' }
+      : { type: 'image', src: img(item.src), poster: img(item.src) }
+  );
+  const videoCount = media.filter(m => m.type === 'video').length;
+  const photoCount = media.length - videoCount;
+  const mediaLabel = [
+    photoCount ? `${photoCount} ${photoCount === 1 ? 'foto' : 'fotos'}` : '',
+    videoCount ? `${videoCount} ${videoCount === 1 ? 'video' : 'videos'}` : ''
+  ].filter(Boolean).join(' · ');
+  return { ...service, media, mediaLabel };
+});
 
 const colorMap = {
   blue: 'text-blue-600 bg-blue-50 border-blue-600 hover:shadow-blue-500/10',
@@ -19,6 +35,33 @@ const colorMap = {
 } as const;
 
 type ColorKey = keyof typeof colorMap;
+
+const borderMap: Record<ColorKey, string> = {
+  blue: 'border-b-blue-600',
+  orange: 'border-b-orange-600',
+  green: 'border-b-green-600',
+  cyan: 'border-b-cyan-600',
+  indigo: 'border-b-indigo-600',
+  slate: 'border-b-slate-600'
+};
+
+const glowMap: Record<ColorKey, string> = {
+  blue: 'bg-blue-400',
+  orange: 'bg-orange-400',
+  green: 'bg-green-400',
+  cyan: 'bg-cyan-400',
+  indigo: 'bg-indigo-400',
+  slate: 'bg-slate-400'
+};
+
+const mediaGradientMap: Record<ColorKey, string> = {
+  blue: 'from-blue-950/80 via-blue-900/20',
+  orange: 'from-orange-950/80 via-orange-900/20',
+  green: 'from-green-950/80 via-green-900/20',
+  cyan: 'from-cyan-950/80 via-cyan-900/20',
+  indigo: 'from-indigo-950/80 via-indigo-900/20',
+  slate: 'from-slate-950/80 via-slate-900/20'
+};
 ---
 
 <section id="servicios" class="py-32 relative overflow-hidden bg-white">
@@ -26,41 +69,98 @@ type ColorKey = keyof typeof colorMap;
 
   <div class="container mx-auto px-4 relative z-10">
     <div class="text-center max-w-3xl mx-auto mb-20">
-      <div class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold tracking-widest uppercase mb-4 border border-blue-100 animate-fade-in-down">
+      <div class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold tracking-widest uppercase mb-4 border border-blue-100">
         Excelencia Técnica
       </div>
-      <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight animate-fade-in-up animate-delay-200">Soluciones <span class="text-gradient">profesionales</span></h2>
-      <p class="text-lg md:text-xl text-slate-600 leading-relaxed animate-fade-in-up animate-delay-400">Ofrecemos servicios especializados con los más altos estándares de calidad para garantizar el rendimiento óptimo de tus equipos.</p>
+      <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Soluciones <span class="text-gradient">profesionales</span></h2>
+      <p class="text-lg md:text-xl text-slate-600 leading-relaxed">Ofrecemos servicios especializados con los más altos estándares de calidad para garantizar el rendimiento óptimo de tus equipos.</p>
     </div>
 
     <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
       {services.map((service, index) => (
         <article 
-          class={`relative bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-t border-r border-l border-slate-100 border-b-[12px] ${colorMap[service.color as ColorKey].split(' ').slice(-1)} group animate-fade-in-up animate-delay-${index * 100} cursor-pointer service-card flex flex-col items-start min-h-[450px] overflow-hidden`}
+          class={`relative bg-white rounded-[2rem] shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-t border-r border-l border-slate-100 border-b-[12px] ${borderMap[service.color as ColorKey]} ${colorMap[service.color as ColorKey].split(' ').slice(-1)} group cursor-pointer service-card flex flex-col items-start min-h-[560px] overflow-hidden`}
           data-index={index}
         >
           <!-- Accent Glow -->
-          <div class={`absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500 ${service.color === 'blue' ? 'bg-blue-400' : service.color === 'orange' ? 'bg-orange-400' : service.color === 'green' ? 'bg-green-400' : service.color === 'indigo' ? 'bg-indigo-400' : service.color === 'slate' ? 'bg-slate-400' : 'bg-cyan-400'}`}></div>
-          
-          <!-- Icon -->
-          <div class={`w-20 h-20 rounded-2xl flex items-center justify-center mb-10 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-jiggle shadow-lg shadow-slate-200 ${colorMap[service.color as ColorKey].split(' ').slice(0, 2).join(' ')}`}>
-            {service.icon === 'shield-check' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>}
-            {service.icon === 'wrench' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>}
-            {service.icon === 'shopping-cart' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>}
-            {service.icon === 'plus-square' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>}
-            {service.icon === 'droplets' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/></svg>}
-            {service.icon === 'layers' && <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>}
+          <div class={`absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500 ${glowMap[service.color as ColorKey]}`}></div>
+
+          <div class="service-card-media relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
+            {service.media[0].type === 'video' ? (
+              <video
+                src={service.media[0].src}
+                poster={service.media[0].poster}
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                data-card-video
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            ) : (
+              <img
+                src={service.media[0].src}
+                alt={`Trabajo de ${service.title}`}
+                loading={index < 3 ? 'eager' : 'lazy'}
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            )}
+            <div class={`absolute inset-0 bg-linear-to-t ${mediaGradientMap[service.color as ColorKey]} to-transparent pointer-events-none`}></div>
+            {service.media[0].type === 'video' && (
+              <div class="absolute right-5 top-5 flex items-center gap-1.5 rounded-full bg-blue-600/90 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-white shadow-lg backdrop-blur-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                Video
+              </div>
+            )}
+            <div class="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-slate-800 shadow-lg backdrop-blur-md">
+              {service.mediaLabel}
+            </div>
+            <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 pointer-events-none">
+              <div class="text-white">
+                <p class="text-xs font-black uppercase tracking-[0.2em] text-white/75">Galería técnica</p>
+                <p class="mt-1 text-lg font-black leading-tight drop-shadow">Trabajo real en campo</p>
+              </div>
+              <div class="hidden shrink-0 grid-cols-3 gap-1.5 sm:grid">
+                {service.media.slice(1, 4).map((preview, previewIndex) => (
+                  <div class="relative h-12 w-12">
+                    <img
+                      src={preview.poster}
+                      alt={`Vista ${previewIndex + 2} de ${service.title}`}
+                      loading="lazy"
+                      class="h-12 w-12 rounded-xl border-2 border-white/70 object-cover shadow-lg"
+                    />
+                    {preview.type === 'video' && (
+                      <span class="absolute inset-0 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white" class="drop-shadow"><path d="M8 5v14l11-7z"/></svg>
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           
-          <h3 class="text-3xl font-black text-slate-900 mb-6 group-hover:text-blue-600 transition-colors tracking-tight">{service.title}</h3>
-          <p class="text-slate-600 leading-relaxed mb-auto text-lg">
-            {service.description}
-          </p>
-          
-          <button class="w-full mt-12 py-5 rounded-2xl font-bold text-base bg-slate-50 text-slate-600 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-xl group-hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2 border border-slate-100 group-hover:border-blue-600">
-            Ver Galería de Trabajos
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
+          <div class="flex flex-1 flex-col p-7 md:p-8">
+            <!-- Icon -->
+            <div class={`w-16 h-16 rounded-2xl flex items-center justify-center mb-7 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-jiggle shadow-lg shadow-slate-200 ${colorMap[service.color as ColorKey].split(' ').slice(0, 2).join(' ')}`}>
+              {service.icon === 'shield-check' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>}
+              {service.icon === 'wrench' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>}
+              {service.icon === 'shopping-cart' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>}
+              {service.icon === 'plus-square' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>}
+              {service.icon === 'droplets' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S3 9 3 12.3c0 2.2 1.8 4 4 4z"/><path d="M17 16.3c2.2 0 4-1.8 4-4 0-3.3-4-6.3-4-6.3S13 9 13 12.3c0 2.2 1.8 4 4 4z"/></svg>}
+              {service.icon === 'layers' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>}
+            </div>
+            
+            <h3 class="text-2xl md:text-3xl font-black text-slate-900 mb-5 group-hover:text-blue-600 transition-colors tracking-tight leading-tight">{service.title}</h3>
+            <p class="text-slate-600 leading-relaxed mb-auto text-base md:text-lg">
+              {service.description}
+            </p>
+            
+            <button class="w-full mt-8 py-4 rounded-2xl font-bold text-base bg-slate-50 text-slate-600 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-xl group-hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2 border border-slate-100 group-hover:border-blue-600">
+              Ver Galería de Trabajos
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
         </article>
       ))}
     </div>
@@ -83,7 +183,7 @@ type ColorKey = keyof typeof colorMap;
         <!-- Left Column: Visuals (50%) -->
         <div class="w-full md:w-1/2 bg-slate-50 flex flex-col border-r border-slate-100">
           <!-- Main Image Viewport -->
-          <div class="flex-1 relative min-h-[300px] md:min-h-[450px] flex items-center justify-center p-8 group/main">
+          <div class="flex-1 relative min-h-[300px] md:min-h-[450px] flex items-center justify-center p-4 md:p-6 group/main">
             <div class="absolute inset-0 grid-pattern opacity-20 pointer-events-none"></div>
             
             <!-- Zoom Icon Trigger -->
@@ -98,7 +198,8 @@ type ColorKey = keyof typeof colorMap;
               <span id="modal-counter-current">1</span> / <span id="modal-counter-total">1</span>
             </div>
 
-            <img id="modal-main-image" src="" class="w-full h-full object-contain relative z-10 transition-all duration-500 rounded-2xl" alt="Trabajo realizado" />
+            <img id="modal-main-image" src="" class="w-full h-full object-cover relative z-10 transition-all duration-500 rounded-2xl shadow-xl shadow-slate-900/10" alt="Trabajo realizado" />
+            <video id="modal-main-video" controls playsinline preload="metadata" class="hidden w-full h-full object-cover relative z-30 rounded-2xl shadow-xl shadow-slate-900/10 bg-black"></video>
             
             <!-- Navigation Arrows -->
             <div class="absolute inset-0 flex items-center justify-between px-4 z-30 pointer-events-none">
@@ -178,21 +279,38 @@ type ColorKey = keyof typeof colorMap;
       setImage: (index: number) => void;
       prevImage: () => void;
       nextImage: () => void;
+      __servicesKeydownBound?: boolean;
+      __servicesState?: {
+        modal: HTMLElement | null;
+        zoomOverlay: HTMLElement | null;
+        closeModal: () => void;
+        closeZoom: () => void;
+      };
     }
   }
 
-  // Defer execution to avoid blocking LCP
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      initServices();
-    }, 0);
-  });
+  function scheduleServicesInit() {
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        initServices();
+      }, 0);
+    });
+  }
 
   function initServices() {
+    const servicesGrid = document.getElementById('services-grid') as HTMLElement | null;
+
+    if (!servicesGrid) {
+      window.__servicesState = undefined;
+      return;
+    }
+
+    if (servicesGrid.dataset.initialized === 'true') return;
+    servicesGrid.dataset.initialized = 'true';
+
     // Elements
     const servicesDataElement = document.getElementById('services-data');
     const servicesData = servicesDataElement ? JSON.parse(servicesDataElement.textContent || '[]') : [];
-    const cards = document.querySelectorAll('.service-card');
     const modal = document.getElementById('service-modal') as HTMLElement;
     const closeBtn = document.getElementById('modal-close') as HTMLElement; 
     
@@ -203,18 +321,22 @@ type ColorKey = keyof typeof colorMap;
     const modalIconContainer = document.getElementById('modal-icon-container') as HTMLElement;
     
     const modalMainImage = document.getElementById('modal-main-image') as HTMLImageElement;
+    const modalMainVideo = document.getElementById('modal-main-video') as HTMLVideoElement;
     const modalList = document.getElementById('modal-details-list') as HTMLElement;
     const modalGallery = document.getElementById('modal-gallery') as HTMLElement;
     const modalCounterCurrent = document.getElementById('modal-counter-current') as HTMLElement;
     const modalCounterTotal = document.getElementById('modal-counter-total') as HTMLElement;
-    
+
     const zoomOverlay = document.getElementById('zoom-overlay') as HTMLElement;
     const zoomImage = document.getElementById('zoom-image') as HTMLImageElement;
     const zoomTrigger = document.getElementById('zoom-trigger') as HTMLElement;
     const zoomClose = document.getElementById('zoom-close') as HTMLElement;
-  
-    let currentImages: string[] = [];
+
+    type MediaItem = { type: 'image' | 'video'; src: string; poster: string };
+    let currentMedia: MediaItem[] = [];
     let currentImageIndex = 0;
+
+    const playIconSvg = '<span class="absolute inset-0 flex items-center justify-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white" class="drop-shadow"><path d="M8 5v14l11-7z"/></svg></span>';
   
     const colorClasses: Record<string, string> = {
       blue: 'text-blue-600 bg-blue-50',
@@ -235,9 +357,6 @@ type ColorKey = keyof typeof colorMap;
       'layers': '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0l8.57-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>'
     };
   
-    // Open Modal (Event Delegation)
-    const servicesGrid = document.getElementById('services-grid');
-    
     servicesGrid?.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
       const card = target.closest('.service-card');
@@ -252,7 +371,7 @@ type ColorKey = keyof typeof colorMap;
       
       if (!data) return;
       
-      currentImages = data.images;
+      currentMedia = data.media;
       currentImageIndex = 0;
   
       // Populate Data
@@ -265,7 +384,7 @@ type ColorKey = keyof typeof colorMap;
   
       if (modalTitleMobile) modalTitleMobile.innerText = data.title;
       if (modalDescMobile) modalDescMobile.innerText = data.description;
-      if (modalCounterTotal) modalCounterTotal.innerText = currentImages.length.toString();
+      if (modalCounterTotal) modalCounterTotal.innerText = currentMedia.length.toString();
       
       // Extra Info
       const extraContainer = document.getElementById('modal-extra-info');
@@ -284,14 +403,15 @@ type ColorKey = keyof typeof colorMap;
       }
   
       if (modalGallery) {
-        modalGallery.innerHTML = data.images.map((img: string, idx: number) => `
-          <button onclick="setImage(${idx})" class="aspect-square rounded-xl overflow-hidden border-2 border-slate-100 opacity-50 hover:border-blue-300 transition-all focus:outline-none gallery-thumb group/thumb">
-            <img src="${img}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
+        modalGallery.innerHTML = currentMedia.map((item: MediaItem, idx: number) => `
+          <button onclick="setImage(${idx})" class="relative aspect-square rounded-xl overflow-hidden border-2 border-slate-100 opacity-50 hover:border-blue-300 transition-all focus:outline-none gallery-thumb group/thumb">
+            <img src="${item.poster}" class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500" />
+            ${item.type === 'video' ? playIconSvg : ''}
           </button>
         `).join('');
       }
-  
-      updateMainImage();
+
+      updateMainMedia();
   
       // Details List
       if (modalList) {
@@ -304,29 +424,49 @@ type ColorKey = keyof typeof colorMap;
       }
   
       modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden', 'false');
       setTimeout(() => modal.classList.remove('opacity-0'), 10);
       document.body.style.overflow = 'hidden';
     });
   
     window.setImage = (index: number) => {
        currentImageIndex = index;
-       updateMainImage();
+       updateMainMedia();
     };
-  
+
     window.prevImage = () => {
-       currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : currentImages.length - 1;
-       updateMainImage();
+       currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : currentMedia.length - 1;
+       updateMainMedia();
     };
-  
+
     window.nextImage = () => {
-       currentImageIndex = (currentImageIndex < currentImages.length - 1) ? currentImageIndex + 1 : 0;
-       updateMainImage();
+       currentImageIndex = (currentImageIndex < currentMedia.length - 1) ? currentImageIndex + 1 : 0;
+       updateMainMedia();
     };
-  
-    function updateMainImage() {
-       modalMainImage.src = currentImages[currentImageIndex];
+
+    function updateMainMedia() {
+       const item = currentMedia[currentImageIndex];
+       if (!item) return;
+
+       if (item.type === 'video') {
+          modalMainVideo.pause();
+          modalMainVideo.src = item.src;
+          modalMainVideo.poster = item.poster;
+          modalMainVideo.classList.remove('hidden');
+          modalMainImage.classList.add('hidden');
+          if (zoomTrigger) zoomTrigger.classList.add('hidden');
+       } else {
+          modalMainVideo.pause();
+          modalMainVideo.removeAttribute('src');
+          modalMainVideo.load();
+          modalMainVideo.classList.add('hidden');
+          modalMainImage.src = item.src;
+          modalMainImage.classList.remove('hidden');
+          if (zoomTrigger) zoomTrigger.classList.remove('hidden');
+       }
+
        if (modalCounterCurrent) modalCounterCurrent.innerText = (currentImageIndex + 1).toString();
-       
+
        document.querySelectorAll('.gallery-thumb').forEach((el, idx) => {
           if(idx === currentImageIndex) {
             el.classList.add('border-blue-500', 'shadow-md', 'scale-105', 'z-10', 'opacity-100');
@@ -337,19 +477,23 @@ type ColorKey = keyof typeof colorMap;
           }
        });
     }
-  
+
     function closeModal() {
+      modalMainVideo.pause();
       modal.classList.add('opacity-0');
       setTimeout(() => {
         modal.classList.add('hidden');
+        modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       }, 300);
     }
-  
+
     closeBtn.addEventListener('click', closeModal);
-    
+
     function openZoom() {
-      zoomImage.src = currentImages[currentImageIndex];
+      const item = currentMedia[currentImageIndex];
+      if (!item || item.type === 'video') return;
+      zoomImage.src = item.src;
       zoomOverlay.classList.remove('hidden');
       setTimeout(() => zoomOverlay.classList.remove('opacity-0'), 10);
     }
@@ -358,6 +502,13 @@ type ColorKey = keyof typeof colorMap;
       zoomOverlay.classList.add('opacity-0');
       setTimeout(() => zoomOverlay.classList.add('hidden'), 300);
     }
+
+    window.__servicesState = {
+      modal,
+      zoomOverlay,
+      closeModal,
+      closeZoom,
+    };
   
     zoomTrigger?.addEventListener('click', openZoom);
     zoomOverlay?.addEventListener('click', closeZoom);
@@ -365,19 +516,44 @@ type ColorKey = keyof typeof colorMap;
       e.stopPropagation();
       closeZoom();
     });
-    
-    document.addEventListener('keydown', (e) => {
-      if (!zoomOverlay.classList.contains('hidden')) {
-        if (e.key === 'Escape') closeZoom();
-        return;
-      }
-      if (!modal.classList.contains('hidden')) {
-        if (e.key === 'Escape') closeModal();
-        if (e.key === 'ArrowLeft') window.prevImage();
-        if (e.key === 'ArrowRight') window.nextImage();
-      }
+
+    // Autoplay de videos de portada al pasar el cursor (desktop)
+    servicesGrid.querySelectorAll<HTMLVideoElement>('video[data-card-video]').forEach((video) => {
+      const card = video.closest('.service-card');
+      if (!card) return;
+      card.addEventListener('mouseenter', () => {
+        video.play().catch(() => {});
+      });
+      card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+      });
     });
+
+    if (!window.__servicesKeydownBound) {
+      window.__servicesKeydownBound = true;
+
+      document.addEventListener('keydown', (e) => {
+        const state = window.__servicesState;
+        if (!state) return;
+
+        const isZoomOpen = state.zoomOverlay && !state.zoomOverlay.classList.contains('hidden');
+        const isModalOpen = state.modal && !state.modal.classList.contains('hidden');
+
+        if (isZoomOpen) {
+          if (e.key === 'Escape') state.closeZoom();
+          return;
+        }
+
+        if (isModalOpen) {
+          if (e.key === 'Escape') state.closeModal();
+          if (e.key === 'ArrowLeft') window.prevImage();
+          if (e.key === 'ArrowRight') window.nextImage();
+        }
+      });
+    }
   }
+
+  document.addEventListener('astro:page-load', scheduleServicesInit);
+  scheduleServicesInit();
 </script>
-
-

@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 
 const supplierLogos = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/images/suppliers/*.{avif,webp,png,jpg,jpeg}",
+  "/src/assets/images/suppliers/*.avif",
   { eager: true },
 );
 const getLogo = (name: string) =>

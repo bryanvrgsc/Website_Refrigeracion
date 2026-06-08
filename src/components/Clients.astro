@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 
 const clientLogos = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/assets/images/clients/*.{avif,webp,png,jpg,jpeg}",
+    "/src/assets/images/clients/*.avif",
     { eager: true },
 );
 const getLogo = (name: string) =>
@@ -25,7 +25,7 @@ const clients = [
     { name: "Filoyarn", logo: getLogo("Filoyarn.avif") },
     { name: "GP Impresores", logo: getLogo("GPImpresores.avif") },
     { name: "Grupo Zapata", logo: getLogo("GrupoZapata.avif") },
-    { name: "Industrias Cazel", logo: getLogo("IndustriasCazel.webp") },
+    { name: "Industrias Cazel", logo: getLogo("IndustriasCazel.avif") },
     { name: "RR Donnelley", logo: getLogo("RRDonnelley.avif") },
     { name: "Tlapa", logo: getLogo("Tlapa.avif") },
     { name: "VetcoGray", logo: getLogo("VetcoGray.avif") },
@@ -81,38 +81,3 @@ const clients = [
         </div>
     </div>
 </section>
-
-<style>
-    .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-    }
-</style>
-
-<script>
-    const observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            }
-        });
-    }, observerOptions);
-
-    document.addEventListener("DOMContentLoaded", () => {
-        document
-            .querySelectorAll(".reveal")
-            .forEach((el) => observer.observe(el));
-    });
-</script>
