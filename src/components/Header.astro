@@ -18,7 +18,7 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
     <!-- Logo: Solo ícono en móvil, con texto en desktop -->
     <a
       href="/"
-      class="font-black text-slate-900 flex items-center gap-2 group tracking-tight"
+      class="font-black text-fg flex items-center gap-2 group tracking-tight"
     >
       <img
         id="brand-logo"
@@ -48,7 +48,7 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
               "px-5 py-2.5 rounded-xl font-bold transition-all text-sm tracking-wide whitespace-nowrap",
               normalize(currentPath) === normalize(item.href)
                 ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
-                : "text-slate-600 hover:text-blue-600 hover:bg-blue-50/50",
+                : "text-muted hover:text-blue-500 hover:bg-blue-500/10",
             ]}
           >
             {item.name}
@@ -69,7 +69,7 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="lg:hidden text-slate-900 p-2.5 glass rounded-xl border-white/50 shadow-sm active:scale-95 transition-transform"
+        class="lg:hidden text-fg p-2.5 glass rounded-xl border-white/50 shadow-sm active:scale-95 transition-transform"
         aria-label="Menú de navegación"
       >
         <svg
@@ -95,7 +95,7 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
   <!-- Mobile Menu Dropdown -->
   <div
     id="mobile-menu"
-    class="lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-xl overflow-hidden transition-all duration-300 max-h-0 opacity-0"
+    class="lg:hidden absolute top-full left-0 w-full bg-surface border-t border-border shadow-xl overflow-hidden transition-all duration-300 max-h-0 opacity-0"
   >
     <div class="flex flex-col p-4 gap-2">
       {
@@ -105,15 +105,15 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
             class:list={[
               "px-4 py-3 rounded-xl font-medium transition-colors",
               normalize(currentPath) === normalize(item.href)
-                ? "bg-blue-50 text-blue-600"
-                : "text-gray-600 hover:bg-gray-50",
+                ? "bg-blue-500/10 text-blue-500"
+                : "text-muted hover:bg-fg/5",
             ]}
           >
             {item.name}
           </a>
         ))
       }
-      <div class="h-px bg-gray-100 my-2"></div>
+      <div class="h-px bg-border my-2"></div>
       <a
         href="/cotizar"
         class="bg-blue-600 text-white px-4 py-3 rounded-xl font-bold text-center hover:bg-blue-700 transition-colors"
@@ -142,7 +142,7 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
         "shadow-xl",
         "!py-3",
         "border-b",
-        "border-slate-200/50",
+        "border-border/50",
       );
       header?.classList.remove("bg-transparent");
     } else {
@@ -151,7 +151,7 @@ const normalize = (path: string) => path.replace(/\/$/, "") || "/";
         "shadow-xl",
         "!py-3",
         "border-b",
-        "border-slate-200/50",
+        "border-border/50",
       );
       header?.classList.add("bg-transparent");
     }
