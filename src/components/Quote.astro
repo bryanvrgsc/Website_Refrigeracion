@@ -2,16 +2,16 @@
 const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_QUOTE}`;
 ---
 
-<section id="cotizar" class="py-24 bg-white relative overflow-hidden">
+<section id="cotizar" class="py-24 bg-bg relative overflow-hidden">
   <div class="container mx-auto px-4 relative z-10">
     <div class="text-center max-w-3xl mx-auto mb-16 reveal">
       <h2 class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-3">
         Presupuesto sin compromiso
       </h2>
-      <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+      <h3 class="text-4xl md:text-5xl font-bold text-fg mb-6">
         Solicita tu cotización personalizada
       </h3>
-      <p class="text-gray-600 text-lg">
+      <p class="text-muted text-lg">
         Completa el siguiente formulario con los detalles de tu requerimiento y
         uno de nuestros expertos se pondrá en contacto contigo para brindarte la
         mejor solución al mejor precio.
@@ -19,7 +19,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
     </div>
 
     <div
-      class="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-xl reveal reveal-delay-200"
+      class="max-w-4xl mx-auto bg-surface rounded-3xl p-8 md:p-12 border border-border shadow-xl reveal reveal-delay-200"
     >
       <form
         id="quote-form"
@@ -31,7 +31,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
           <div class="group">
             <label
               for="name"
-              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              class="block text-sm font-bold text-muted mb-2 group-focus-within:text-blue-600 transition-colors"
               >Nombre Completo</label
             >
             <input
@@ -40,13 +40,13 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
               name="name"
               placeholder="Ej. Juan Pérez"
               required
-              class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+              class="w-full px-6 py-4 rounded-2xl border border-border focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-bg text-fg"
             />
           </div>
           <div class="group">
             <label
               for="email"
-              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              class="block text-sm font-bold text-muted mb-2 group-focus-within:text-blue-600 transition-colors"
               >Correo Electrónico</label
             >
             <input
@@ -55,7 +55,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
               name="email"
               placeholder="tu@email.com"
               required
-              class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+              class="w-full px-6 py-4 rounded-2xl border border-border focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-bg text-fg"
             />
           </div>
         </div>
@@ -64,7 +64,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
           <div class="group">
             <label
               for="phone"
-              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              class="block text-sm font-bold text-muted mb-2 group-focus-within:text-blue-600 transition-colors"
               >Teléfono / WhatsApp</label
             >
             <input
@@ -72,13 +72,13 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
               id="phone"
               name="phone"
               placeholder="+1 (555) 000-0000"
-              class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+              class="w-full px-6 py-4 rounded-2xl border border-border focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-bg text-fg"
             />
           </div>
           <div class="group">
             <label
               for="property-type"
-              class="block text-sm font-bold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors"
+              class="block text-sm font-bold text-muted mb-2 group-focus-within:text-blue-600 transition-colors"
               >Tipo de Inmueble</label
             >
             <select
@@ -145,7 +145,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
               ].map((item) => (
                 <label
                   for={item.id}
-                  class="relative flex flex-col items-center justify-center p-6 rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-blue-300 hover:bg-blue-50/50 transition-all has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:border-blue-600 has-[:checked]:shadow-lg group/card"
+                  class="relative flex flex-col items-center justify-center p-6 rounded-2xl border-2 border-border cursor-pointer hover:border-blue-300 hover:bg-blue-50/50 transition-all has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:border-blue-600 has-[:checked]:shadow-lg group/card"
                 >
                   <input
                     type="checkbox"
@@ -178,7 +178,7 @@ const formspreeUrl = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_
             name="message"
             rows="4"
             placeholder="Marca del equipo, síntomas de la falla, número de unidades..."
-            class="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-white"
+            class="w-full px-6 py-4 rounded-2xl border border-border focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all bg-bg text-fg"
           ></textarea>
         </div>
 
