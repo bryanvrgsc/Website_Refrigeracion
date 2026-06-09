@@ -197,9 +197,14 @@ const {
 </script>
 
 <script>
-  import { applyTheme } from "../scripts/theme.ts";
+  import { applyTheme, getStored } from "../scripts/theme.ts";
 
+  applyTheme();
   document.addEventListener("astro:page-load", () => applyTheme());
   document.addEventListener("astro:after-swap", () => applyTheme());
-  applyTheme();
+
+  // Live-update when OS scheme changes, only while in "system" mode.
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (getStored() === "system") applyTheme("system");
+  });
 </script>
