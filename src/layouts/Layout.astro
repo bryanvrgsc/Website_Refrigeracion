@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
 import SileoToaster from "../components/SileoToaster.tsx";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface Props {
   title: string;
@@ -20,6 +21,20 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var mode = stored === "light" || stored === "dark" ? stored : "system";
+          var dark =
+            mode === "dark" ||
+            (mode === "system" &&
+              matchMedia("(prefers-color-scheme: dark)").matches);
+          if (dark) document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <title>{title}</title>
@@ -82,7 +97,7 @@ const {
     </script>
   </head>
   <body
-    class="antialiased text-slate-900 bg-white selection:bg-blue-100 selection:text-blue-900"
+    class="antialiased text-fg bg-bg selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-blue-500/30 dark:selection:text-blue-100"
   >
     <!-- Google Tag Manager (noscript) -->
     <noscript
@@ -95,6 +110,7 @@ const {
     <!-- End Google Tag Manager (noscript) -->
 
     <slot />
+    <ThemeToggle />
     <Analytics />
     <SileoToaster client:load />
   </body>
@@ -178,4 +194,17 @@ const {
   document.addEventListener("astro:page-load", observeRevealElements);
 
   observeRevealElements();
+</script>
+
+<script>
+  import { applyTheme, getStored } from "../scripts/theme.ts";
+
+  applyTheme();
+  document.addEventListener("astro:page-load", () => applyTheme());
+  document.addEventListener("astro:after-swap", () => applyTheme());
+
+  // Live-update when OS scheme changes, only while in "system" mode.
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (getStored() === "system") applyTheme("system");
+  });
 </script>
