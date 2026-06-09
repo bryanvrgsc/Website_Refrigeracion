@@ -1,24 +1,56 @@
 @import "tailwindcss";
 @import "tailwind-animations";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: var(--color-blue-600);
   --color-secondary: var(--color-cyan-500);
 }
 
 @layer base {
+  :root {
+    color-scheme: light;
+    --bg: var(--color-white);
+    --surface: var(--color-white);
+    --fg: var(--color-slate-900);
+    --muted: var(--color-slate-600);
+    --border: var(--color-slate-200);
+    --pattern-dot: var(--color-slate-200);
+    --pattern-dot-2: var(--color-slate-300);
+  }
+
+  .dark {
+    color-scheme: dark;
+    --bg: var(--color-slate-950);
+    --surface: var(--color-slate-900);
+    --fg: var(--color-slate-100);
+    --muted: var(--color-slate-400);
+    --border: var(--color-slate-800);
+    --pattern-dot: var(--color-slate-800);
+    --pattern-dot-2: var(--color-slate-700);
+  }
+
   * {
-    @apply border-slate-200;
+    @apply border-border;
   }
 
   body {
-    @apply bg-slate-50/30 text-slate-900;
+    @apply bg-bg text-fg;
   }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm;
+    @apply bg-surface/70 backdrop-blur-xl border border-border/40 shadow-sm;
   }
 
   .text-gradient {
@@ -34,12 +66,12 @@
   }
 
   .grid-pattern {
-    background-image: radial-gradient(circle at 1px 1px, var(--color-slate-200) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, var(--pattern-dot) 1px, transparent 0);
     background-size: 40px 40px;
   }
 
   .dot-pattern {
-    background-image: radial-gradient(var(--color-slate-300) 0.5px, transparent 0.5px);
+    background-image: radial-gradient(var(--pattern-dot-2) 0.5px, transparent 0.5px);
     background-size: 20px 20px;
   }
 
@@ -71,9 +103,9 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-100;
+  @apply bg-surface;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full border-4 border-solid border-slate-100 hover:bg-slate-400 transition-colors;
+  @apply bg-border rounded-full border-4 border-solid border-surface hover:bg-muted/50 transition-colors;
 }
