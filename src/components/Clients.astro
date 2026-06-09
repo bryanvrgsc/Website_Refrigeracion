@@ -33,7 +33,7 @@ const clients = [
 ];
 ---
 
-<section class="py-24 bg-white overflow-hidden">
+<section class="py-24 bg-bg overflow-hidden">
     <div class="container mx-auto px-4 text-center">
         <div class="max-w-3xl mx-auto mb-16">
             <h2
@@ -42,7 +42,7 @@ const clients = [
                 CONFIANZA Y RESULTADOS
             </h2>
             <h3
-                class="text-4xl font-bold text-gray-900 mb-6 italic animate-fade-in-up animate-delay-200"
+                class="text-4xl font-bold text-fg mb-6 italic animate-fade-in-up animate-delay-200"
             >
                 Empresas que confían en nosotros
             </h3>
@@ -51,7 +51,7 @@ const clients = [
             >
             </div>
             <p
-                class="text-gray-600 text-lg animate-fade-in-up animate-delay-400"
+                class="text-muted text-lg animate-fade-in-up animate-delay-400"
             >
                 Colaboramos con empresas líderes en diversos sectores,
                 garantizando sistemas de climatización y servicios industriales
@@ -65,7 +65,7 @@ const clients = [
             {
                 clients.map((client, index) => (
                     <div
-                        class={`group relative flex items-center justify-center p-6 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-500 bg-gray-50/50 rounded-2xl border border-transparent hover:border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-blue-500/5 animate-fade-in-up animate-delay-${index * 100}`}
+                        class={`group relative flex items-center justify-center p-6 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-500 bg-surface/50 rounded-2xl border border-transparent hover:border-border hover:bg-surface hover:shadow-xl hover:shadow-blue-500/5 animate-fade-in-up animate-delay-${index * 100}`}
                     >
                         <Image
                             src={client.logo}
