@@ -38,7 +38,7 @@ const allBrands = [...brands, ...brands];
     <div class="flex w-max animate-marquee">
       {
         allBrands.map((brand) => (
-          <div class="brand-item flex items-center justify-center mx-8 sm:mx-12 w-40 sm:w-56 md:w-64 h-20 md:h-24">
+          <div class="brand-item flex items-center justify-center mx-8 sm:mx-12 w-40 sm:w-56 md:w-64 h-20 md:h-24 rounded-2xl p-4 transition-colors dark:bg-white/90 dark:hover:bg-white">
             <Image
               src={brand.logo}
               alt={brand.name}

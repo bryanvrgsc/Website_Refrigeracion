@@ -66,7 +66,7 @@ const allSuppliers = [...suppliers, ...suppliers];
     <div class="flex w-max animate-marquee">
       {
         allSuppliers.map((supplier) => (
-          <div class="supplier-item flex items-center justify-center mx-4 sm:mx-6 md:mx-8 w-48 sm:w-64 md:w-80 h-24 md:h-32 hover:animate-pulse">
+          <div class="supplier-item flex items-center justify-center mx-4 sm:mx-6 md:mx-8 w-48 sm:w-64 md:w-80 h-24 md:h-32 hover:animate-pulse rounded-2xl p-4 transition-colors dark:bg-white/90 dark:hover:bg-white">
             <Image
               src={supplier.logo}
               alt={supplier.name}
