@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
 import SileoToaster from "../components/SileoToaster.tsx";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface Props {
   title: string;
@@ -109,6 +110,7 @@ const {
     <!-- End Google Tag Manager (noscript) -->
 
     <slot />
+    <ThemeToggle />
     <Analytics />
     <SileoToaster client:load />
   </body>
